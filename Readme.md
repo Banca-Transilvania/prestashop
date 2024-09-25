@@ -3,7 +3,6 @@
 </p>
 
 # BT iPay PrestaShop Payment Module
-[![Latest release](https://newgitlab.arnia.ro/banca-transilvania/ipay-prestashop/release/)](https://newgitlab.arnia.ro/banca-transilvania/ipay-prestashop/releases)
 
 ### Index
 - [About](#about)
