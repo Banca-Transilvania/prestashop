@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="983ae9b1959f4268db20957fc51b5e64">
+        <source>Redirect your customer</source>
+        <target>Redirect your customer</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c4a25e957da921186bf7b0a8efb968da">
+        <source>This action should be used to redirect your customer to the website of your payment processor</source>
+        <target>This action should be used to redirect your customer to the website of your payment processor</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb494cdd286867a332b19dbd0e0f6d68">
+        <source>You can redirect your customer with an error message</source>
+        <target>You can redirect your customer with an error message</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a090999d6428c9bafb58cb95cac62b70">
+        <source>Look at the error</source>
+        <target>Look at the error</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c46b918313988a348a9543101d925116">
+        <source>Look at the error message</source>
+        <target>Look at the error message</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="16f44eb05acbdc4d7c00ebde8a110d7a">
+        <source>You can also redirect your customer to the confirmation page</source>
+        <target>You can also redirect your customer to the confirmation page</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70d9be9b139893aa6c69b5e77e614311">
+        <source>Confirm</source>
+        <target>Confirm</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2cc28a27be6b8881b057a12c23bbf48f">
+        <source>Go to the confirmation page</source>
+        <target>Go to the confirmation page</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,119 @@
+imports:
+  - { resource: ../common.yml }
+
+services:
+  btipay.refund.service:
+    class: BTiPay\Service\RefundService
+    public: true
+    arguments:
+      - '@btipay.config'
+      - '@btipay.payment_repository'
+      - '@btipay.refund_repository'
+      - '@btipay.payment_details.service'
+      - '@btipay.refund.command'
+      - '@btipay.logger'
+      - "@btipay.refund.command.service"
+
+  btipay.refund.command.service:
+    class: BTiPay\Service\RefundCommandService
+    public: true
+    arguments:
+      - '@prestashop.core.command_bus'
+      - '@btipay.logger'
+      - '@prestashop.adapter.order.refund.order_refund_calculator'
+
+  btipay.refund.command:
+    class: BTiPay\Command\ActionCommand
+    public: true
+    arguments:
+      - 'refund'
+      - '@btipay.refund.request'
+      - '@BTiPay\Client\BtpayClient'
+      - '@btipay.logger'
+      - '@btipay.config'
+      - '@btipay.common.response.validator'
+      - '@btipay.refund.response.handler'
+
+  btipay.refund.request:
+    class: BTiPay\Request\BuilderComposite
+    public: true
+    arguments:
+      - '@btipay.pst_map_factory'
+      - [
+        'BTiPay\Request\IPayIdRequestBuilder',
+        'BTiPay\Request\AmountRequestBuilder'
+      ]
+
+  btipay.refund.response.handler:
+    class: BTiPay\Response\HandlerChain
+    public: true
+    arguments:
+      - '@btipay.pst_map_factory'
+      - [
+        'BTiPay\Response\RefundPaymentHandler',
+      ]
+
+  btipay.cancel.service:
+    class: BTiPay\Service\CancelService
+    public: true
+    arguments:
+      - '@btipay.config'
+      - '@btipay.payment_repository'
+      - '@btipay.payment_details.service'
+      - '@btipay.cancel.command'
+      - '@btipay.logger'
+
+  btipay.cancel.command:
+    class: BTiPay\Command\ActionCommand
+    public: true
+    arguments:
+      - 'cancel'
+      - '@btipay.refund.request'
+      - '@BTiPay\Client\BtpayClient'
+      - '@btipay.logger'
+      - '@btipay.config'
+      - '@btipay.common.response.validator'
+      - '@btipay.refund.response.handler'
+
+  btipay.capture.service:
+    class: BTiPay\Service\CaptureService
+    public: true
+    arguments:
+      - '@btipay.config'
+      - '@btipay.payment_repository'
+      - '@btipay.payment_details.service'
+      - '@btipay.capture.command'
+      - '@btipay.logger'
+
+  btipay.capture.command:
+    class: BTiPay\Command\ActionCommand
+    public: true
+    arguments:
+      - 'capture'
+      - '@btipay.refund.request'
+      - '@BTiPay\Client\BtpayClient'
+      - '@btipay.logger'
+      - '@btipay.config'
+      - '@btipay.common.response.validator'
+      - '@btipay.refund.response.handler'
+  
+  btipay.decorator.issue_partial_refund_handler:
+    class: BTiPay\Refund\Decorators\IssuePartialRefundHandler
+    decorates: "prestashop.adapter.order.command_handler.issue_partial_refund_handler"
+    arguments:
+      - "@btipay.decorator.issue_partial_refund_handler.inner"
+      - "@btipay.refund.service"
+    public: false
+
+  btipay.decorator.issue_standard_refund_handler:
+    class: BTiPay\Refund\Decorators\IssueStandardRefundHandler
+    decorates: "prestashop.adapter.order.command_handler.issue_standard_refund_handler"
+    arguments:
+      - "@btipay.decorator.issue_standard_refund_handler.inner"
+      - "@btipay.refund.service"
+    public: false
+
+  btipay.form.extension.cancel_product:
+    class: BTiPay\Form\CancelProductFormExtension
+    tags:
+      - { name: form.type_extension, extended_type: PrestaShopBundle\Form\Admin\Sell\Order\CancelProductType }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="444d4d1d26f8595be7d86bbf07787f8f">
+        <source>Pay with my payment module</source>
+        <target>Pay with my payment module</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3e1eaa9db22bc50ae8ce4094b4091f8f">
+        <source>Minimum amount required in order to pay with my payment module:</source>
+        <target>Minimum amount required in order to pay with my payment module:</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

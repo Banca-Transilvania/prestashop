@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="52f4393e1b52ba63e27310ca92ba098c">
+        <source>General Settings</source>
+        <target>General Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f3e4980fcfebe8ad8714ddddd7e3c568">
+        <source>Payment Method Settings</source>
+        <target>Payment Method Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

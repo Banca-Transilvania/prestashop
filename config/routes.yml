@@ -1,0 +1,8 @@
+btipay_api_payment_handle:
+  path: /api/payment/handle/{action}/{orderId}
+  methods: [POST]
+  defaults:
+    _controller: 'BTiPay\Controller\ApiPaymentController::handleRequest'
+  requirements:
+    action: 'capture|refund|cancel'  # Restricts the action to specific values
+    orderId: '\d+'                  # Ensures that orderId is a digit

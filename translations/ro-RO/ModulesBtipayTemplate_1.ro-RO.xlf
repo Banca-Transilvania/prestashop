@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="ro-RO" target-language="ro-RO" datatype="plaintext">
+    <body>
+      <trans-unit id="30ecb35cafedd40cb7ef23c5da1e3d29">
+        <source>Call 888-888-1234 if you have any questions or need more information!</source>
+        <target>Call 888-888-1234 if you have any questions or need more information!</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="986845be054f0245edd8518ad8cae15a">
+        <source>For transactions in US Dollars (USD) only</source>
+        <target>For transactions in US Dollars (USD) only</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1808c37ede3ce514599c0a36971bbda0">
+        <source>Accept payments in the United States using all major credit cards</source>
+        <target>Accept payments in the United States using all major credit cards</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb51bc6fb93cab4bd8adf80c2402a56e">
+        <source>Monthly fees for My Payment Module Global Gateway will apply.</source>
+        <target>Monthly fees for My Payment Module Global Gateway will apply.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e94ced44c75b34cf2b52a021d5ae089d">
+        <source>The free My Payment Module Global Gateway will be accessed through log in information provided via email within 48 hours.</source>
+        <target>The free My Payment Module Global Gateway will be accessed through log in information provided via email within 48 hours.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb328079f8ba6922b12eca1dc7dff4e3">
+        <source>New merchant account required and subject to credit card approval.</source>
+        <target>New merchant account required and subject to credit card approval.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="72c2f9ab5e7f8306d6243c45dcd848b8">
+        <source>Ability to perform full or patial refunds</source>
+        <target>Ability to perform full or patial refunds</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="799057771340d579f186c842f906e940">
+        <source>24/7/365 customer support</source>
+        <target>24/7/365 customer support</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="001dec24ae285b1112b23cb9f5eff3af">
+        <source>Reccuring billing</source>
+        <target>Reccuring billing</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="58ee91b5845a4e7ee565923c0bc067ae">
+        <source>Virtual terminal</source>
+        <target>Virtual terminal</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9c2344aa18752904f815ec3bb910c17f">
+        <source>Simple, secure and reliable solution to process online payments</source>
+        <target>Simple, secure and reliable solution to process online payments</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="394df267309a81d5a5beb968e26eda82">
+        <source>FREE My Payment Module Glocal Gateway (Value of 400$)</source>
+        <target>FREE My Payment Module Glocal Gateway (Value of 400$)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fcd11b954df105964c730aa4bd2c57fd">
+        <source>Conveniance of one invoice, one set of reports and one 24/7 customer service contact.</source>
+        <target>Conveniance of one invoice, one set of reports and one 24/7 customer service contact.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f3b5e25b9954a4f8d590b435da468360">
+        <source>One-source solution</source>
+        <target>One-source solution</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="39ecbd40bc896d35cf4b1bcf3f572a70">
+        <source>Multiple firewalls, encryption protocols and fraud protection.</source>
+        <target>Multiple firewalls, encryption protocols and fraud protection.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9ae00a023d80f22436817ac40b5dd0e7">
+        <source>Enhanced security</source>
+        <target>Enhanced security</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b1775d09c3baf92b9e28b3746f579226">
+        <source>Receive funds quickly from the bank of your choice.</source>
+        <target>Receive funds quickly from the bank of your choice.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7a8464c9377f4e1526f723d8ccb40e86">
+        <source>Help to improve cash flow</source>
+        <target>Help to improve cash flow</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3be2b135c445228d2f394b9f4814237e">
+        <source>Visa®, Mastercard®, Diners Club®, American Express®, Discover®, Network and CJB®, plus debit, gift cards and more.</source>
+        <target>Visa®, Mastercard®, Diners Club®, American Express®, Discover®, Network and CJB®, plus debit, gift cards and more.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b317d5ff3ff26249184a247f6071b060">
+        <source>Increase customer payment options</source>
+        <target>Increase customer payment options</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="01ea4b4334e1aa3e6842a55ccb051e96">
+        <source>My payment module offers the following benefits</source>
+        <target>My payment module offers the following benefits</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bffe9a3c9a7e00ba00a11749e022d911">
+        <source>Log in</source>
+        <target>Log in</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="21bdc5689c12595ae14298354d5550d5">
+        <source>Already have an account?</source>
+        <target>Already have an account?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f431e97ef0f81e233ffa5ff4a2fe5a3a">
+        <source>Create an account now!</source>
+        <target>Create an account now!</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ec26a28cd88feadf1552206409aa8e22">
+        <source>Fast - Secure - Reliable</source>
+        <target>Fast - Secure - Reliable</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bd075c433a883fa44946979aaa7f3257">
+        <source>Online payment processing</source>
+        <target>Online payment processing</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

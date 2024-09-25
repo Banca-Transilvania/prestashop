@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="047b6444b341118a774d2462f3e33e1a">
+        <source>Effortlessly manage payments with BT iPay’s user-friendly interface.</source>
+        <target>Effortlessly manage payments with BT iPay’s user-friendly interface.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b405f78069fe0923cf14761e44989713">
+        <source>Our module supports all transaction types, ensuring secure and efficient payment processing.</source>
+        <target>Our module supports all transaction types, ensuring secure and efficient payment processing.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a5a173da3adb3b21e330ce3071854703">
+        <source>Developed by Arnia Software Romania and backed by Banca Transilvania’s robust online payment solution, this module is designed to streamline your online payment process, offering a secure and efficient transaction experience for both merchants and customers.</source>
+        <target>Developed by Arnia Software Romania and backed by Banca Transilvania’s robust online payment solution, this module is designed to streamline your online payment process, offering a secure and efficient transaction experience for both merchants and customers.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2fdfd506efea08144c0794c32ca8250a">
+        <source>Create an account</source>
+        <target>Create an account</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="af08e0f0088adee17ac412def3f2088c">
+        <source>Already have one?</source>
+        <target>Already have one?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bffe9a3c9a7e00ba00a11749e022d911">
+        <source>Log in</source>
+        <target>Log in</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="58205efbe783a1afab7af22dfedf83db">
+        <source>Benefits of using BT iPay payment module</source>
+        <target>Benefits of using BT iPay payment module</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1b2af9e7cce14965acd203f0fa2e67dc">
+        <source>Configurability</source>
+        <target>Configurability</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0abea8daaa81ede50f4dc40bb7775335">
+        <source>Flexible configuration options with easy toggle between test and live modes.</source>
+        <target>Flexible configuration options with easy toggle between test and live modes.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c5bcfeae0e41266b00bc67b503491027">
+        <source>Multi-Currency Support</source>
+        <target>Multi-Currency Support</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="687a59c3a192f71e5bbb2534c0f2458a">
+        <source>Multi-currency support with comprehensive logging features for easier troubleshooting.</source>
+        <target>Multi-currency support with comprehensive logging features for easier troubleshooting.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3f1fae487f9a9cd52213369aa5687e13">
+        <source>Streamlined Transactions</source>
+        <target>Streamlined Transactions</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="56a0372906d8f19e41e2395dfe7f102f">
+        <source>Card on File functionality to streamline future transactions.</source>
+        <target>Card on File functionality to streamline future transactions.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb669af85313d9ce931ec5b8490a2312">
+        <source>Efficient Invoicing</source>
+        <target>Efficient Invoicing</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7754d2adfabdc7fc5ead7af0ab23aec4">
+        <source>Automatic invoice generation upon successful payment, customizable per merchant preference.</source>
+        <target>Automatic invoice generation upon successful payment, customizable per merchant preference.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70b4903abcb62ace84264ad0443ae759">
+        <source>Internationalization</source>
+        <target>Internationalization</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2507ee7fe3f700dfa497839875ac916a">
+        <source>Full internationalization support for English and Romanian, with easily translatable module texts for additional languages.</source>
+        <target>Full internationalization support for English and Romanian, with easily translatable module texts for additional languages.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dfdb7175d338eb4d1935c3b99e0b5baa">
+        <source>Module Specifications</source>
+        <target>Module Specifications</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6a330702a04f4b3a688f8fbfc0c9006b">
+        <source>Release Date</source>
+        <target>Release Date</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="9e430013066e046941680aae59624f7e">
+        <source>Mai 2024</source>
+        <target>Mai 2024</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="34b6cd75171affba6957e308dcbd92be">
+        <source>Version</source>
+        <target>Version</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e4c2e8edac362acab7123654b9e73432">
+        <source>1.0</source>
+        <target>1.0</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bc38b08be1ee0df0dd10a9ff999e2bca">
+        <source>Supported PHP Versions</source>
+        <target>Supported PHP Versions</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8d9a63332fb430c7f604af4715f54b31">
+        <source>7.4, 8.0+</source>
+        <target>7.4, 8.0+</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a6dadc4dfbc1366943388f836248950f">
+        <source>Compatible with PrestaShop</source>
+        <target>Compatible with PrestaShop</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="18c78d87c9d5615375a86987f1a990b7">
+        <source>1.7.x and 8.1</source>
+        <target>1.7.x and 8.1</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="359f9e79e746fa9f684e5cda9e60ca2e">
+        <source>How does it work?</source>
+        <target>How does it work?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e7aca51f61d4678389e12bb0041d3ffb">
+        <source>Online transactions through BT iPay using AMEX cards are not supported, however, we accept payments with Revolut.</source>
+        <target>Online transactions through BT iPay using AMEX cards are not supported, however, we accept payments with Revolut.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="5fde15c2efdebc24fc987163c4774126">
+        <source>For more information, call 0264.597.710</source>
+        <target>For more information, call 0264.597.710</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e81c4e4f2b7b93b481e13a8553c2ae1b">
+        <source>or</source>
+        <target>or</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fb17daa13599c526af53ab8e62b90cf4">
+        <source>Access credentials are username and password pairs provided by Banca Transilvania when the merchant is created on the iPay platform. These are necessary for accessing the iPay console and for calling the APIs.</source>
+        <target>Access credentials are username and password pairs provided by Banca Transilvania when the merchant is created on the iPay platform. These are necessary for accessing the iPay console and for calling the APIs.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="31581c328370b24819248df3d216bd35">
+        <source>Attention! Production credentials do not work on the test environment or vice versa.</source>
+        <target>Attention! Production credentials do not work on the test environment or vice versa.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="17f32e06412e4f20d5a25e5b7f785f9c">
+        <source>Link to the documentation</source>
+        <target>Link to the documentation</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

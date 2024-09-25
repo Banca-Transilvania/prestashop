@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>btipay</name>
+    <displayName><![CDATA[BT iPay]]></displayName>
+    <version><![CDATA[1.0.0]]></version>
+    <description><![CDATA[BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.6 - 8.1.6]]></description>
+    <author><![CDATA[Banca Transilvania]]></author>
+    <tab><![CDATA[payments_gateways]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want to unistall the payment module BT iPay?]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>1</need_instance>
+</module>

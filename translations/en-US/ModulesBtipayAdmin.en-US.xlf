@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="92d4773a9f32fc3333cb8238471cf763">
+        <source>You have to enable the cURL extension on your server to install this module</source>
+        <target>You have to enable the cURL extension on your server to install this module</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cdbe2f170711683cb6624cf9c509cc99">
+        <source>This module is not available in your country</source>
+        <target>This module is not available in your country</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

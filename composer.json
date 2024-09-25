@@ -1,0 +1,64 @@
+{
+  "name": "btipay/prestashop",
+  "description": "BT iPay PrestaShop Payment Module",
+  "homepage": "https://bancatransilvania.com/",
+  "license": "AFL-3.0",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Banca Transilvania",
+      "email": "contact@bancatransilvania.com"
+    },
+    {
+      "name": "Tech Talent",
+      "email": "contact@arnia.ro"
+    }
+  ],
+  "type": "prestashop-module",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/var/www/html/git/ipay-sdk",
+      "options": {
+        "symlink": false
+      }
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "classmap-authoritative": true,
+    "optimize-autoloader": true,
+    "prepend-autoloader": false,
+    "sort-packages": true,
+    "allow-plugins": {
+      "php-http/discovery": false
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "banca-transilvania/ipay-sdk": "1.1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "BTiPay\\": "src/",
+      "BTiPay\\Controllers\\": "controllers/"
+    },
+    "classmap": [
+      "btipay.php",
+      "controllers/"
+    ]
+  },
+  "scripts": {
+    "set-license-header": [
+      "@php ./vendor/bin/header-stamp --license=\"assets/afl.txt\" --exclude=\".github,vendor\""
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BTiPay\\Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="88526efe38fd18179a127024aba8c1d7">
+        <source>Your order on %s is complete.</source>
+        <target>Your order on %s is complete.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b2f40690858b404ed10e62bdf422c704">
+        <source>Amount</source>
+        <target>Amount</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="63d5049791d9d79d86e9a108b0a999ca">
+        <source>Reference</source>
+        <target>Reference</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="19c419a8a4f1cd621853376a930a2e24">
+        <source>An email has been sent with this information.</source>
+        <target>An email has been sent with this information.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ca7e41a658753c87973936d7ce2429a8">
+        <source>If you have questions, comments or concerns, please contact our</source>
+        <target>If you have questions, comments or concerns, please contact our</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cd430c2eb4b87fb3b49320bd21af074e">
+        <source>expert customer support team.</source>
+        <target>expert customer support team.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7569ab9b5973795ce8c9fc870d38d8e1">
+        <source>Your order on %s has not been accepted.</source>
+        <target>Your order on %s has not been accepted.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="caa4088f1d295cf8ce8e358eb975ab32">
+        <source>Please, try to order again.</source>
+        <target>Please, try to order again.</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

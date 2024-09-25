@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="f3e4980fcfebe8ad8714ddddd7e3c568">
+        <source>Payment Method Settings</source>
+        <target>Payment Method Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="03eef11a64b9861ddf4e5394f046ae34">
+        <source>Transaction Phase</source>
+        <target>Transaction Phase</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e712b7fab3948c17dae70955bd9f2dba">
+        <source>Choose between 1-Phase for immediate settlement suitable for services like insurance or tickets, and 2-Phase for goods requiring confirmation before settlement, like physical products. 1-Phase transactions are automatically deposited (T+1/T+2 days), while 2-Phase transactions require merchant action for capture post-delivery confirmation.</source>
+        <target>Choose between 1-Phase for immediate settlement suitable for services like insurance or tickets, and 2-Phase for goods requiring confirmation before settlement, like physical products. 1-Phase transactions are automatically deposited (T+1/T+2 days), while 2-Phase transactions require merchant action for capture post-delivery confirmation.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4c9f2cf1c890f1eeb63ecadb6652e56b">
+        <source>1-Phase – Immediate Settlement</source>
+        <target>1-Phase – Immediate Settlement</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c53d8573dbca178bac0889505f0a517d">
+        <source>2-Phase – Post-Delivery Settlement</source>
+        <target>2-Phase – Post-Delivery Settlement</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3d735bd096cbfa78856395432020e16d">
+        <source>New Order Status</source>
+        <target>New Order Status</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="59956e3313e77bf2923636120fa3e71a">
+        <source>Default status of a new order.</source>
+        <target>Default status of a new order.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="fa76bc08bf31857596ce55bacaa3c680">
+        <source>Available for All Countries</source>
+        <target>Available for All Countries</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="93cba07454f06a4a960172bbd6e2a435">
+        <source>Yes</source>
+        <target>Yes</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bafd7322c6e97d25b6299b5d6fe8920b">
+        <source>No</source>
+        <target>No</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="630255da58ddfd9952582ec1525740f8">
+        <source>If no, you will be able to select specific countries.</source>
+        <target>If no, you will be able to select specific countries.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="41d95107eedd4607f97816b49473f747">
+        <source>Available for Specific Countries</source>
+        <target>Available for Specific Countries</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="675668ccde913a4a4f0abf91606c382f">
+        <source>Select countries where this method will be available.</source>
+        <target>Select countries where this method will be available.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="68d53e262cf621168b9c88f19b9d6d9c">
+        <source>Allow For Currencies</source>
+        <target>Allow For Currencies</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2217633024aa0c65c95121e1066198d8">
+        <source>Select specific currencies allowed for this payment method.</source>
+        <target>Select specific currencies allowed for this payment method.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c20cc8f5bb7d26404f80b1c990c8a7fd">
+        <source>Sort Order</source>
+        <target>Sort Order</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="147d9a70e16569e9fb7fc384837f329f">
+        <source>Define the order of how this payment method appears during checkout.</source>
+        <target>Define the order of how this payment method appears during checkout.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8dd319176f11f37eb1a66fb719a93bad">
+        <source>Generate Invoice on Successful Payment</source>
+        <target>Generate Invoice on Successful Payment</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8f439e07e1cfa9f6575637cd95050788">
+        <source>Automatically generate an invoice when the payment is successful.</source>
+        <target>Automatically generate an invoice when the payment is successful.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ca3848346060a527ef56a2249cc0737a">
+        <source>Enable Card On File</source>
+        <target>Enable Card On File</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b631e383f2bdb3316990550611919f0b">
+        <source>Enable saving card details for future transactions.</source>
+        <target>Enable saving card details for future transactions.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="82a486370afbc5e127a28fee6a495fa2">
+        <source>Enable Logging</source>
+        <target>Enable Logging</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="67c8507dc8cf26726ab2360993a84bf0">
+        <source>Enable detailed logging of payment communication.</source>
+        <target>Enable detailed logging of payment communication.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c85bd10992df5e27eb6c4b4bb032f172">
+        <source>Save Payment Settings</source>
+        <target>Save Payment Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="52f4393e1b52ba63e27310ca92ba098c">
+        <source>General Settings</source>
+        <target>General Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="00d23a76e43b46dae9ec7aa9dcbebb32">
+        <source>Enabled</source>
+        <target>Enabled</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6de3b961f349669a64d33aa24f8a4870">
+        <source>Enable or disable the payment method</source>
+        <target>Enable or disable the payment method</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b78a3223503896721cca1303f776159b">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="860a60758ed97bd84e4240c74bf946a4">
+        <source>The title for the BT IPay payment method.</source>
+        <target>The title for the BT IPay payment method.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="03a36f89aad8dd8286bc5fe6692cbbeb">
+        <source>Test Mode</source>
+        <target>Test Mode</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a8851f6066ffebf3a9cba7123aa285e9">
+        <source>Enable test mode for transactions</source>
+        <target>Enable test mode for transactions</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c3965d8baafff2f3f5f12d82470cc17a">
+        <source>User name (live)</source>
+        <target>User name (live)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0baac9021b7a87c5c4754bd65fc0f182">
+        <source>Username for live mode provided by BT</source>
+        <target>Username for live mode provided by BT</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4f6727e46134033d09b4590e2db1de23">
+        <source>Password (live)</source>
+        <target>Password (live)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="dfe3b0c86d60731f3d5dc9d3f6e86ad5">
+        <source>Password for live mode. Will be encrypted in the DB.</source>
+        <target>Password for live mode. Will be encrypted in the DB.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c47234002760d70cd25223ca65b82246">
+        <source>Sub Merchant ID (live)</source>
+        <target>Sub Merchant ID (live)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1a1e7851848eb6080415513e8f9829fd">
+        <source>User name (test)</source>
+        <target>User name (test)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="39dacc33d49cc7e1be9320999397bdc7">
+        <source>Username for test mode provided by BT</source>
+        <target>Username for test mode provided by BT</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="60140b0af220895cef59cb2c46e87c5d">
+        <source>Password (test)</source>
+        <target>Password (test)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="83e01e11c27629943ab948ac57ad382c">
+        <source>Password for test mode. Will be encrypted in the DB.</source>
+        <target>Password for test mode. Will be encrypted in the DB.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4c8507726a6a62060f73d71d8411c887">
+        <source>Sub Merchant ID (test)</source>
+        <target>Sub Merchant ID (test)</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="061c6c6c9183b8a7f4b25975c9d08a4f">
+        <source>Save General Settings</source>
+        <target>Save General Settings</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="751886bf6dff2a60543727f69daaae70">
+        <source>BT iPay</source>
+        <target>BT iPay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="42532ce89c87591df68d3d8b8642845f">
+        <source>BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.x - 8.1.5</source>
+        <target>BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.x - 8.1.5</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f8993eba40a941d7b865128642278502">
+        <source>Are you sure you want to unistall the payment module BT iPay?</source>
+        <target>Are you sure you want to unistall the payment module BT iPay?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="cdbe2f170711683cb6624cf9c509cc99">
+        <source>This module is not available in your country</source>
+        <target>This module is not available in your country</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0613d30ca512e7b8e49379389632264f">
+        <source>General Settings updated.</source>
+        <target>General Settings updated.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c40926be1f6cd326fe94dbdaa4702342">
+        <source>Payment Settings updated.</source>
+        <target>Payment Settings updated.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6c04deb3a0dc4f2442d73c217e612f19">
+        <source>Pay by BT iPAY</source>
+        <target>Pay by BT iPAY</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="c453a4b8e8d98e82f35b67f433e3b4da">
+        <source>Payment</source>
+        <target>Payment</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="902b0d55fddef6f8d651fe1035b7d4bd">
+        <source>Error</source>
+        <target>Error</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e61b0be95b713b117d27dbd19d75f69a">
+        <source>An error occurred while processing payment</source>
+        <target>An error occurred while processing payment</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="66b914a3d0878daed70f10d165196200">
+        <source>An error occured. Please contact the merchant to have more informations</source>
+        <target>An error occured. Please contact the merchant to have more informations</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
