@@ -30,12 +30,17 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * @author    Neuman Vong
+ * @copyright 2011, Neuman Vong
+ * @license   BSD-3-Clause https://opensource.org/licenses/BSD-3-Clause
  */
 
 namespace BTiPay\Webhook;
 
-use UnexpectedValueException;
-use DomainException;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 /**
  * JSON Web Token implementation
@@ -48,9 +53,9 @@ use DomainException;
 class BTPayJwt
 {
     /**
-     * @param string      $jwt    The JWT
-     * @param string|null $key    The secret key
-     * @param bool        $verify Don't skip verification process
+     * @param string $jwt The JWT
+     * @param string|null $key The secret key
+     * @param bool $verify Don't skip verification process
      *
      * @return object The JWT's payload as a PHP object
      */
@@ -58,33 +63,34 @@ class BTPayJwt
     {
         $tks = explode('.', $jwt);
         if (count($tks) !== 3) {
-            throw new UnexpectedValueException('Wrong number of segments');
+            throw new \UnexpectedValueException('Wrong number of segments');
         }
         list($headb64, $payloadb64, $cryptob64) = $tks;
         $header = self::jsonDecode(self::urlsafeB64Decode($headb64));
         if (null === $header) {
-            throw new UnexpectedValueException('Invalid segment encoding');
+            throw new \UnexpectedValueException('Invalid segment encoding');
         }
         $payload = self::jsonDecode(self::urlsafeB64Decode($payloadb64));
         if (null === $payload) {
-            throw new UnexpectedValueException('Invalid segment encoding');
+            throw new \UnexpectedValueException('Invalid segment encoding');
         }
         $sig = self::urlsafeB64Decode($cryptob64);
         if ($verify) {
             if (empty($header->alg)) {
-                throw new DomainException('Empty algorithm');
+                throw new \DomainException('Empty algorithm');
             }
             if (!hash_equals(self::sign("$headb64.$payloadb64", $key, $header->alg), $sig)) {
-                throw new UnexpectedValueException('Signature verification failed');
+                throw new \UnexpectedValueException('Signature verification failed');
             }
         }
+
         return $payload;
     }
 
     /**
      * @param object|array $payload PHP object or array
-     * @param string       $key     The secret key
-     * @param string       $algo    The signing algorithm
+     * @param string $key The secret key
+     * @param string $algo The signing algorithm
      *
      * @return string A JWT
      */
@@ -107,8 +113,8 @@ class BTPayJwt
     }
 
     /**
-     * @param string $msg    The message to sign
-     * @param string $key    The secret key
+     * @param string $msg The message to sign
+     * @param string $key The secret key
      * @param string $method The signing algorithm
      *
      * @return string An encrypted message
@@ -121,8 +127,10 @@ class BTPayJwt
             'HS512' => 'sha512',
         ];
         if (empty($methods[$method])) {
-            throw new DomainException('Algorithm not supported');
+            throw new \DomainException('Algorithm not supported');
         }
+
+        // phpcs:ignore
         return hash_hmac($methods[$method], $msg, $key, true);
     }
 
@@ -137,8 +145,9 @@ class BTPayJwt
         if (self::jsonErrorExists()) {
             self::handleJsonError(json_last_error());
         } elseif ($obj === null && $input !== 'null') {
-            throw new DomainException('Null result with non-null input');
+            throw new \DomainException('Null result with non-null input');
         }
+
         return $obj;
     }
 
@@ -153,8 +162,9 @@ class BTPayJwt
         if (self::jsonErrorExists()) {
             self::handleJsonError(json_last_error());
         } elseif ($json === 'null' && $input !== null) {
-            throw new DomainException('Null result with non-null input');
+            throw new \DomainException('Null result with non-null input');
         }
+
         return $json;
     }
 
@@ -163,6 +173,7 @@ class BTPayJwt
         if (!function_exists('json_last_error')) {
             return false;
         }
+
         return json_last_error() !== JSON_ERROR_NONE;
     }
 
@@ -178,6 +189,7 @@ class BTPayJwt
             $padlen = 4 - $remainder;
             $input .= str_repeat('=', $padlen);
         }
+
         return base64_decode(strtr($input, '-_', '+/'));
     }
 
@@ -203,10 +215,6 @@ class BTPayJwt
             JSON_ERROR_CTRL_CHAR => 'Unexpected control character found',
             JSON_ERROR_SYNTAX => 'Syntax error, malformed JSON',
         ];
-        throw new DomainException(
-            isset($messages[$errno])
-                ? $messages[$errno]
-                : 'Unknown JSON error: ' . $errno
-        );
+        throw new \DomainException(isset($messages[$errno]) ? $messages[$errno] : 'Unknown JSON error: ' . $errno);
     }
 }

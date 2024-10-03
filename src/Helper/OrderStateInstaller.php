@@ -1,4 +1,22 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Helper;
 
@@ -8,13 +26,17 @@ use BTiPay\Exception\CouldNotInstallModuleException;
 use BTiPay\Facade\Configuration;
 use BTiPay\Facade\Context;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class OrderStateInstaller
 {
     /** @var Configuration */
     private Configuration $configurationAdapter;
 
     public function __construct(
-        Configuration $configurationAdapter = null
+        ?Configuration $configurationAdapter = null,
     ) {
         if (!$configurationAdapter) {
             $configurationAdapter = new Configuration(new Context());
@@ -149,10 +171,7 @@ class OrderStateInstaller
         try {
             $orderState->add();
         } catch (\Exception $exception) {
-            throw new CouldNotInstallModuleException(
-                'Order state: ' . $orderStateInstallerData->getName() . 'can not be installed. '
-                . $exception->getMessage()
-            );
+            throw new CouldNotInstallModuleException('Order state: ' . $orderStateInstallerData->getName() . 'can not be installed. ' . $exception->getMessage());
         }
 
         $this->createOrderStateLogo($orderState->id);

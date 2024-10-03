@@ -1,4 +1,22 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Config;
 
@@ -6,45 +24,49 @@ use BTiPay\Facade\Configuration;
 use BTiPay\Facade\Context;
 use BTiPay\Helper\Encrypt;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class BTiPayConfig
 {
-    public const ENABLED              = 'BTIPAY_ENABLED';
-    public const TITLE                = 'BTIPAY_TITLE';
-    public const DESCRIPTION          = 'BTIPAY_DESCRIPTION';
-    public const TEST_MODE            = 'BTIPAY_TEST_MODE';
-    public const LIVE_USERNAME        = 'BTIPAY_LIVE_USERNAME';
-    public const LIVE_PASSWORD        = 'BTIPAY_LIVE_PASSWORD';
+    public const ENABLED = 'BTIPAY_ENABLED';
+    public const TITLE = 'BTIPAY_TITLE';
+    public const DESCRIPTION = 'BTIPAY_DESCRIPTION';
+    public const TEST_MODE = 'BTIPAY_TEST_MODE';
+    public const LIVE_USERNAME = 'BTIPAY_LIVE_USERNAME';
+    public const LIVE_PASSWORD = 'BTIPAY_LIVE_PASSWORD';
     public const LIVE_SUB_MERCHANT_ID = 'BTIPAY_LIVE_SUB_MERCHANT_ID';
-    public const TEST_USERNAME        = 'BTIPAY_TEST_USERNAME';
-    public const TEST_PASSWORD        = 'BTIPAY_TEST_PASSWORD';
+    public const TEST_USERNAME = 'BTIPAY_TEST_USERNAME';
+    public const TEST_PASSWORD = 'BTIPAY_TEST_PASSWORD';
     public const TEST_SUB_MERCHANT_ID = 'BTIPAY_TEST_SUB_MERCHANT_ID';
-    public const CALLBACK_URL         = 'BTIPAY_CALLBACK_URL';
-    public const CALLBACK_KEY         = 'BTIPAY_CALLBACK_KEY';
+    public const CALLBACK_URL = 'BTIPAY_CALLBACK_URL';
+    public const CALLBACK_KEY = 'BTIPAY_CALLBACK_KEY';
 
-    public const PHASE                 = 'BTIPAY_PHASE';
-    public const NEW_ORDER_STATUS      = 'BTIPAY_NEW_ORDER_STATUS';
+    public const PHASE = 'BTIPAY_PHASE';
+    public const NEW_ORDER_STATUS = 'BTIPAY_NEW_ORDER_STATUS';
     public const APPROVED_ORDER_STATUS = 'BTIPAY_APPROVED_ORDER_STATUS';
     public const PARTIAL_CAPTURE_ORDER_STATUS = 'BTIPAY_PARTIAL_CAPTURE_ORDER_STATUS';
 
-    public const ALL_COUNTRIES      = 'BTIPAY_ALL_COUNTRIES';
+    public const ALL_COUNTRIES = 'BTIPAY_ALL_COUNTRIES';
     public const SPECIFIC_COUNTRIES = 'BTIPAY_SPECIFIC_COUNTRIES';
     public const ALLOWED_CURRENCIES = 'BTIPAY_ALLOWED_CURRENCIES';
 
-    public const GEN_INVOICE          = 'BTIPAY_GEN_INVOICE';
-    public const CARD_ON_FILE         = 'BTIPAY_CARD_ON_FILE';
-    public const LOGGING              = 'BTIPAY_LOGGING';
+    public const GEN_INVOICE = 'BTIPAY_GEN_INVOICE';
+    public const CARD_ON_FILE = 'BTIPAY_CARD_ON_FILE';
+    public const LOGGING = 'BTIPAY_LOGGING';
 
-    public const AUTO_REFUND          = 'BTIPAY_AUTO_REFUND';
+    public const AUTO_REFUND = 'BTIPAY_AUTO_REFUND';
     public const CUSTOM_REFUND_BUTTON = 'BTIPAY_CUSTOM_REFUND_BUTTON';
-    public const REFUND_ON_STATUS_CHANGE          = 'BTIPAY_REFUND_ON_STATUS_CHANGE';
+    public const REFUND_ON_STATUS_CHANGE = 'BTIPAY_REFUND_ON_STATUS_CHANGE';
     public const CREATE_ORDER_SLIP_ON_FULL_REFUND = 'BTIPAY_CREATE_ORDER_SLIP_ON_FULL_REFUND';
 
     public const ONE_PHASE = 1;
     public const TWO_PHASE = 2;
 
-    public const BTIPAY_STATUS_AWAITING        = 'BTIPAY_STATUS_AWAITING';
-    public const BTIPAY_STATUS_APPROVED        = 'BTIPAY_STATUS_APPROVED';
-    public const BTIPAY_STATUS_PARTIAL_REFUND  = 'BTIPAY_STATUS_PARTIAL_REFUND';
+    public const BTIPAY_STATUS_AWAITING = 'BTIPAY_STATUS_AWAITING';
+    public const BTIPAY_STATUS_APPROVED = 'BTIPAY_STATUS_APPROVED';
+    public const BTIPAY_STATUS_PARTIAL_REFUND = 'BTIPAY_STATUS_PARTIAL_REFUND';
     public const BTIPAY_STATUS_PARTIAL_CAPTURE = 'BTIPAY_STATUS_PARTIAL_CAPTURE';
 
     public const LOCK_TIME_TO_LIVE = 60;
@@ -52,9 +74,9 @@ class BTiPayConfig
     /** @var Configuration */
     private $configuration;
 
-    public function __construct(Configuration $configuration = null)
+    public function __construct(?Configuration $configuration = null)
     {
-        if(!$configuration) {
+        if (!$configuration) {
             $configuration = new Configuration(new Context());
         }
         $this->configuration = $configuration;
@@ -117,22 +139,22 @@ class BTiPayConfig
 
     public function getNewOrderStatus()
     {
-        return (int)$this->configuration->get(self::NEW_ORDER_STATUS);
+        return (int) $this->configuration->get(self::NEW_ORDER_STATUS);
     }
 
     public function getApproveOrderStatus()
     {
-        return (int)$this->configuration->get(self::APPROVED_ORDER_STATUS);
+        return (int) $this->configuration->get(self::APPROVED_ORDER_STATUS);
     }
 
     public function getPartialCaptureStatus()
     {
-        return (int)$this->configuration->get(self::PARTIAL_CAPTURE_ORDER_STATUS);
+        return (int) $this->configuration->get(self::PARTIAL_CAPTURE_ORDER_STATUS);
     }
 
     public function isAllCountriesEnabled()
     {
-        return (bool)$this->configuration->get(self::ALL_COUNTRIES);
+        return (bool) $this->configuration->get(self::ALL_COUNTRIES);
     }
 
     public function getSpecificCountries()
@@ -142,7 +164,7 @@ class BTiPayConfig
 
     public function getAllowedCurrencies()
     {
-        return explode(',', $this->configuration->get(self::ALLOWED_CURRENCIES)) ;
+        return explode(',', $this->configuration->get(self::ALLOWED_CURRENCIES));
     }
 
     public function isInvoiceGenerationEnabled()

@@ -158,6 +158,7 @@ class ComposerStaticInit028167214baf1ea46681ebdd249009c5
         'BtipayRedirectModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/redirect.php',
         'BtipayReturnModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/return.php',
         'BtipayWebhookModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/webhook.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

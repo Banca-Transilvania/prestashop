@@ -1,5 +1,22 @@
 <?php
-
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -11,9 +28,9 @@ class AdminBTiPayCaptureController extends ModuleAdminController
         parent::initContent();
         $this->layout = 'content.tpl';
 
-        $this->context->smarty->assign(array(
-            'content' => $this->renderModal()
-        ));
+        $this->context->smarty->assign([
+            'content' => $this->renderModal(),
+        ]);
     }
 
     /**
@@ -25,14 +42,14 @@ class AdminBTiPayCaptureController extends ModuleAdminController
     {
         parent::initModal();
 
-        $orderId = \Tools::getValue('id_order');
+        $orderId = Tools::getValue('id_order');
         if (!$orderId) {
             $orderId = 10;  // Set a default or handle the error appropriately
         }
 
-        $this->context->smarty->assign(array(
-            'id_order' => $orderId
-        ));
+        $this->context->smarty->assign([
+            'id_order' => $orderId,
+        ]);
 
         $modalContent = $this->context->smarty->fetch($this->module->getLocalPath() . 'views/templates/admin/captureModal.tpl');
 
@@ -47,14 +64,14 @@ class AdminBTiPayCaptureController extends ModuleAdminController
                     'type' => 'button',
                     'label' => $this->module->l('Confirm Capture'),
                     'class' => 'btn-primary',
-                    'value' => 'capture'
+                    'value' => 'capture',
                 ],
                 [
                     'type' => 'link',
                     'label' => $this->module->l('View Details'),
                     'class' => 'btn-link',
-                    'href' => $this->context->link->getAdminLink('AdminOrders') . '&viewOrder&id_order=' . \Tools::getValue('id_order')
-                ]
+                    'href' => $this->context->link->getAdminLink('AdminOrders') . '&viewOrder&id_order=' . Tools::getValue('id_order'),
+                ],
             ],
         ];
     }

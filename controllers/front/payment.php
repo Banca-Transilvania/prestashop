@@ -5,7 +5,7 @@
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
+ * This source file is subject to the Academic Free License version 3.0
  * that is bundled with this package in the file LICENSE.md.
  * It is also available through the world-wide-web at this URL:
  * https://opensource.org/licenses/AFL-3.0
@@ -13,14 +13,17 @@
  * obtain it through the world-wide-web, please send an email
  * to license@prestashop.com so we can send you a copy immediately.
  *
- * @author    PrestaShop SA <contact@prestashop.com>
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
  * @copyright Since 2007 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 use BTiPay\Config\BTiPayConfig;
 use BTransilvania\Api\Model\Response\RegisterResponseModel;
-use BTransilvania\Api\Model\Response\ResponseModelInterface;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 /**
  * This Controller simulate an external payment gateway
@@ -35,14 +38,14 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
      */
     public function postProcess()
     {
-        /** @var \BTiPay\Facade\Context $context */
+        /** @var BTiPay\Facade\Context $context */
         $context = $this->get('btipay.facade.context');
         /** @var BTiPayConfig $btConfig */
         $btConfig = $this->get('btipay.config');
-        /** @var \Monolog\Logger $btLogger */
+        /** @var Monolog\Logger $btLogger */
         $btLogger = $this->get('btipay.logger');
 
-        if (!isset($_GET['orderId'])) {
+        if (!Tools::getIsset('orderId')) {
             if (false === $this->checkIfContextIsValid() || false === $this->checkIfPaymentOptionIsAvailable()) {
                 Tools::redirect($this->context->link->getPageLink(
                     'order',
@@ -78,7 +81,7 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
                 $total,
                 $this->module->displayName,
                 null,
-                array(),
+                [],
                 $context->getCurrencyId(),
                 false,
                 $secureKey
@@ -89,8 +92,9 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
             $orderId = Tools::getValue('orderId');
             $secureKey = Tools::getValue('secureKey');
 
-            if(empty($secureKey)) {
+            if (empty($secureKey)) {
                 $this->displayError([$this->module->l('Missing secure key.')]);
+
                 return false;
             }
             $order = new Order($orderId);
@@ -99,6 +103,7 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
                 $errorMessage = $this->module->l('Order not found.');
                 $this->get('btipay.logger')->error($errorMessage);
                 $this->displayError([$errorMessage]);
+
                 return false;
             }
 
@@ -106,13 +111,13 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
                 $errorMessage = $this->module->l('Invalid secure key.');
                 $this->get('btipay.logger')->error($errorMessage);
                 $this->displayError([$errorMessage], $orderId);
+
                 return false;
             }
         }
 
-
-        /** @var \BTiPay\Command\ActionCommand $orderCommand */
-        if($btConfig->getPhase() == BTiPayConfig::ONE_PHASE) {
+        /* @var \BTiPay\Command\ActionCommand $orderCommand */
+        if ($btConfig->getPhase() == BTiPayConfig::ONE_PHASE) {
             $orderCommand = $this->get('btipay.order.command');
         } else {
             $orderCommand = $this->get('btipay.authorize.command');
@@ -126,13 +131,13 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
 
             /** @var RegisterResponseModel $response */
             $response = $orderCommand->execute([
-                'orderId'           => $orderId,
-                'useNewCard'        => $useNewCard,
-                'saveCard'          => $saveCard,
-                'selectedCardId'    => $selectedCardId,
+                'orderId' => $orderId,
+                'useNewCard' => $useNewCard,
+                'saveCard' => $saveCard,
+                'selectedCardId' => $selectedCardId,
                 'cardOnFileEnabled' => $cardOnFileEnabled,
-                'context'           => $context,
-                'secureKey'         => $secureKey
+                'context' => $context,
+                'secureKey' => $secureKey,
             ]);
 
             if ($response->isError()) {
@@ -143,19 +148,20 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
             if ($response->hasRedirect()) {
                 Tools::redirect($response->getRedirectUrl());
             }
-        } catch (\BTiPay\Exception\CommandException $exception) {
+        } catch (BTiPay\Exception\CommandException $exception) {
             $errors[] = $this->module->l($exception->getMessage());
             $btLogger->error($exception->getMessage());
-        } catch (\BTransilvania\Api\Exception\ApiException $exception) {
+        } catch (BTransilvania\Api\Exception\ApiException $exception) {
             $errors[] = $this->module->l($exception->getPlainMessage());
             $btLogger->error($exception->getMessage());
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $errors[] = $this->module->l('An error occurred. Please contact us for more details.');
             $btLogger->error($exception->getMessage());
         }
 
         if (!empty($errors)) {
             $this->displayError($errors, $orderId, $secureKey);
+
             return false;
         }
     }
@@ -220,13 +226,12 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
                     'payment',
                     [
                         'orderId' => $invoicenumber,
-                        'secureKey' => $secureKey
+                        'secureKey' => $secureKey,
                     ],
-                    true)
+                    true),
             ]
         );
 
         $this->setTemplate('module:btipay/views/templates/front/error.tpl');
-
     }
 }

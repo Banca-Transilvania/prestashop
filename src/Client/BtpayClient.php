@@ -1,14 +1,35 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Client;
 
-use BTiPay\Client\ClientInterface;
 use BTiPay\Config\BTiPayConfig;
 use BTiPay\Facade\Context;
-use BTransilvania\Api\IPayClient;
 use BTransilvania\Api\Config\Config as SdkConfig;
+use BTransilvania\Api\IPayClient;
 use BTransilvania\Api\Logger\PsrLogger;
 use Psr\Log\LoggerInterface;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class BtpayClient implements ClientInterface
 {
@@ -24,34 +45,34 @@ class BtpayClient implements ClientInterface
         $this->logger = $logger;
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function placeRequest(string $action, array $transferObject)
     {
         return $this->$action($transferObject);
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function getPaymentDetails($transferObject)
     {
         return $this->createClient()->getOrderStatusExtended($transferObject);
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function bindCard(array $transferObject)
     {
         return $this->createClient()->bindCard($transferObject);
     }
 
-    /** @inheritDoc */
+    /** {@inheritDoc} */
     public function unBindCard(array $transferObject)
     {
-       return $this->createClient()->unBindCard($transferObject);
+        return $this->createClient()->unBindCard($transferObject);
     }
 
     private function createClient()
     {
         if (!$this->sdkClient) {
-            if($this->btConfig->isTestMode()) {
+            if ($this->btConfig->isTestMode()) {
                 $user = $this->btConfig->getTestUsername();
                 $password = $this->btConfig->getTestPassword();
                 $env = SdkConfig::TEST_MODE;
@@ -62,11 +83,11 @@ class BtpayClient implements ClientInterface
             }
 
             $sdk_config = [
-                'user'         => $user,
-                'password'     => $password,
-                'environment'  => $env,
+                'user' => $user,
+                'password' => $password,
+                'environment' => $env,
                 'platformName' => 'PrestaShop ' . _PS_VERSION_,
-                'language'     => $this->context->getLanguageIso()
+                'language' => $this->context->getLanguageIso(),
             ];
 
             try {

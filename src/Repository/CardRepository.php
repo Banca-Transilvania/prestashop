@@ -1,12 +1,31 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Repository;
 
 use BTiPay\Entity\BTIPayCard;
-use Db;
-use DbQuery;
-use PrestaShopException;
 use BTiPay\Helper\Encrypt;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class CardRepository
 {
@@ -17,9 +36,9 @@ class CardRepository
     {
         // Encrypt sensitive data before saving
         $cardData = [
-            'expiration'     => $card->expiration,
+            'expiration' => $card->expiration,
             'cardholderName' => $card->cardholderName,
-            'pan'            => $card->pan
+            'pan' => $card->pan,
         ];
 
         $encryptedData = Encrypt::encryptCard($cardData);
@@ -53,14 +72,14 @@ class CardRepository
         $encryptedData = Encrypt::encryptCard($data);
 
         // Remove any existing card with the same PAN and customer ID
-        $this->deleteWithSamePan($encryptedData['pan'], (int)$data['customer_id']);
+        $this->deleteWithSamePan($encryptedData['pan'], (int) $data['customer_id']);
 
         // Prepare data for insertion
         $encryptedData['status'] = 'enabled'; // Assume 'enabled' is a valid status, adapt as necessary
         $encryptedData['created_at'] = date('Y-m-d H:i:s'); // Set current time for created_at
 
         // Insert data into the database
-        if (!Db::getInstance()->insert('bt_ipay_cards', $encryptedData)) {
+        if (!\Db::getInstance()->insert('bt_ipay_cards', $encryptedData)) {
             throw new \Exception('Failed to create card record.');
         }
     }
@@ -70,7 +89,7 @@ class CardRepository
      */
     public function deleteWithSamePan($pan, $customerId)
     {
-        return Db::getInstance()->delete('bt_ipay_cards', 'pan = \'' . pSQL($pan) . '\' AND customer_id = ' . (int)$customerId);
+        return \Db::getInstance()->delete('bt_ipay_cards', 'pan = \'' . pSQL($pan) . '\' AND customer_id = ' . (int) $customerId);
     }
 
     /**
@@ -78,7 +97,7 @@ class CardRepository
      */
     public function deleteById($id)
     {
-        return Db::getInstance()->delete('bt_ipay_cards', 'id = ' . (int)$id);
+        return \Db::getInstance()->delete('bt_ipay_cards', 'id = ' . (int) $id);
     }
 
     /**
@@ -86,7 +105,7 @@ class CardRepository
      */
     public function updateStatus($status, $ipayCardId)
     {
-        return Db::getInstance()->update('bt_ipay_cards', ['status' => pSQL($status)], 'ipay_id = \'' . pSQL($ipayCardId) . '\'');
+        return \Db::getInstance()->update('bt_ipay_cards', ['status' => pSQL($status)], 'ipay_id = \'' . pSQL($ipayCardId) . '\'');
     }
 
     /**
@@ -94,13 +113,13 @@ class CardRepository
      */
     public function findById($id)
     {
-        $card = new BTIPayCard((int)$id);
+        $card = new BTIPayCard((int) $id);
 
         // Decrypt sensitive data after retrieving
         $cardData = [
             'expiration' => $card->expiration,
             'cardholderName' => $card->cardholderName,
-            'pan' => $card->pan
+            'pan' => $card->pan,
         ];
 
         $decryptedData = Encrypt::decryptCard($cardData);
@@ -117,14 +136,14 @@ class CardRepository
      */
     public function findByIpayId($ipayId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from('bt_ipay_cards');
         $sql->where('ipay_id = \'' . pSQL($ipayId) . '\'');
 
-        $id = Db::getInstance()->getValue($sql);
+        $id = \Db::getInstance()->getValue($sql);
         if ($id) {
-            return $this->findById((int)$id);
+            return $this->findById((int) $id);
         }
 
         return null;
@@ -135,13 +154,13 @@ class CardRepository
      */
     public function findByCustomerId($customerId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from('bt_ipay_cards');
-        $sql->where('customer_id = ' . (int)$customerId);
+        $sql->where('customer_id = ' . (int) $customerId);
         $sql->orderBy('created_at DESC');
 
-        $results = Db::getInstance()->executeS($sql);
+        $results = \Db::getInstance()->executeS($sql);
 
         // Decrypt sensitive data after retrieving
         foreach ($results as &$result) {
@@ -156,13 +175,13 @@ class CardRepository
      */
     public function findEnabledByCustomerId($customerId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('id, cardholderName, pan');
         $sql->from('bt_ipay_cards');
-        $sql->where('customer_id = ' . (int)$customerId . ' AND status = \'enabled\'');
+        $sql->where('customer_id = ' . (int) $customerId . ' AND status = \'enabled\'');
         $sql->orderBy('created_at DESC');
 
-        $results = Db::getInstance()->executeS($sql);
+        $results = \Db::getInstance()->executeS($sql);
 
         // Decrypt sensitive data after retrieving
         foreach ($results as &$result) {
@@ -177,12 +196,13 @@ class CardRepository
      */
     public function getIpayIdsByCustomerId($customerId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('ipay_id');
         $sql->from('bt_ipay_cards');
-        $sql->where('customer_id = ' . (int)$customerId);
+        $sql->where('customer_id = ' . (int) $customerId);
 
         $results = \Db::getInstance()->executeS($sql);
+
         return array_column($results, 'ipay_id');
     }
 
@@ -199,16 +219,17 @@ class CardRepository
      *
      * @param int $selectedCardId
      * @param int $customerId
+     *
      * @return false|string|null
      */
     public function getIpayIdByCardIdCustomer(int $selectedCardId, int $customerId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('ipay_id');
         $sql->from('bt_ipay_cards');
-        $sql->where('id = ' . (int)$selectedCardId . ' AND customer_id = ' . (int)$customerId);
+        $sql->where('id = ' . (int) $selectedCardId . ' AND customer_id = ' . (int) $customerId);
 
-        return Db::getInstance()->getValue($sql);
+        return \Db::getInstance()->getValue($sql);
     }
 
     /**
@@ -216,16 +237,17 @@ class CardRepository
      *
      * @param string $selectedCardId
      * @param int $customerId
+     *
      * @return false|string|null
      */
     public function getIpayIdByIpayIdCustomer(string $ipayId, int $customerId)
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('ipay_id');
         $sql->from('bt_ipay_cards');
         $ipayId = pSQL($ipayId);
-        $sql->where("ipay_id = '$ipayId' AND customer_id = " . (int)$customerId);
+        $sql->where("ipay_id = '$ipayId' AND customer_id = " . (int) $customerId);
 
-        return Db::getInstance()->getValue($sql);
+        return \Db::getInstance()->getValue($sql);
     }
 }

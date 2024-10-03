@@ -1,26 +1,44 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Service;
 
 use BTiPay\Command\CommandInterface;
 use BTiPay\Config\BTiPayConfig;
 use BTiPay\Entity\BTIPayPayment;
+use BTiPay\Entity\BTIPayRefund;
 use BTiPay\Exception\BTRefundException;
 use BTiPay\Repository\PaymentRepository;
 use BTiPay\Repository\RefundRepository;
+use BTransilvania\Api\Model\IPayStatuses;
 use BTransilvania\Api\Model\Response\GetOrderStatusResponseModel;
 use BTransilvania\Api\Model\Response\RefundResponse;
-use PrestaShop\Decimal\DecimalNumber;
-use PrestaShop\PrestaShop\Adapter\Order\Refund\OrderRefundCalculator;
 use PrestaShop\PrestaShop\Adapter\Order\Refund\OrderRefundSummary;
 use PrestaShop\PrestaShop\Core\Domain\Order\Command\IssuePartialRefundCommand;
 use PrestaShop\PrestaShop\Core\Domain\Order\Command\IssueStandardRefundCommand;
-use PrestaShop\PrestaShop\Core\Domain\Order\Exception\InvalidCancelProductException;
-use PrestaShop\PrestaShop\Core\Domain\Order\Exception\OrderException;
 use PrestaShop\PrestaShop\Core\Domain\Order\VoucherRefundType;
 use Psr\Log\LoggerInterface;
-use BTiPay\Entity\BTIPayRefund;
-use BTransilvania\Api\Model\IPayStatuses;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class RefundService
 {
@@ -46,7 +64,7 @@ class RefundService
         PaymentDetailsService $paymentDetailsService,
         CommandInterface $refundCommand,
         LoggerInterface $logger,
-        RefundCommandService $refundCommandService = null
+        ?RefundCommandService $refundCommandService = null,
     ) {
         $this->btConfig = $btConfig;
         $this->paymentRepository = $paymentRepository;
@@ -67,6 +85,7 @@ class RefundService
     public function getRefundSummary($command): OrderRefundSummary
     {
         $order = $this->getOrder($command);
+
         return $this->refundCommandService->getRefundSummary($order, $command);
     }
 
@@ -86,13 +105,14 @@ class RefundService
      * Refund after creating credit slip
      *
      * @param IssueStandardRefundCommand|IssuePartialRefundCommand $command
-     * @param  \PrestaShop\PrestaShop\Adapter\Order\Refund\OrderRefundSummary $refundSummary
+     * @param OrderRefundSummary $refundSummary
+     *
      * @return void
      */
     public function autoRefund($command, $refundSummary)
     {
         $checkboxBtRequest = \Tools::getValue('cancel_product')['send_refund_request_btipay'] ?? false;
-        if($this->btConfig->isAutoRefundEnabled()
+        if ($this->btConfig->isAutoRefundEnabled()
             && self::$alreadyRefunded === false
             && $checkboxBtRequest
         ) {
@@ -100,7 +120,7 @@ class RefundService
             $payments = $this->paymentRepository->findByOrderId($order->id);
             $amount = $refundSummary->getRefundedAmount();
 
-            if($payments) {
+            if ($payments) {
                 $this->refund($order, $payments, $amount);
             }
         }
@@ -110,18 +130,19 @@ class RefundService
      * Refund after creating credit slip
      *
      * @param IssueStandardRefundCommand|IssuePartialRefundCommand $command
-     * @param  \PrestaShop\PrestaShop\Adapter\Order\Refund\OrderRefundSummary $refundSummary
+     * @param OrderRefundSummary $refundSummary
+     *
      * @return void
      */
     public function customRefund($data, $type, $amount)
     {
-        if(!self::$alreadyRefunded) {
+        if (!self::$alreadyRefunded) {
             /** @var \Order $order */
             $order = $data['order'];
             $payments = $this->paymentRepository->findByOrderId($order->id);
             $this->refundType = $type;
 
-            if($payments) {
+            if ($payments) {
                 $this->refund($order, $payments, $amount);
             }
         }
@@ -133,7 +154,8 @@ class RefundService
     public function refund(\Order $order, $payments, $amount = null): void
     {
         if (!$this->btConfig->isEnabled()) {
-            $this->logger->info("Refund process or BT iPay is disabled.");
+            $this->logger->info('Refund process or BT iPay is disabled.');
+
             return;
         }
 
@@ -142,7 +164,7 @@ class RefundService
             throw new BTRefundException('Amount refunded is equal with 0.');
         }
 
-        if(!$amount) {
+        if (!$amount) {
             $amount = $this->getTotalAmountRefund($order);
         }
 
@@ -151,26 +173,26 @@ class RefundService
         $paymentDetails = null;
         $loyDetails = null;
 
-        if($this->pay) {
+        if ($this->pay) {
             $paymentDetails = $this->paymentDetailsService->get($this->pay->ipay_id);
         }
 
         $loyId = null;
-        if($this->loy) {
+        if ($this->loy) {
             $loyId = $this->loy->ipay_id;
         }
 
-        if($paymentDetails) {
+        if ($paymentDetails) {
             $loyId = $paymentDetails->getLoyId();
         }
 
-        if($loyId) {
+        if ($loyId) {
             /** @var GetOrderStatusResponseModel $loyDetails */
             $loyDetails = $this->paymentDetailsService->get($loyId);
         }
 
         $totalPaid = $this->calculateTotalPaid($paymentDetails, $loyDetails);
-        $amount = round($amount,2);
+        $amount = round($amount, 2);
 
         $maxRefunded = $this->determineAmount($amount, $totalPaid);
 
@@ -187,7 +209,7 @@ class RefundService
             $refundSubject = [
                 'ipayId' => $loyId,
                 'amount' => $loyToRefund,
-                'order_id' => $order->id
+                'order_id' => $order->id,
             ];
 
             /** @var RefundResponse $loyRefundResponse */
@@ -207,7 +229,7 @@ class RefundService
                 $this->loy->refund_amount = $loyDetails->getTotalRefunded() + $loyToRefund;
                 $loyiPayRefund->amount = $loyToRefund;
                 $loyiPayRefund->status = 'Success';
-                if($loyDetails->getTotalAvailableForRefund() - $loyToRefund > 0.001) {
+                if ($loyDetails->getTotalAvailableForRefund() - $loyToRefund > 0.001) {
                     $loyiPayRefund->type = BTIPayRefund::PARTIAL_REFUND;
                     $this->loy->status = IPayStatuses::STATUS_PARTIALLY_REFUNDED;
                 } else {
@@ -220,12 +242,12 @@ class RefundService
             $loyiPayRefund->save();
         }
 
-        if($maxRefunded > 0 && $paymentDetails) {
+        if ($maxRefunded > 0 && $paymentDetails) {
             $refundSubject = [
                 'ipayId' => $this->pay->ipay_id,
-                'amount' => $maxRefunded
+                'amount' => $maxRefunded,
             ];
-            /** @var \BTransilvania\Api\Model\Response\RefundResponse $paymentRefundResponse */
+            /** @var RefundResponse $paymentRefundResponse */
             $paymentRefundResponse = $this->refundCommand->execute($refundSubject);
 
             $paymentiPayRefund = new BTIPayRefund();
@@ -242,7 +264,7 @@ class RefundService
                 $this->pay->refund_amount = $paymentDetails->getTotalRefunded() + $maxRefunded;
                 $paymentiPayRefund->amount = $maxRefunded;
                 $paymentiPayRefund->status = 'Success';
-                if($paymentDetails->getTotalAvailableForRefund() - $maxRefunded > 0.001) {
+                if ($paymentDetails->getTotalAvailableForRefund() - $maxRefunded > 0.001) {
                     $paymentiPayRefund->type = BTIPayRefund::PARTIAL_REFUND;
                     $this->pay->status = IPayStatuses::STATUS_PARTIALLY_REFUNDED;
                 } else {
@@ -266,9 +288,9 @@ class RefundService
                 $order->setCurrentState($orderStatusAdmin);
                 $order->update();
 
-//                $loyRefund = $loyiPayRefund->amount ?? 0;
-//                $payRefund = $paymentiPayRefund->amount ?? 0;
-//                $this->createGenericCreditSlip($order, $loyRefund + $payRefund);
+                //                $loyRefund = $loyiPayRefund->amount ?? 0;
+                //                $payRefund = $paymentiPayRefund->amount ?? 0;
+                //                $this->createGenericCreditSlip($order, $loyRefund + $payRefund);
             }
 
             if ($paymentStatus === IPayStatuses::STATUS_REFUNDED) {
@@ -285,7 +307,7 @@ class RefundService
 
                     foreach ($orderDetailList as $orderDetail) {
                         $fullRefund[$orderDetail['id_order_detail']] = [
-                            'quantity' => (int)$orderDetail['product_quantity'] - (int)$orderDetail['product_quantity_refunded']
+                            'quantity' => (int) $orderDetail['product_quantity'] - (int) $orderDetail['product_quantity_refunded'],
                         ];
                     }
 
@@ -303,7 +325,8 @@ class RefundService
         }
     }
 
-    public function createGenericCreditSlip($order, $totalRefundAmount, $refundShipping = false, $taxRate = null) {
+    public function createGenericCreditSlip($order, $totalRefundAmount, $refundShipping = false, $taxRate = null)
+    {
         if (!\Validate::isLoadedObject($order)) {
             return 'Order cannot be loaded';
         }
@@ -342,7 +365,7 @@ class RefundService
      */
     protected function getOrderStatusForEntireAmount()
     {
-        return (int)\Configuration::get('PS_OS_REFUND');
+        return (int) \Configuration::get('PS_OS_REFUND');
     }
 
     /**
@@ -352,7 +375,7 @@ class RefundService
      */
     protected function getOrderStatusForPartialAmount()
     {
-        return (int)\Configuration::get(BTiPayConfig::BTIPAY_STATUS_PARTIAL_REFUND);
+        return (int) \Configuration::get(BTiPayConfig::BTIPAY_STATUS_PARTIAL_REFUND);
     }
 
     private function setPayments(array $payments)
@@ -375,11 +398,13 @@ class RefundService
         if ($loyDetails) {
             $totalApproved += $loyDetails->getTotalAvailableForRefund();
         }
+
         return $totalApproved;
     }
 
     /**
      * @param \Order $order
+     *
      * @return float
      */
     private function getTotalAmountRefund(\Order $order): float

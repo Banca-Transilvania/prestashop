@@ -1,4 +1,22 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Helper;
 
@@ -6,12 +24,17 @@ use BTiPay\Config\BTiPayConfig;
 use BTiPay\Facade\Context;
 use BTransilvania\Api\Model\Response\ResponseModelInterface;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 class SubjectReader
 {
     /**
      * Reads Order ID from subject
      *
      * @param array $subject
+     *
      * @return int
      */
     public static function readOrderId(array $subject): int
@@ -20,13 +43,14 @@ class SubjectReader
             throw new \InvalidArgumentException('Order Id should be provided and should be numeric');
         }
 
-        return (int)$subject['orderId'];
+        return (int) $subject['orderId'];
     }
 
     /**
      * Reads iPay ID from subject
      *
      * @param array $subject
+     *
      * @return string
      */
     public static function readIPayId(array $subject): string
@@ -35,13 +59,14 @@ class SubjectReader
             throw new \InvalidArgumentException('iPay Id should be provided and should be string');
         }
 
-        return (string)$subject['ipayId'];
+        return (string) $subject['ipayId'];
     }
 
     /**
      * Reads is new card from subject
      *
      * @param array $subject
+     *
      * @return bool
      */
     public static function readIsNewCard(array $subject): bool
@@ -57,6 +82,7 @@ class SubjectReader
      * Reads is saveCard from subject
      *
      * @param array $subject
+     *
      * @return bool
      */
     public static function readIsSaveCard(array $subject): bool
@@ -72,6 +98,7 @@ class SubjectReader
      * Reads is saveCard from subject
      *
      * @param array $subject
+     *
      * @return bool
      */
     public static function readSecureKey(array $subject): string
@@ -87,6 +114,7 @@ class SubjectReader
      * Reads is new card from subject
      *
      * @param array $subject
+     *
      * @return int
      */
     public static function readSelectedCardId(array $subject): int
@@ -95,13 +123,14 @@ class SubjectReader
             throw new \InvalidArgumentException('Selected card should be provided and should be string/int');
         }
 
-        return (int)$subject['selectedCardId'];
+        return (int) $subject['selectedCardId'];
     }
 
     /**
      * Reads is card on file enabled from subject
      *
      * @param array $subject
+     *
      * @return bool
      */
     public static function readIsCardOnFileEnabled(array $subject): bool
@@ -117,6 +146,7 @@ class SubjectReader
      * Reads context from subject
      *
      * @param array $subject
+     *
      * @return Context
      */
     public static function readContext(array $subject): Context
@@ -132,6 +162,7 @@ class SubjectReader
      * Reads response from API from subject
      *
      * @param array $subject
+     *
      * @return ResponseModelInterface
      */
     public static function readResponse(array $subject): ResponseModelInterface
@@ -147,6 +178,7 @@ class SubjectReader
      * Reads Amount from subject
      *
      * @param array $subject
+     *
      * @return float
      */
     public static function readAmount(array $subject): float
@@ -155,13 +187,14 @@ class SubjectReader
             throw new \InvalidArgumentException('Amount should be provided and should be string');
         }
 
-        return (float)$subject['amount'];
+        return (float) $subject['amount'];
     }
 
     /**
      * Reads BTiPayConfig Object
      *
      * @param array $subject
+     *
      * @return BTiPayConfig|null
      */
     public static function readBTConfiguration(array $subject): ?BTiPayConfig

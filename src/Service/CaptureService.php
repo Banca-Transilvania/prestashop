@@ -1,4 +1,22 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Service;
 
@@ -12,6 +30,10 @@ use BTransilvania\Api\Model\IPayStatuses;
 use BTransilvania\Api\Model\Response\DepositResponse;
 use BTransilvania\Api\Model\Response\GetOrderStatusResponseModel;
 use Psr\Log\LoggerInterface;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class CaptureService
 {
@@ -31,7 +53,7 @@ class CaptureService
         PaymentRepository $paymentRepository,
         PaymentDetailsService $paymentDetailsService,
         CommandInterface $captureCommand,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->btConfig = $btConfig;
         $this->paymentRepository = $paymentRepository;
@@ -40,7 +62,6 @@ class CaptureService
         $this->logger = $logger;
     }
 
-
     /**
      * @throws BTRefundException
      * @throws \Exception
@@ -48,7 +69,8 @@ class CaptureService
     public function execute($data, $type, $amount = null): void
     {
         if (!$this->btConfig->isEnabled()) {
-            $this->logger->info("Capture process or BT iPay is disabled.");
+            $this->logger->info('Capture process or BT iPay is disabled.');
+
             return;
         }
 
@@ -61,20 +83,20 @@ class CaptureService
         $paymentDetails = null;
         $loyDetails = null;
 
-        if($this->pay) {
+        if ($this->pay) {
             $paymentDetails = $this->paymentDetailsService->get($this->pay->ipay_id);
         }
 
         $loyId = null;
-        if($this->loy) {
+        if ($this->loy) {
             $loyId = $this->loy->ipay_id;
         }
 
-        if($paymentDetails) {
+        if ($paymentDetails) {
             $loyId = $paymentDetails->getLoyId();
         }
 
-        if($loyId) {
+        if ($loyId) {
             /** @var GetOrderStatusResponseModel $loyDetails */
             $loyDetails = $this->paymentDetailsService->get($loyId);
         }
@@ -82,8 +104,8 @@ class CaptureService
         $totalApproved = $this->calculateTotalApproved($paymentDetails, $loyDetails);
 
         if ($amount <= 0 && $this->action !== 'cancel') {
-            $this->logger->info($this->action . " amount is equal with 0" . $this->pay->currency);
-            throw new \Exception($this->action . " amount is equal with 0" . $this->pay->currency);
+            $this->logger->info($this->action . ' amount is equal with 0' . $this->pay->currency);
+            throw new \Exception($this->action . ' amount is equal with 0' . $this->pay->currency);
         }
 
         if (!$amount) {
@@ -103,18 +125,18 @@ class CaptureService
             if ($captureBoth === true) {
                 $loyToCapture = $this->determineAmount($maxCapture, $loyTotalApproved);
                 $captureSubject = [
-                    'ipayId'   => $loyId,
-                    'amount'   => $loyToCapture,
-                    'order_id' => $order->id
+                    'ipayId' => $loyId,
+                    'amount' => $loyToCapture,
+                    'order_id' => $order->id,
                 ];
 
                 $data['loy'] = [
                     'order_id' => $order->id,
-                    'ipay_id'  => $loyId,
-                    'amount'   => $loyToCapture,
-                    'status'   => BTIPayRefund::FAILED,
-                    'type'     => BTIPayRefund::NONE_REFUND,
-                    'is_loy'   => 1
+                    'ipay_id' => $loyId,
+                    'amount' => $loyToCapture,
+                    'status' => BTIPayRefund::FAILED,
+                    'type' => BTIPayRefund::NONE_REFUND,
+                    'is_loy' => 1,
                 ];
 
                 /** @var DepositResponse $loyCaptureResponse */
@@ -144,19 +166,19 @@ class CaptureService
             $captureSubject = [
                 'ipayId' => $this->pay->ipay_id,
                 'amount' => $amountApproved,
-                'order_id' => $order->id
+                'order_id' => $order->id,
             ];
 
-            /** @var \BTransilvania\Api\Model\Response\DepositResponse $paymentRefundResponse */
+            /** @var DepositResponse $paymentRefundResponse */
             $paymentCaptureResponse = $this->captureCommand->execute($captureSubject);
 
             $data['pay'] = [
                 'order_id' => $order->id,
-                'ipay_id'  => $this->pay->ipay_id,
-                'amount'   => $amountApproved,
-                'status'   => BTIPayRefund::FAILED,
-                'type'     => BTIPayRefund::NONE_REFUND,
-                'is_loy'   => 1
+                'ipay_id' => $this->pay->ipay_id,
+                'amount' => $amountApproved,
+                'status' => BTIPayRefund::FAILED,
+                'type' => BTIPayRefund::NONE_REFUND,
+                'is_loy' => 1,
             ];
 
             if ($paymentCaptureResponse->isSuccess()) {
@@ -205,6 +227,7 @@ class CaptureService
         if ($transaction) {
             return $transaction->capture_amount;
         }
+
         return 0;
     }
 
@@ -228,6 +251,7 @@ class CaptureService
         if ($loyDetails) {
             $totalApproved += $loyDetails->getTotalAvailableForCancel();
         }
+
         return $totalApproved;
     }
 
@@ -236,6 +260,7 @@ class CaptureService
      *
      * @param \Order $order
      * @param string $type
+     *
      * @return float
      */
     private function getTotalAmount(\Order $order, string $type): float
@@ -245,7 +270,7 @@ class CaptureService
             $amount = $order->total_paid;
         }
 
-        return (float)$amount;
+        return (float) $amount;
     }
 
     private function determineAmount($amountRequest, float $maxAmountToRefund): float
@@ -282,14 +307,16 @@ class CaptureService
     /**
      * @param \Order $order
      * @param float $totalAmountCaptured
+     *
      * @return bool
+     *
      * @throws \Exception
      */
     protected function createInvoiceAndMarkAsPaid($order, $totalAmountCaptured, $paymentStatus)
     {
         try {
             if (!\Validate::isLoadedObject($order)) {
-                throw new \Exception("Order not found.");
+                throw new \Exception('Order not found.');
             }
 
             /** @var \OrderPayment $orderPayments */
@@ -297,23 +324,22 @@ class CaptureService
             if (count($orderPayments) > 0) {
                 $orderPayment = array_shift($orderPayments);
             } else {
-                throw new \Exception("Payment details not found.");
+                throw new \Exception('Payment details not found.');
             }
 
             $orderPayment->amount = $totalAmountCaptured;
 
             if (!$orderPayment->save()) {
-                throw new \Exception("Failed to save payment information.");
+                throw new \Exception('Failed to save payment information.');
             }
 
-            $this->logger->info("Order and payment marked as paid.");
+            $this->logger->info('Order and payment marked as paid.');
 
             // Mark the order as paid and generate invoice,
             // The total_paid_real updated by orderPayment amount classes/order/Order.php:1962 based on $orderPayment->amount
             if ($order && !$order->hasInvoice()) {
                 if ($totalAmountCaptured < $order->total_paid) {
                     $orderStatus = $this->getPartialCaptureOrderStatus();
-
                 } else {
                     $orderStatus = $this->getOrderStatusForEntireAmount(); // Set the order status to "Payment accepted"
                 }
@@ -327,12 +353,12 @@ class CaptureService
                 if ($order->hasInvoice()) {
                     return true;
                 } else {
-                    throw new \Exception("Invoice creation failed.");
+                    throw new \Exception('Invoice creation failed.');
                 }
             }
         } catch (\Exception $e) {
-            $this->logger->error("Failed to mark order as paid: " . $e->getMessage());
-            throw new \Exception("Error processing order payment status.");
+            $this->logger->error('Failed to mark order as paid: ' . $e->getMessage());
+            throw new \Exception('Error processing order payment status.');
         }
 
         return false;
@@ -344,6 +370,7 @@ class CaptureService
      * @param \Order $order
      * @param int $stateId
      * @param string $message
+     *
      * @throws PrestaShopException
      */
     private function setOrderState($order, $stateId, $message)
@@ -353,7 +380,7 @@ class CaptureService
         $history->changeIdOrderState($stateId, $order, true);
         $history->addWithemail(true, [
             'order_name' => $order->getUniqReference(),
-            'message'    => $message
+            'message' => $message,
         ]);
     }
 
@@ -364,11 +391,11 @@ class CaptureService
      */
     protected function getOrderStatusForEntireAmount()
     {
-        return (int)\Configuration::get('PS_OS_PAYMENT');
+        return (int) \Configuration::get('PS_OS_PAYMENT');
     }
 
     private function getPartialCaptureOrderStatus()
     {
-        return $this->btConfig->getPartialCaptureStatus() ?? (int)\Configuration::get('PS_OS_PAYMENT');
+        return $this->btConfig->getPartialCaptureStatus() ?? (int) \Configuration::get('PS_OS_PAYMENT');
     }
 }

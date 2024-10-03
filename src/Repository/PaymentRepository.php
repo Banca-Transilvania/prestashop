@@ -1,13 +1,32 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Repository;
 
 use BTiPay\Entity\BTIPayPayment;
 use BTransilvania\Api\Model\IPayStatuses;
 use BTransilvania\Api\Model\Response\ResponseModelInterface;
-use Db;
-use DbQuery;
-use PrestaShopException;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class PaymentRepository
 {
@@ -17,18 +36,19 @@ class PaymentRepository
     /**
      * Finds all payments by order ID.
      *
-     * @param int $orderId The ID of the order.
-     * @return BTIPayPayment[] Returns an array of payment objects or an empty array if none found.
+     * @param int $orderId the ID of the order
+     *
+     * @return BTIPayPayment[] returns an array of payment objects or an empty array if none found
      */
     public function findByOrderId($orderId): array
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from(BTIPayPayment::$definition['table']);
-        $sql->where('`order_id` = ' . (int)$orderId);
+        $sql->where('`order_id` = ' . (int) $orderId);
 
         try {
-            $results = Db::getInstance()->executeS($sql);
+            $results = \Db::getInstance()->executeS($sql);
             $payments = [];
 
             foreach ($results as $result) {
@@ -43,7 +63,7 @@ class PaymentRepository
             }
 
             return $payments;
-        } catch (PrestaShopException $e) {
+        } catch (\PrestaShopException $e) {
             // Log error
             return [];
         }
@@ -68,24 +88,25 @@ class PaymentRepository
     /**
      * Finds all payments by order ID and returns them as an array of arrays.
      *
-     * @param int $orderId The ID of the order.
-     * @return array Returns an array of associative arrays containing payment data.
+     * @param int $orderId the ID of the order
+     *
+     * @return array returns an array of associative arrays containing payment data
      */
     public function findPaymentsByOrderIdAsArray(int $orderId): array
     {
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from(BTIPayPayment::$definition['table']);
-        $sql->where('`order_id` = ' . (int)$orderId);
+        $sql->where('`order_id` = ' . (int) $orderId);
 
         try {
-            $results = Db::getInstance()->executeS($sql);
+            $results = \Db::getInstance()->executeS($sql);
             if (!$results) {
                 return [];
             }
 
             return $results;
-        } catch (PrestaShopException $e) {
+        } catch (\PrestaShopException $e) {
             return [];
         }
     }
@@ -119,6 +140,7 @@ class PaymentRepository
      * Get the sum of all payments approved amounts with status 'success' by order ID.
      *
      * @param int $orderId
+     *
      * @return float
      */
     public function getTotalApprovedAmountByOrderId(int $orderId): float
@@ -126,7 +148,7 @@ class PaymentRepository
         $sql = new \DbQuery();
         $sql->select('SUM(amount) as total_approved');
         $sql->from('bt_ipay_payments');
-        $sql->where('order_id = ' . (int)$orderId);
+        $sql->where('order_id = ' . (int) $orderId);
         $sql->where('status = "' . IPayStatuses::STATUS_APPROVED . '"');
 
         $result = \Db::getInstance()->getValue($sql);
@@ -135,13 +157,14 @@ class PaymentRepository
             return 0.0;
         }
 
-        return (float)$result;
+        return (float) $result;
     }
 
     /**
      * Get the sum of all payments capture amounts with status 'success' by order ID.
      *
      * @param int $orderId
+     *
      * @return float
      */
     public function getTotalCaptureAmountByOrderId(int $orderId): float
@@ -149,11 +172,11 @@ class PaymentRepository
         $sql = new \DbQuery();
         $sql->select('SUM(capture_amount) as total_captured');
         $sql->from('bt_ipay_payments');
-        $sql->where('order_id = ' . (int)$orderId);
+        $sql->where('order_id = ' . (int) $orderId);
         $statuses = [
             IPayStatuses::STATUS_DEPOSITED,
             IPayStatuses::STATUS_PARTIALLY_REFUNDED,
-            IPayStatuses::STATUS_REFUNDED
+            IPayStatuses::STATUS_REFUNDED,
         ];
         $statusString = implode('", "', $statuses);
         $sql->where('status IN ("' . $statusString . '")');
@@ -164,34 +187,36 @@ class PaymentRepository
             return 0.0;
         }
 
-        return (float)$result;
+        return (float) $result;
     }
 
     /**
      * Finds a payment by IPay ID.
      *
-     * @param string $iPayId The ID of the order.
-     * @return BTIPayPayment|null Returns the payment object or null if not found.
+     * @param string $iPayId the ID of the order
+     *
+     * @return BTIPayPayment|null returns the payment object or null if not found
      */
     public function findByIPayId(string $iPayId): ?BTIPayPayment
     {
         $escapedIPayId = pSQL($iPayId);
 
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from(BTIPayPayment::$definition['table']);
         $sql->where('`ipay_id` = "' . $escapedIPayId . '"');
 
         try {
-            $result = Db::getInstance()->getRow($sql);
+            $result = \Db::getInstance()->getRow($sql);
             if (!$result) {
                 return null;
             }
 
             $payment = new BTIPayPayment();
             $payment->hydrate($result);
+
             return $payment;
-        } catch (PrestaShopException $e) {
+        } catch (\PrestaShopException $e) {
             // Log error
             return null;
         }
@@ -200,28 +225,30 @@ class PaymentRepository
     /**
      * Finds a payment by Loy ID.
      *
-     * @param string $iPayId The ID of the order.
-     * @return BTIPayPayment|null Returns the payment object or null if not found.
+     * @param string $iPayId the ID of the order
+     *
+     * @return BTIPayPayment|null returns the payment object or null if not found
      */
     public function findByLoyId(string $iPayId): ?BTIPayPayment
     {
         $escapedIPayId = pSQL($iPayId);
 
-        $sql = new DbQuery();
+        $sql = new \DbQuery();
         $sql->select('*');
         $sql->from(BTIPayPayment::$definition['table']);
         $sql->where('`loy_id` = "' . $escapedIPayId . '"');
 
         try {
-            $result = Db::getInstance()->getRow($sql);
+            $result = \Db::getInstance()->getRow($sql);
             if (!$result) {
                 return null;
             }
 
             $payment = new BTIPayPayment();
             $payment->hydrate($result);
+
             return $payment;
-        } catch (PrestaShopException $e) {
+        } catch (\PrestaShopException $e) {
             // Log error
             return null;
         }
@@ -235,7 +262,7 @@ class PaymentRepository
             } else {
                 return $payment->add();
             }
-        } catch (PrestaShopException $e) {
+        } catch (\PrestaShopException $e) {
             // Handle or log the error
             return false;
         }
@@ -243,7 +270,7 @@ class PaymentRepository
 
     /**
      * @throws \PrestaShopDatabaseException
-     * @throws PrestaShopException
+     * @throws \PrestaShopException
      */
     public function updateData(BTIPayPayment $payment)
     {
@@ -253,16 +280,15 @@ class PaymentRepository
     /**
      * Updates a payment object with details from a response model.
      *
-     * @param BTIPayPayment $payment The payment object to update.
-     * @param ResponseModelInterface $response The response model with payment details.
+     * @param BTIPayPayment $payment the payment object to update
+     * @param ResponseModelInterface $response the response model with payment details
      */
     public function updatePaymentFromResponse(
         BTIPayPayment $payment,
         ResponseModelInterface $response,
         $ipayId,
-        $parentId
+        $parentId,
     ): void {
-
         $payment->ipay_id = $ipayId;
         $payment->parent_ipay_id = $parentId;
         $payment->status = $response->getStatus();

@@ -1,18 +1,38 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Helper;
 
-use Configuration;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class Encrypt
 {
     public const TO_ENCRYPT = [
         'expiration',
         'cardholderName',
-        'pan'
+        'pan',
     ];
 
-    public const ALG = "AES-256-GCM";
+    public const ALG = 'aes-256-gcm';
     private const STATIC_SALT = 'hoP%687,f:q£';
 
     private static $key;
@@ -26,6 +46,7 @@ class Encrypt
         if ($encrypted === false) {
             throw new \Exception(openssl_error_string());
         }
+
         return base64_encode($encrypted . '::' . $iv . '::' . $tag);
     }
 
@@ -38,6 +59,7 @@ class Encrypt
         if ($decrypted === false) {
             throw new \Exception(openssl_error_string());
         }
+
         return $decrypted;
     }
 
@@ -47,7 +69,7 @@ class Encrypt
 
         if (!self::$key) {
             if (file_exists($keyFile)) {
-                $key = trim(file_get_contents($keyFile));
+                $key = trim(\Tools::file_get_contents($keyFile));
                 if ($key) {
                     self::$key = substr(hash('sha256', self::STATIC_SALT, true), 0, 32);
                 }
@@ -59,7 +81,6 @@ class Encrypt
         }
     }
 
-
     /**
      * @throws \Exception
      */
@@ -70,6 +91,7 @@ class Encrypt
                 $data[$key] = self::encrypt($value);
             }
         }
+
         return $data;
     }
 
@@ -83,6 +105,7 @@ class Encrypt
                 $data[$key] = self::decrypt($value);
             }
         }
+
         return $data;
     }
 
@@ -90,7 +113,9 @@ class Encrypt
      * Encrypts a single configuration value.
      *
      * @param string $value
+     *
      * @return string
+     *
      * @throws \Exception
      */
     public static function encryptConfigValue(string $value): string
@@ -102,7 +127,9 @@ class Encrypt
      * Decrypts a single configuration value.
      *
      * @param string $value
+     *
      * @return string
+     *
      * @throws \Exception
      */
     public static function decryptConfigValue(string $value): string

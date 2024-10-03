@@ -5,7 +5,7 @@
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
+ * This source file is subject to the Academic Free License version 3.0
  * that is bundled with this package in the file LICENSE.md.
  * It is also available through the world-wide-web at this URL:
  * https://opensource.org/licenses/AFL-3.0
@@ -13,9 +13,9 @@
  * obtain it through the world-wide-web, please send an email
  * to license@prestashop.com so we can send you a copy immediately.
  *
- * @author    PrestaShop SA <contact@prestashop.com>
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
  * @copyright Since 2007 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
 use BTiPay\Entity\BTIPayCard;
@@ -23,10 +23,14 @@ use BTiPay\Repository\CardRepository;
 use BTransilvania\Api\Model\Response\RegisterResponseModel;
 use BTransilvania\Api\Model\Response\ResponseModelInterface;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * This Controller display cards in customer account
  */
-class BtipayAccountModuleFrontController extends \ModuleFrontController
+class BtipayAccountModuleFrontController extends ModuleFrontController
 {
     /**
      * {@inheritdoc}
@@ -50,11 +54,11 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
     {
         parent::initContent();
 
-        /** @var \BTiPay\Config\BTiPayConfig $config */
+        /** @var BTiPay\Config\BTiPayConfig $config */
         $config = $this->get('btipay.config');
         $this->cardRepository = $this->get('btipay.card_repository');
 
-        if($config->isCardOnFileEnabled()) {
+        if ($config->isCardOnFileEnabled()) {
             if (Tools::isSubmit('action')) {
                 $this->handleCardAction();
             } else {
@@ -63,7 +67,6 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
         } else {
             Tools::redirect('index.php?controller=404');
         }
-
     }
 
     /**
@@ -77,23 +80,23 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
             $token = Tools::getToken(false);
 
             $this->context->smarty->assign([
-                'saved_cards'       => $savedCards,
-                'have_cards'        => $haveCards,
+                'saved_cards' => $savedCards,
+                'have_cards' => $haveCards,
                 'moduleDisplayName' => $this->module->displayName,
-                'add_card_link'     => $this->context->link->getModuleLink(
+                'add_card_link' => $this->context->link->getModuleLink(
                     'btipay',
                     'account',
                     [
                         'action' => 'add',
-                        'token' => $token
+                        'token' => $token,
                     ]
                 ),
-                'post_action_url'   => $this->context->link->getModuleLink('btipay', 'account'),
-                'token'             => $token, // CSRF token
+                'post_action_url' => $this->context->link->getModuleLink('btipay', 'account'),
+                'token' => $token, // CSRF token
             ]);
 
             $this->setTemplate('module:btipay/views/templates/front/account.tpl');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->handleError($e);
             $this->redirectWithNotifications(
                 $this->context->link->getPageLink('my-account', true)
@@ -113,6 +116,7 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
         $token = Tools::getValue('token');
         if (!isset($token) || !$this->isCsrfTokenValid($token)) {
             $this->errors[] = $this->module->l('Invalid CSRF token.');
+
             return;
         }
 
@@ -155,6 +159,7 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      * Enable a card by its ID.
      *
      * @param int $cardId
+     *
      * @throws Exception
      */
     private function enableCard($cardId)
@@ -196,6 +201,7 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      * Delete a card by its ID.
      *
      * @param int $cardId
+     *
      * @throws Exception
      */
     private function deleteCard($cardId)
@@ -206,7 +212,7 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
             throw new Exception('Cannot delete card');
         }
 
-        if($card->status == BTIPayCard::STATUS_ENABLE) {
+        if ($card->status == BTIPayCard::STATUS_ENABLE) {
             /** @var ResponseModelInterface $response */
             $response = $this->toggleStatus($card->ipay_id, false);
             $this->handleApiError($response, 'Unable to disable card before deletion');
@@ -219,13 +225,14 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      * Add a new card.
      *
      * @return string|null Redirect URL
+     *
      * @throws Exception
      */
     private function addCard(string $token = '')
     {
-        /** @var \BTiPay\Facade\Context $context */
+        /** @var BTiPay\Facade\Context $context */
         $context = $this->get('btipay.facade.context');
-        /** @var \BTiPay\Service\CardService $cardService */
+        /** @var BTiPay\Service\CardService $cardService */
         $cardService = $this->get('btipay.card.service');
         /** @var RegisterResponseModel $response */
         $response = $cardService->addCard($context, $token);
@@ -250,14 +257,14 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
             throw new Exception($this->module->l('Binding Id is missing.'));
         }
 
-        /** @var \BTiPay\Service\PaymentDetailsService $paymentDetailsService */
+        /** @var BTiPay\Service\PaymentDetailsService $paymentDetailsService */
         $paymentDetailsService = $this->get('btipay.payment_details.service');
 
-        /** @var \BTransilvania\Api\Model\Response\GetOrderStatusResponseModel $response */
+        /** @var BTransilvania\Api\Model\Response\GetOrderStatusResponseModel $response */
         $response = $paymentDetailsService->get($ipayId);
         if ($response->isSuccess()) {
             if (!$response->canSaveCard()) {
-                throw new \Exception('Could not save card, invalid data provided - ' . $response->getCustomerError());
+                throw new Exception('Could not save card, invalid data provided - ' . $response->getCustomerError());
             }
             $cardData = $response->getCardInfo();
             if ($cardData === null) {
@@ -266,11 +273,11 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
 
             $cardId = $this->cardRepository->getIpayIdByIpayIdCustomer($ipayId, $this->context->customer->id);
             if ($cardId) {
-                throw new \Exception('This card is already registered');
+                throw new Exception('This card is already registered');
             }
             $this->cardRepository->create($cardData);
         } else {
-            throw new \Exception('Could not save card');
+            throw new Exception('Could not save card');
         }
     }
 
@@ -279,26 +286,29 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      *
      * @param array $card
      *
-     * @return boolean
+     * @return bool
      */
-    private function canChangeCard( BTIPayCard $card ): bool {
-        return isset( $card->customer_id ) &&
-            is_scalar( $card->customer_id ) &&
-            (int) $card->customer_id === $this->context->customer->id;
+    private function canChangeCard(BTIPayCard $card): bool
+    {
+        return isset($card->customer_id)
+            && is_scalar($card->customer_id)
+            && (int) $card->customer_id === $this->context->customer->id;
     }
 
     /**
      * Get card by ID.
      *
      * @param int $cardId
+     *
      * @return BTIPayCard
+     *
      * @throws Exception
      */
     private function getCard($cardId): BTIPayCard
     {
         $card = $this->cardRepository->findById($cardId);
         if (!$card || !isset($card->ipay_id)) {
-            throw new \Exception($this->module->l('Cannot find card.'));
+            throw new Exception($this->module->l('Cannot find card.'));
         }
 
         return $card;
@@ -309,21 +319,23 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      *
      * @param string $ipay_card_id
      * @param bool $enable
+     *
      * @return ResponseModelInterface
      */
     private function toggleStatus(string $ipay_card_id, bool $enable)
     {
-        /** @var \BTiPay\Service\CardService $cardService */
+        /** @var BTiPay\Service\CardService $cardService */
         $cardService = $this->get('btipay.card.service');
+
         return $cardService->toggleCardStatus($ipay_card_id, $enable);
     }
 
     /**
      * Handle errors by logging them and displaying a generic error message.
      *
-     * @param \Exception $e
+     * @param Exception $e
      */
-    private function handleError(\Exception $e)
+    private function handleError(Exception $e)
     {
         $this->module->getLogger()->error($e->getMessage());
         $this->errors[] = $this->module->l('An unexpected error occurred. Please try again later.');
@@ -334,7 +346,8 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
      *
      * @param ResponseModelInterface $response
      * @param string $customMessage
-     * @throws \Exception
+     *
+     * @throws Exception
      */
     private function handleApiError(ResponseModelInterface $response, string $customMessage = '')
     {
@@ -343,19 +356,19 @@ class BtipayAccountModuleFrontController extends \ModuleFrontController
             if (!empty($customMessage)) {
                 $errorMessage = $customMessage . ': ' . $errorMessage;
             }
-            throw new \Exception($errorMessage);
+            throw new Exception($errorMessage);
         }
     }
 
-        /**
+    /**
      * Check if the CSRF token is valid.
      *
      * @param string $token
+     *
      * @return bool
      */
     protected function isCsrfTokenValid($token)
     {
         return Tools::getToken(false) === $token;
     }
-
 }

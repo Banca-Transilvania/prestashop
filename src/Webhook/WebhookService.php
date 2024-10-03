@@ -1,4 +1,22 @@
 <?php
+/**
+ * Copyright since 2007 PrestaShop SA and Contributors
+ * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License version 3.0
+ * that is bundled with this package in the file LICENSE.md.
+ * It is also available through the world-wide-web at this URL:
+ * https://opensource.org/licenses/AFL-3.0
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@prestashop.com so we can send you a copy immediately.
+ *
+ * @author    PrestaShop SA and Contributors <contact@prestashop.com>
+ * @copyright Since 2007 PrestaShop SA and Contributors
+ * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
+ */
 
 namespace BTiPay\Webhook;
 
@@ -6,18 +24,20 @@ use BTiPay\Entity\BTIPayPayment;
 use BTiPay\Entity\BTIPayRefund;
 use BTiPay\Repository\PaymentRepository;
 use BTiPay\Repository\RefundRepository;
-use BTiPay\Service\CaptureService;
 use BTiPay\Service\OrderService;
 use BTiPay\Service\PaymentDetailsService;
-use BTiPay\Service\RefundService;
 use BTransilvania\Api\Model\IPayStatuses;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class WebhookService
 {
     private const ORDER_STATUS_ACCEPTED = 2;
     private const ORDER_STATUS_CANCELED = 6;
     private const ORDER_STATUS_REFUNDED = 7;
-    private const ORDER_STATUS_ERROR    = 8;
+    private const ORDER_STATUS_ERROR = 8;
 
     private BTPayJwt $jwtDecoder;
     private \Monolog\Logger $logger;
@@ -27,16 +47,16 @@ class WebhookService
     private PaymentDetailsService $paymentDetailsService;
     private OrderService $orderService;
 
-    private \StdClass $payload;
+    private \stdClass $payload;
 
     public function __construct(
-        \BTiPay\Webhook\BTPayJwt $jwtDecoder,
+        BTPayJwt $jwtDecoder,
         \Monolog\Logger $logger,
         \BTiPay\Config\BTiPayConfig $config,
         PaymentRepository $paymentRepository,
         RefundRepository $refundRepository,
         PaymentDetailsService $paymentDetailsService,
-        OrderService $orderService
+        OrderService $orderService,
     ) {
         $this->jwtDecoder = $jwtDecoder;
         $this->logger = $logger;
@@ -47,7 +67,7 @@ class WebhookService
         $this->orderService = $orderService;
     }
 
-    public function executeWebhook(\StdClass $payload)
+    public function executeWebhook(\stdClass $payload)
     {
         $this->payload = $payload;
 
@@ -134,21 +154,20 @@ class WebhookService
             }
 
             if (!\Validate::isLoadedObject($order)) {
-                throw new \Exception("Order not found.");
+                throw new \Exception('Order not found.');
             }
 
             $alreadyRefundedAmount = $this->refundRepository->getTotalRefundedAmountByIpayId($paymentData->ipay_id);
             $refundAmount = $totalRefunded - $alreadyRefundedAmount;
 
-            if($refundAmount > 0.001)
-            {
+            if ($refundAmount > 0.001) {
                 $paymentiPayRefund = new BTIPayRefund();
                 $paymentiPayRefund->order_id = $order->id;
                 $paymentiPayRefund->return_id = time();
                 $paymentiPayRefund->ipay_id = $paymentData->ipay_id;
                 $paymentiPayRefund->amount = $refundAmount;
                 $paymentiPayRefund->status = BTIPayRefund::SUCCESS;
-                if($status == IPayStatuses::STATUS_PARTIALLY_REFUNDED) {
+                if ($status == IPayStatuses::STATUS_PARTIALLY_REFUNDED) {
                     $paymentiPayRefund->type = BTIPayRefund::PARTIAL_REFUND;
                 } else {
                     $paymentiPayRefund->type = BTIPayRefund::FULL_REFUND;
@@ -161,7 +180,6 @@ class WebhookService
 
         $this->paymentRepository->save($paymentData);
     }
-
 
     private function addRefund(string $paymentId, \Order $orderService): bool
     {
@@ -184,11 +202,12 @@ class WebhookService
 
     private function getPaymentEngineId(): ?string
     {
-        if (property_exists($this->payload, 'mdOrder') &&
-            is_string($this->payload->mdOrder)
+        if (property_exists($this->payload, 'mdOrder')
+            && is_string($this->payload->mdOrder)
         ) {
             return $this->payload->mdOrder;
         }
+
         return null;
     }
 
@@ -202,16 +221,18 @@ class WebhookService
         if (property_exists($this->payload, 'operation') && is_string($this->payload->operation)) {
             return strtoupper($this->payload->operation);
         }
+
         return null;
     }
 
     private function getOrderId(BTIPayPayment $paymentData): ?int
     {
-        if (property_exists($paymentData, 'order_id') &&
-            is_scalar($paymentData->order_id)
+        if (property_exists($paymentData, 'order_id')
+            && is_scalar($paymentData->order_id)
         ) {
-            return (int)$paymentData->order_id;
+            return (int) $paymentData->order_id;
         }
+
         return null;
     }
 
@@ -228,8 +249,9 @@ class WebhookService
     /**
      * Get the total amount refunded for a given order.
      *
-     * @param \Order $order The ID of the order.
-     * @return float The total amount refunded.
+     * @param \Order $order the ID of the order
+     *
+     * @return float the total amount refunded
      */
     public function getRefundedAmount(\Order $order): float
     {
@@ -260,6 +282,7 @@ class WebhookService
      * @param \Order $order
      * @param int $stateId
      * @param string $message
+     *
      * @throws PrestaShopException
      */
     private function setOrderState($order, $stateId, $message)
@@ -269,9 +292,7 @@ class WebhookService
         $history->changeIdOrderState($stateId, $order, true);
         $history->addWithemail(true, [
             'order_name' => $order->getUniqReference(),
-            'message'    => $message
+            'message' => $message,
         ]);
     }
-
-
 }
