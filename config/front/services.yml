@@ -11,8 +11,7 @@ services:
       - [
         'BTiPay\Validator\Availability\GeneralValidator',
         'BTiPay\Validator\Availability\CountryValidator',
-        'BTiPay\Validator\Availability\CurrencyValidator'
-      ]
+        'BTiPay\Validator\Availability\CurrencyValidator']
 
   btipay.authorize.command:
     class: BTiPay\Command\ActionCommand
@@ -48,8 +47,7 @@ services:
         'BTiPay\Request\OrderBundleRequestBuilder',
         'BTiPay\Request\CustomerRequestBuilder',
         '@btipay.save_card.request',
-        'BTiPay\Request\AdditionalParametersBuilder'
-      ]
+        'BTiPay\Request\AdditionalParametersBuilder']
 
   btipay.request.builder.composite:
     class: BTiPay\Request\BuilderComposite
@@ -67,9 +65,7 @@ services:
     public: true
     arguments:
       - '@btipay.pst_map_factory'
-      - [
-        '@btipay.save_transaction_handler',
-      ]
+      - [ '@btipay.save_transaction_handler' ]
 
   btipay.save_transaction_handler:
     class: BTiPay\Response\SaveTransactionHandler

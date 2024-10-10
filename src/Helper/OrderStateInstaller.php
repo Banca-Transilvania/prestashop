@@ -36,7 +36,7 @@ class OrderStateInstaller
     private Configuration $configurationAdapter;
 
     public function __construct(
-        ?Configuration $configurationAdapter = null,
+        ?Configuration $configurationAdapter = null
     ) {
         if (!$configurationAdapter) {
             $configurationAdapter = new Configuration(new Context());

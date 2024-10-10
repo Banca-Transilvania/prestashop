@@ -31,11 +31,6 @@ if (!defined('_PS_VERSION_')) {
 
 class CancelProductFormExtension extends AbstractTypeExtension
 {
-    public static function getExtendedTypes(): iterable
-    {
-        return [CancelProductType::class];
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('send_refund_request_btipay', CheckboxType::class, [
@@ -50,5 +45,25 @@ class CancelProductFormExtension extends AbstractTypeExtension
                 'class' => 'form-group send-refund-request-wrapper',
             ],
         ]);
+    }
+
+    public static function getExtendedTypes(): iterable
+    {
+        if (version_compare(_PS_VERSION_, '8.0.0', '>=')) {
+            return [CancelProductType::class];
+        }
+
+        return [];
+    }
+
+    // For PrestaShop 1.7 compatibility
+    public function getExtendedType()
+    {
+        if (version_compare(_PS_VERSION_, '8.0.0', '<')) {
+            return CancelProductType::class;
+        }
+
+        // Return nothing for PrestaShop 8+ as it's handled in getExtendedTypes().
+        return null;
     }
 }

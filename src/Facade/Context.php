@@ -67,7 +67,7 @@ class Context
         $ssl = null,
         $idLang = null,
         $idShop = null,
-        $relativeProtocol = false,
+        $relativeProtocol = false
     ): string {
         return (string) $this->context->link->getModuleLink(
             $module,

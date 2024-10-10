@@ -39,7 +39,7 @@ class BuilderComposite implements BuilderInterface
      */
     public function __construct(
         PSTMapFactory $factory,
-        array $builders = [],
+        array $builders = []
     ) {
         $this->builders = $factory->create(BuilderInterface::class, $builders);
     }

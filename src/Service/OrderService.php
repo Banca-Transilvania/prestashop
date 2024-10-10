@@ -36,7 +36,7 @@ class OrderService
 
     public function __construct(
         PaymentRepository $paymentRepository,
-        LoggerInterface $logger,
+        LoggerInterface $logger
     ) {
         $this->paymentRepository = $paymentRepository;
         $this->logger = $logger;

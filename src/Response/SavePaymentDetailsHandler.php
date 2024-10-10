@@ -39,7 +39,7 @@ class SavePaymentDetailsHandler implements HandlerInterface
 
     public function __construct(
         PaymentRepository $paymentRepository,
-        PaymentDetailsService $paymentDetailsService,
+        PaymentDetailsService $paymentDetailsService
     ) {
         $this->paymentRepository = $paymentRepository;
         $this->paymentDetailsService = $paymentDetailsService;

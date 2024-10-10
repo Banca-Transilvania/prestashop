@@ -1,76 +1,71 @@
-{
-        "packages": [
-                {
-                        "name": "banca-transilvania/ipay-sdk",
-                        "version": "1.1.7",
-                        "version_normalized": "1.1.7.0",
-                        "dist": {
-                                "type": "path",
-                                "url": "/var/www/html/git/ipay-sdk",
-                                "reference": "af8ee64586d843e6fd958e8509f3c29f7fc7b51c"
-                        },
-                        "require": {
-                                "ext-curl": "*",
-                                "ext-json": "*",
-                                "ext-mbstring": "*",
-                                "ext-openssl": "*",
-                                "php": ">=8.1"
-                        },
-                        "require-dev": {
-                                "phpmd/phpmd": "@stable",
-                                "phpstan/phpstan": "^0.12",
-                                "phpunit/phpunit": "^9.5",
-                                "squizlabs/php_codesniffer": "^3.0"
-                        },
-                        "type": "library",
-                        "installation-source": "dist",
-                        "autoload": {
-                                "psr-4": {
-                                        "BTransilvania\\Api\\": "src/"
-                                }
-                        },
-                        "autoload-dev": {
-                                "psr-4": {
-                                        "BTransilvania\\Tests\\": "tests/"
-                                }
-                        },
-                        "scripts": {
-                                "test": [
-                                        "phpunit --configuration phpunit.xml"
-                                ],
-                                "cs-check": [
-                                        "phpcs --standard=PSR12 src tests"
-                                ],
-                                "cs-fix": [
-                                        "phpcbf --standard=PSR12 src tests"
-                                ],
-                                "analyze": [
-                                        "phpstan analyse -c phpstan.neon src tests"
-                                ]
-                        },
-                        "license": [
-                                "Apache-2.0"
-                        ],
-                        "authors": [
-                                {
-                                        "name": "Banca Transilvania",
-                                        "email": "contact@bancatransilvania.com",
-                                        "homepage": "https://btepos.ro/",
-                                        "role": "Developer"
-                                }
-                        ],
-                        "description": "This SDK facilitates communication between payment modules and the iPay API.",
-                        "support": {
-                                "email": "contact@bancatransilvania.com",
-                                "docs": "https://btepos.ro/documentatie"
-                        },
-                        "transport-options": {
-                                "symlink": false,
-                                "relative": false
-                        },
-                        "install-path": "../banca-transilvania/ipay-sdk"
-                }
+[
+    {
+        "name": "banca-transilvania/ipay-sdk",
+        "version": "1.1.7",
+        "version_normalized": "1.1.7.0",
+        "dist": {
+            "type": "path",
+            "url": "/var/www/html/git/ipay-sdk",
+            "reference": "a7e10ef5c2af228d6554db596fe6a84c97a724be"
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "ext-mbstring": "*",
+            "ext-openssl": "*",
+            "php": ">=7.4"
+        },
+        "require-dev": {
+            "phpmd/phpmd": "@stable",
+            "phpstan/phpstan": "^0.12",
+            "phpunit/phpunit": "^9.5",
+            "squizlabs/php_codesniffer": "^3.0"
+        },
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "BTransilvania\\Api\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "BTransilvania\\Tests\\": "tests/"
+            }
+        },
+        "scripts": {
+            "test": [
+                "phpunit --configuration phpunit.xml"
+            ],
+            "cs-check": [
+                "phpcs --standard=PSR12 src tests"
+            ],
+            "cs-fix": [
+                "phpcbf --standard=PSR12 src tests"
+            ],
+            "analyze": [
+                "phpstan analyse -c phpstan.neon src tests"
+            ]
+        },
+        "license": [
+            "Apache-2.0"
         ],
-        "dev": false,
-        "dev-package-names": []
-}
+        "authors": [
+            {
+                "name": "Banca Transilvania",
+                "email": "contact@bancatransilvania.com",
+                "homepage": "https://btepos.ro/",
+                "role": "Developer"
+            }
+        ],
+        "description": "This SDK facilitates communication between payment modules and the iPay API.",
+        "support": {
+            "email": "contact@bancatransilvania.com",
+            "docs": "https://btepos.ro/documentatie"
+        },
+        "transport-options": {
+            "symlink": false,
+            "relative": false
+        }
+    }
+]

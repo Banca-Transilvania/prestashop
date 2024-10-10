@@ -50,7 +50,7 @@ class ActionCommand implements CommandInterface
         LoggerInterface $logger,
         BTiPayConfig $btPayConfig,
         ?ValidatorInterface $validator = null,
-        ?HandlerInterface $handler = null,
+        ?HandlerInterface $handler = null
     ) {
         $this->action = $action;
         $this->requestBuilder = $requestBuilder;

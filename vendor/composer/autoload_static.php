@@ -4,12 +4,13 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit028167214baf1ea46681ebdd249009c5
+class ComposerStaticInit7a0837b6064a206ddc7b397b8523d32e
 {
     public static $prefixLengthsPsr4 = array (
         'B' => 
         array (
             'BTransilvania\\Api\\' => 18,
+            'BTiPay\\Tests\\' => 13,
             'BTiPay\\Controllers\\' => 19,
             'BTiPay\\' => 7,
         ),
@@ -19,6 +20,10 @@ class ComposerStaticInit028167214baf1ea46681ebdd249009c5
         'BTransilvania\\Api\\' => 
         array (
             0 => __DIR__ . '/..' . '/banca-transilvania/ipay-sdk/src',
+        ),
+        'BTiPay\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'BTiPay\\Controllers\\' => 
         array (
@@ -87,6 +92,7 @@ class ComposerStaticInit028167214baf1ea46681ebdd249009c5
         'BTiPay\\Service\\PaymentDetailsService' => __DIR__ . '/../..' . '/src/Service/PaymentDetailsService.php',
         'BTiPay\\Service\\RefundCommandService' => __DIR__ . '/../..' . '/src/Service/RefundCommandService.php',
         'BTiPay\\Service\\RefundService' => __DIR__ . '/../..' . '/src/Service/RefundService.php',
+        'BTiPay\\Tests\\Unit\\OrderBundleRequestBuilderTest' => __DIR__ . '/../..' . '/tests/Unit/OrderBundleRequestBuilderTest.php',
         'BTiPay\\Validator\\Availability\\AvailabilityValidatorPool' => __DIR__ . '/../..' . '/src/Validator/Availability/AvailabilityValidatorPool.php',
         'BTiPay\\Validator\\Availability\\CountryValidator' => __DIR__ . '/../..' . '/src/Validator/Availability/CountryValidator.php',
         'BTiPay\\Validator\\Availability\\CurrencyValidator' => __DIR__ . '/../..' . '/src/Validator/Availability/CurrencyValidator.php',
@@ -158,15 +164,14 @@ class ComposerStaticInit028167214baf1ea46681ebdd249009c5
         'BtipayRedirectModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/redirect.php',
         'BtipayReturnModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/return.php',
         'BtipayWebhookModuleFrontController' => __DIR__ . '/../..' . '/controllers/front/webhook.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit028167214baf1ea46681ebdd249009c5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit028167214baf1ea46681ebdd249009c5::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit028167214baf1ea46681ebdd249009c5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7a0837b6064a206ddc7b397b8523d32e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7a0837b6064a206ddc7b397b8523d32e::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7a0837b6064a206ddc7b397b8523d32e::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -41,17 +41,14 @@ services:
       - '@btipay.pst_map_factory'
       - [
         'BTiPay\Request\IPayIdRequestBuilder',
-        'BTiPay\Request\AmountRequestBuilder'
-      ]
+        'BTiPay\Request\AmountRequestBuilder']
 
   btipay.refund.response.handler:
     class: BTiPay\Response\HandlerChain
     public: true
     arguments:
       - '@btipay.pst_map_factory'
-      - [
-        'BTiPay\Response\RefundPaymentHandler',
-      ]
+      - [ 'BTiPay\Response\RefundPaymentHandler' ]
 
   btipay.cancel.service:
     class: BTiPay\Service\CancelService

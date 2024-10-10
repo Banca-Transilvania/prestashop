@@ -42,7 +42,7 @@ class RefundCommandService
     public function __construct(
         CommandBusInterface $commandBus,
         LoggerInterface $logger,
-        OrderRefundCalculator $refundCalculator, // Newly added dependency
+        OrderRefundCalculator $refundCalculator // Newly added dependency
     ) {
         $this->commandBus = $commandBus;
         $this->logger = $logger;

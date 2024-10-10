@@ -64,7 +64,7 @@ class RefundService
         PaymentDetailsService $paymentDetailsService,
         CommandInterface $refundCommand,
         LoggerInterface $logger,
-        ?RefundCommandService $refundCommandService = null,
+        ?RefundCommandService $refundCommandService = null
     ) {
         $this->btConfig = $btConfig;
         $this->paymentRepository = $paymentRepository;

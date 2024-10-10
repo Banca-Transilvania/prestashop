@@ -287,7 +287,7 @@ class PaymentRepository
         BTIPayPayment $payment,
         ResponseModelInterface $response,
         $ipayId,
-        $parentId,
+        $parentId
     ): void {
         $payment->ipay_id = $ipayId;
         $payment->parent_ipay_id = $parentId;

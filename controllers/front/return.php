@@ -140,7 +140,7 @@ class BtipayReturnModuleFrontController extends ModuleFrontController
 
     private function validateOrderOwnership($order, $secureKey)
     {
-        if ($order->id_customer !== $this->context->customer->id) {
+        if ((int)$order->id_customer !== (int)$this->context->customer->id) {
             throw new Exception($this->module->l('Order does not belong to the authenticated user.'));
         }
 

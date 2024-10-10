@@ -56,7 +56,7 @@ class WebhookService
         PaymentRepository $paymentRepository,
         RefundRepository $refundRepository,
         PaymentDetailsService $paymentDetailsService,
-        OrderService $orderService,
+        OrderService $orderService
     ) {
         $this->jwtDecoder = $jwtDecoder;
         $this->logger = $logger;

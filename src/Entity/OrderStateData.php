@@ -57,7 +57,7 @@ class OrderStateData
         bool $shipped = false,
         bool $paid = false,
         string $template = '',
-        bool $pdfInvoice = false,
+        bool $pdfInvoice = false
     ) {
         $this->name = $name;
         $this->sendEmail = $sendEmail;

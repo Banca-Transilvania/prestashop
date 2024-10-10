@@ -53,7 +53,7 @@ class CaptureService
         PaymentRepository $paymentRepository,
         PaymentDetailsService $paymentDetailsService,
         CommandInterface $captureCommand,
-        LoggerInterface $logger,
+        LoggerInterface $logger
     ) {
         $this->btConfig = $btConfig;
         $this->paymentRepository = $paymentRepository;

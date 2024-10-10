@@ -80,9 +80,7 @@ services:
     public: true
     arguments:
       - '@btipay.pst_map_factory'
-      - [
-        'BTiPay\Request\IPayIdRequestBuilder'
-      ]
+      - [ 'BTiPay\Request\IPayIdRequestBuilder' ]
 
   btipay.payment_details.handler:
     class: BTiPay\Response\HandlerChain
@@ -93,8 +91,8 @@ services:
         '@btipay.save_transaction_payment_details.handler',
         '@btipay.update_order_payment.handler',
         '@btipay.save_card.handler',
-        '@btipay.update_order_status.handler'
-      ]
+        '@btipay.update_order_status.handler']
+
 
   btipay.save_transaction_payment_details.handler:
     class: BTiPay\Response\SavePaymentDetailsHandler
@@ -151,17 +149,14 @@ services:
       - '@btipay.pst_map_factory'
       - [
         'BTiPay\Request\IPayIdRequestBuilder',
-        'BTiPay\Request\AmountRequestBuilder'
-      ]
+        'BTiPay\Request\AmountRequestBuilder']
 
   btipay.refund.response.handler:
     class: BTiPay\Response\HandlerChain
     public: true
     arguments:
       - '@btipay.pst_map_factory'
-      - [
-        'BTiPay\Response\RefundPaymentHandler',
-      ]
+      - [ 'BTiPay\Response\RefundPaymentHandler' ]
 
   btipay.cancel.service:
     class: BTiPay\Service\CancelService

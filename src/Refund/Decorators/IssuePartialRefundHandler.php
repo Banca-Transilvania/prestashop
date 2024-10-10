@@ -45,7 +45,7 @@ class IssuePartialRefundHandler implements IssuePartialRefundHandlerInterface
 
     public function __construct(
         IssuePartialRefundHandlerInterface $handler,
-        RefundService $refundService,
+        RefundService $refundService
     ) {
         $this->handler = $handler;
         $this->refundService = $refundService;
@@ -58,8 +58,12 @@ class IssuePartialRefundHandler implements IssuePartialRefundHandlerInterface
     {
         $order = $this->getOrder($command);
 
-        if (in_array($order->current_state, [(int) \Configuration::get(BTiPayConfig::BTIPAY_STATUS_APPROVED), (int) \Configuration::get('PS_OS_CANCELED')])) {
-            throw new InvalidOrderStateException(InvalidOrderStateException::NOT_PAID, 'You can not perform a refund, invalid payment state');
+        if (in_array($order->current_state, [
+            (int)\Configuration::get(BTiPayConfig::BTIPAY_STATUS_APPROVED),
+            (int)\Configuration::get('PS_OS_CANCELED')
+        ])) {
+            throw new InvalidOrderStateException(InvalidOrderStateException::NOT_PAID,
+                'You can not perform a refund, invalid payment state');
         }
 
         $refundSummary = $this->refundService->getRefundSummary($command);
