@@ -31,10 +31,12 @@ class PaymentSettingsHelper
 {
     protected $module;
     protected $context;
+    private $translator;
 
     public function __construct($btIpayModule)
     {
         $this->module = $btIpayModule;
+        $this->translator = $this->module->getTranslator();
         $this->context = \Context::getContext();
     }
 
@@ -106,19 +108,19 @@ class PaymentSettingsHelper
         return [
             'form' => [
                 'legend' => [
-                    'title' => $this->module->l('Payment Method Settings'),
+                    'title' => $this->translate('Payment Method Settings'),
                     'icon' => 'icon-cogs',
                 ],
                 'input' => [
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('Payment Flow'),
+                        'label' => $this->translate('Payment Flow'),
                         'name' => BTiPayConfig::PHASE,
-                        'desc' => $this->module->l('Choose between 1-Phase for immediate settlement suitable for services like insurance or tickets, and 2-Phase for goods requiring confirmation before settlement, like physical products. 1-Phase transactions are automatically deposited (T+1/T+2 days), while 2-Phase transactions require merchant action for capture post-delivery confirmation.'),
+                        'desc' => $this->translate('Choose between 1-Phase for immediate settlement suitable for services like insurance or tickets, and 2-Phase for goods requiring confirmation before settlement, like physical products. 1-Phase transactions are automatically deposited (T+1/T+2 days), while 2-Phase transactions require merchant action for capture post-delivery confirmation.'),
                         'options' => [
                             'query' => [
-                                ['id' => BTiPayConfig::ONE_PHASE, 'name' => $this->module->l('1-Phase – Immediate Settlement')],
-                                ['id' => BTiPayConfig::TWO_PHASE, 'name' => $this->module->l('2-Phase – Post-Delivery Settlement')],
+                                ['id' => BTiPayConfig::ONE_PHASE, 'name' => $this->translate('1-Phase – Immediate Settlement')],
+                                ['id' => BTiPayConfig::TWO_PHASE, 'name' => $this->translate('2-Phase – Post-Delivery Settlement')],
                             ],
                             'id' => 'id',
                             'name' => 'name',
@@ -126,9 +128,9 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('New Order Status'),
+                        'label' => $this->translate('New Order Status'),
                         'name' => BTiPayConfig::NEW_ORDER_STATUS,
-                        'desc' => $this->module->l('Default status of a new order.'),
+                        'desc' => $this->translate('Default status of a new order.'),
                         'options' => [
                             'query' => \OrderState::getOrderStates($this->context->language->id),
                             'id' => 'id_order_state',
@@ -137,9 +139,9 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('Approved Order Status'),
+                        'label' => $this->translate('Approved Order Status'),
                         'name' => BTiPayConfig::APPROVED_ORDER_STATUS,
-                        'desc' => $this->module->l('Default status of APPROVED transaction. (2 Phase)'),
+                        'desc' => $this->translate('Default status of APPROVED transaction. (2 Phase)'),
                         'options' => [
                             'query' => \OrderState::getOrderStates($this->context->language->id),
                             'id' => 'id_order_state',
@@ -148,9 +150,9 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('Partial Capture Status'),
+                        'label' => $this->translate('Partial Capture Status'),
                         'name' => BTiPayConfig::PARTIAL_CAPTURE_ORDER_STATUS,
-                        'desc' => $this->module->l('Default status of Partial Capture'),
+                        'desc' => $this->translate('Default status of Partial Capture'),
                         'options' => [
                             'query' => \OrderState::getOrderStates($this->context->language->id),
                             'id' => 'id_order_state',
@@ -159,22 +161,22 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Available for All Countries'),
+                        'label' => $this->translate('Available for All Countries'),
                         'name' => BTiPayConfig::ALL_COUNTRIES,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('If no, you will be able to select specific countries.'),
+                        'desc' => $this->translate('If no, you will be able to select specific countries.'),
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('Available for Specific Countries'),
+                        'label' => $this->translate('Available for Specific Countries'),
                         'name' => BTiPayConfig::SPECIFIC_COUNTRIES,
                         'class' => 'chosen',
                         'multiple' => true,
-                        'desc' => $this->module->l('Select countries where this method will be available.'),
+                        'desc' => $this->translate('Select countries where this method will be available.'),
                         'options' => [
                             'query' => \Country::getCountries($this->context->language->id),
                             'id' => 'id_country',
@@ -183,11 +185,11 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'select',
-                        'label' => $this->module->l('Allow For Currencies'),
+                        'label' => $this->translate('Allow For Currencies'),
                         'name' => BTiPayConfig::ALLOWED_CURRENCIES,
                         'class' => 'chosen',
                         'multiple' => true,
-                        'desc' => $this->module->l('Select specific currencies allowed for this payment method.'),
+                        'desc' => $this->translate('Select specific currencies allowed for this payment method.'),
                         'options' => [
                             'query' => \Currency::getCurrencies(false, true),
                             'id' => 'id_currency',
@@ -196,84 +198,84 @@ class PaymentSettingsHelper
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Generate Invoice on Successful Payment'),
+                        'label' => $this->translate('Generate Invoice on Successful Payment'),
                         'name' => BTiPayConfig::GEN_INVOICE,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Automatically generate an invoice when the payment is successful.'),
+                        'desc' => $this->translate('Automatically generate an invoice when the payment is successful.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Enable Card On File'),
+                        'label' => $this->translate('Enable Card On File'),
                         'name' => BTiPayConfig::CARD_ON_FILE,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Enable saving card details for future transactions.'),
+                        'desc' => $this->translate('Enable saving card details for future transactions.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Enable Logging'),
+                        'label' => $this->translate('Enable Logging'),
                         'name' => BTiPayConfig::LOGGING,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Enable detailed logging of payment communication.'),
+                        'desc' => $this->translate('Enable detailed logging of payment communication.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Custom Refund Button'),
+                        'label' => $this->translate('Custom Refund Button'),
                         'name' => BTiPayConfig::CUSTOM_REFUND_BUTTON,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Enable new refund button on order view.'),
+                        'desc' => $this->translate('Enable new refund button on order view.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Auto Refund'),
+                        'label' => $this->translate('Auto Refund'),
                         'name' => BTiPayConfig::AUTO_REFUND,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Enable auto refund on creating Credit Slip.'),
+                        'desc' => $this->translate('Enable auto refund on creating Credit Slip.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Refund on Status Change'),
+                        'label' => $this->translate('Refund on Status Change'),
                         'name' => BTiPayConfig::REFUND_ON_STATUS_CHANGE,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Automatically process refunds when the order status changes to a refunded status.'),
+                        'desc' => $this->translate('Automatically process refunds when the order status changes to a refunded status.'),
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Create Order Slip on Full Refund'),
+                        'label' => $this->translate('Create Order Slip on Full Refund'),
                         'name' => BTiPayConfig::CREATE_ORDER_SLIP_ON_FULL_REFUND,
                         'is_bool' => true,
                         'values' => [
-                            ['id' => 'active_on', 'value' => true, 'label' => $this->module->l('Yes')],
-                            ['id' => 'active_off', 'value' => false, 'label' => $this->module->l('No')],
+                            ['id' => 'active_on', 'value' => true, 'label' => $this->translate('Yes')],
+                            ['id' => 'active_off', 'value' => false, 'label' => $this->translate('No')],
                         ],
-                        'desc' => $this->module->l('Automatically create an order slip when a full refund is issued from admin.'),
+                        'desc' => $this->translate('Automatically create an order slip when a full refund is issued from admin.'),
                     ],
                 ],
                 'submit' => [
-                    'title' => $this->module->l('Save Payment Settings'),
+                    'title' => $this->translate('Save Payment Settings'),
                 ],
             ],
         ];
@@ -317,5 +319,10 @@ class PaymentSettingsHelper
         }
 
         return $default;
+    }
+
+    private function translate($string)
+    {
+        return $this->translator->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }

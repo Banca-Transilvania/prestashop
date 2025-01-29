@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="034f1f16f32db94ee6659289fdcaa4e8">
+        <source>Enter Amount</source>
+        <target>Enter Amount</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6702a6e3bc2dce95c3e3b61fe578f29c">
+        <source>Amount:</source>
+        <target>Amount:</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a4d3b161ce1309df1c4e25df28694b7b">
+        <source>Submit</source>
+        <target>Submit</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0b74c018e364d62a847ac5ccc3a552b9">
+        <source>Confirm Cancellation</source>
+        <target>Confirm Cancellation</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="7b2ec7a692480c668c3913c731853c64">
+        <source>Are you sure you want to cancel the payment?</source>
+        <target>Are you sure you want to cancel the payment?</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d3d2e617335f08df83599665eef8a418">
+        <source>Close</source>
+        <target>Close</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="70d9be9b139893aa6c69b5e77e614311">
+        <source>Confirm</source>
+        <target>Confirm</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -18,16 +18,16 @@
  *}
 
 <form action="{$action}" id="btipay-payment-form" method="post" class="form-horizontal">
-    <p>{l s='You will be redirected to Banca Transilvania page to complete the payment.' mod='btipay'}</p>
+    <p>{l s='You will be redirected to Banca Transilvania page to complete the payment.' mod='btipay' d='Modules.Btipay.Paymentoptionexternal'}</p>
     {if $is_customer}
         {if $have_cards}
             <div class="bt-ipay-use-new-card">
                 <input type="checkbox" name="bt_ipay_use_new_card" id="bt_ipay_use_new_card" value="yes">
-                <label for="bt_ipay_use_new_card">{l s='I want to pay with a new card' mod='btipay'}</label>
+                <label for="bt_ipay_use_new_card">{l s='I want to pay with a new card' mod='btipay' d='Modules.Btipay.Paymentoptionexternal'}</label>
                 <input type="hidden" name="bt_ipay_use_new_card_hidden" id="bt_ipay_use_new_card_hidden" value="no">
             </div>
             <div class="bt-ipay-card-list">
-                <label for="bt-card_id">{l s='Select saved card' mod='btipay'}</label>
+                <label for="bt-card_id">{l s='Select saved card' mod='btipay' d='Modules.Btipay.Paymentoptionexternal'}</label>
                 <select name="bt_ipay_card_id" id="bt-card_id" class="bt-ipay-card-select">
                     {foreach from=$saved_cards item=card}
                         <option value="{$card.id}">{$card.pan} - {$card.cardholderName}</option>
@@ -37,7 +37,7 @@
         {/if}
         <div class="bt-save-card-radio" {if $have_cards}style="display:none"{/if}>
             <input type="checkbox" name="bt_ipay_save_cards" id="bt_ipay_save_cards" value="save">
-            <label for="bt_ipay_save_cards">{l s='Save my card for future uses' mod='btipay'}</label>
+            <label for="bt_ipay_save_cards">{l s='Save my card for future uses' mod='btipay' d='Modules.Btipay.Paymentoptionexternal'}</label>
             <input type="hidden" name="bt_ipay_save_cards_hidden" id="bt_ipay_save_cards_hidden" value="no">
         </div>
     {/if}

@@ -7,6 +7,21 @@
         <target>You will be redirected to Banca Transilvania page to complete the payment.</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="d4b088efcc79790be779b5723335a77e">
+        <source>I want to pay with a new card</source>
+        <target>I want to pay with a new card</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb7bc702fea407f4321a7fa5803e5d5e">
+        <source>Select saved card</source>
+        <target>Select saved card</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3483b84601424ea4a5d0d28d45d78f0d">
+        <source>Save my card for future uses</source>
+        <target>Save my card for future uses</target>
+        <note>Line: </note>
+      </trans-unit>
     </body>
   </file>
 </xliff>

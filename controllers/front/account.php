@@ -115,7 +115,7 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
         // Validate CSRF token
         $token = Tools::getValue('token');
         if (!isset($token) || !$this->isCsrfTokenValid($token)) {
-            $this->errors[] = $this->module->l('Invalid CSRF token.');
+            $this->errors[] = $this->translate('Invalid CSRF token.');
 
             return;
         }
@@ -124,15 +124,15 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
             switch ($action) {
                 case 'enable':
                     $this->enableCard($cardId);
-                    $this->success[] = $this->module->l('Card enabled successfully.');
+                    $this->success[] = $this->translate('Card enabled successfully.');
                     break;
                 case 'disable':
                     $this->disableCard($cardId);
-                    $this->success[] = $this->module->l('Card disabled successfully.');
+                    $this->success[] = $this->translate('Card disabled successfully.');
                     break;
                 case 'delete':
                     $this->deleteCard($cardId);
-                    $this->success[] = $this->module->l('Card deleted successfully.');
+                    $this->success[] = $this->translate('Card deleted successfully.');
                     break;
                 case 'add':
                     $redirectUrl = $this->addCard($token);
@@ -140,10 +140,10 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
                     exit;
                 case 'returnAddCard':
                     $this->returnAddCard();
-                    $this->success[] = $this->module->l('Card added successfully.');
+                    $this->success[] = $this->translate('Card added successfully.');
                     break;
                 default:
-                    $this->errors[] = $this->module->l('Invalid action.');
+                    $this->errors[] = $this->translate('Invalid action.');
                     break;
             }
         } catch (Exception $e) {
@@ -254,7 +254,7 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
         $ipayId = Tools::getValue('orderId');
 
         if (!$ipayId) {
-            throw new Exception($this->module->l('Binding Id is missing.'));
+            throw new Exception($this->translate('Binding Id is missing.'));
         }
 
         /** @var BTiPay\Service\PaymentDetailsService $paymentDetailsService */
@@ -308,7 +308,7 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
     {
         $card = $this->cardRepository->findById($cardId);
         if (!$card || !isset($card->ipay_id)) {
-            throw new Exception($this->module->l('Cannot find card.'));
+            throw new Exception($this->translate('Cannot find card.'));
         }
 
         return $card;
@@ -338,7 +338,7 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
     private function handleError(Exception $e)
     {
         $this->module->getLogger()->error($e->getMessage());
-        $this->errors[] = $this->module->l('An unexpected error occurred. Please try again later.');
+        $this->errors[] = $this->translate('An unexpected error occurred. Please try again later.');
     }
 
     /**
@@ -370,5 +370,10 @@ class BtipayAccountModuleFrontController extends ModuleFrontController
     protected function isCsrfTokenValid($token)
     {
         return Tools::getToken(false) === $token;
+    }
+
+    private function translate($string)
+    {
+        return $this->module->getTranslator()->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }

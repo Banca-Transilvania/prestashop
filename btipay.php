@@ -38,11 +38,18 @@ class Btipay extends PaymentModule
     /** @var Monolog\Logger|null */
     private $logger;
 
+    private GeneralSettingsHelper $generalSettingsHelper;
+    private PaymentSettingsHelper $paymentSettingsHelper;
+    /**
+     * @var array|string[]
+     */
+    private array $limited_currencies;
+
     public function __construct()
     {
         $this->name = 'btipay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'Banca Transilvania';
         $this->need_instance = 1;
 
@@ -407,7 +414,7 @@ class Btipay extends PaymentModule
             'approvedAmount' => $approvedAmount,
         ]);
 
-        return $this->display(__FILE__, 'views/templates/admin/order_modal.tpl');
+        return $this->display(__FILE__, 'views/templates/admin/orderModal.tpl');
     }
 
     public function hookDisplayAdminOrderMainBottom($params)
@@ -440,8 +447,8 @@ class Btipay extends PaymentModule
                 true),
         ]);
 
-        $paymentsOutput = $this->display(__FILE__, 'views/templates/admin/order_payments.tpl');
-        $refundsOutput = $this->display(__FILE__, 'views/templates/admin/order_refunds.tpl');
+        $paymentsOutput = $this->display(__FILE__, 'views/templates/admin/orderPayments.tpl');
+        $refundsOutput = $this->display(__FILE__, 'views/templates/admin/orderRefunds.tpl');
 
         return $paymentsOutput . $refundsOutput;
     }

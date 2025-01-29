@@ -21,13 +21,13 @@
 		<p class="payment_module" id="btipay_payment_button">
 			{if $cart->getOrderTotal() < 2}
 				<a href="">
-					<img src="{$domain|cat:$payment_button|escape:'html':'UTF-8'}" alt="{l s='Pay with my payment module' mod='btipay'}" />
-					{l s='Minimum amount required in order to pay with my payment module:' mod='btipay'} {convertPrice price=2}
+					<img src="{$domain|cat:$payment_button|escape:'html':'UTF-8'}" alt="{l s='Pay with my payment module' mod='btipay' d='Modules.Btipay.Payment'}" />
+					{l s='Minimum amount required in order to pay with my payment module:' mod='btipay' d='Modules.Btipay.Payment'} {convertPrice price=2}
 				</a>
 			{else}
-				<a href="{$link->getModuleLink('btipay', 'redirect', array(), true)|escape:'htmlall':'UTF-8'}" title="{l s='Pay with my payment module' mod='btipay'}">
-					<img src="{$module_dir|escape:'htmlall':'UTF-8'}/logo.png" alt="{l s='Pay with my payment module' mod='btipay'}" width="32" height="32" />
-					{l s='Pay with my payment module' mod='btipay'}
+				<a href="{$link->getModuleLink('btipay', 'redirect', array(), true)|escape:'htmlall':'UTF-8'}" title="{l s='Pay with my payment module' mod='btipay' d='Modules.Btipay.Payment'}">
+					<img src="{$module_dir|escape:'htmlall':'UTF-8'}/logo.png" alt="{l s='Pay with my payment module' mod='btipay' d='Modules.Btipay.Payment'}" width="32" height="32" />
+					{l s='Pay with my payment module' mod='btipay' d='Modules.Btipay.Payment'}
 				</a>
 			{/if}
 		</p>

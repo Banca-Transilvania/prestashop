@@ -19,7 +19,7 @@
 {extends file='customer/page.tpl'}
 
 {block name='page_title'}
-  <h1 class="h1">{$moduleDisplayName} - {l s='My Saved Cards' mod='btipay'}</h1>
+  <h1 class="h1">{$moduleDisplayName} - {l s='My Saved Cards' mod='btipay' d='Modules.Btipay.Account'}</h1>
 {/block}
 
 {block name='page_content'}
@@ -28,11 +28,11 @@
       <table class="table table-striped table-bordered table-labeled hidden-sm-down table-hover">
         <thead>
         <tr>
-          <th>{l s='Cardholder Name' mod='btipay'}</th>
-          <th>{l s='Card Number' mod='btipay'}</th>
-          <th>{l s='Expiration Date' mod='btipay'}</th>
-          <th>{l s='Status' mod='btipay'}</th>
-          <th>{l s='Actions' mod='btipay'}</th>
+          <th>{l s='Cardholder Name' mod='btipay' d='Modules.Btipay.Account'}</th>
+          <th>{l s='Card Number' mod='btipay' d='Modules.Btipay.Account'}</th>
+          <th>{l s='Expiration Date' mod='btipay' d='Modules.Btipay.Account'}</th>
+          <th>{l s='Status' mod='btipay' d='Modules.Btipay.Account'}</th>
+          <th>{l s='Actions' mod='btipay' d='Modules.Btipay.Account'}</th>
         </tr>
         </thead>
         <tbody>
@@ -59,21 +59,21 @@
                   <input type="hidden" name="action" value="disable">
                   <input type="hidden" name="cardId" value="{$card.id}">
                   <input type="hidden" name="token" value="{$token}">
-                  <button type="submit" class="btn btn-secondary">{l s='Disable' mod='btipay'}</button>
+                  <button type="submit" class="btn btn-secondary">{l s='Disable' mod='btipay' d='Modules.Btipay.Account'}</button>
                 </form>
               {else}
                 <form action="{$post_action_url}" method="post" style="display:inline;">
                   <input type="hidden" name="action" value="enable">
                   <input type="hidden" name="cardId" value="{$card.id}">
                   <input type="hidden" name="token" value="{$token}">
-                  <button type="submit" class="btn btn-secondary">{l s='Enable' mod='btipay'}</button>
+                  <button type="submit" class="btn btn-secondary">{l s='Enable' mod='btipay' d='Modules.Btipay.Account'}</button>
                 </form>
               {/if}
               <form action="{$post_action_url}" method="post" style="display:inline;">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="cardId" value="{$card.id}">
                 <input type="hidden" name="token" value="{$token}">
-                <button type="submit" class="btn btn-danger">{l s='Delete' mod='btipay'}</button>
+                <button type="submit" class="btn btn-danger">{l s='Delete' mod='btipay' d='Modules.Btipay.Account'}</button>
               </form>
             </td>
           </tr>
@@ -81,8 +81,8 @@
         </tbody>
       </table>
     {else}
-      <div class="alert alert-info">{l s='No cards saved.' mod='btipay'}</div>
+      <div class="alert alert-info">{l s='No cards saved.' mod='btipay' d='Modules.Btipay.Account'}</div>
     {/if}
-    <a href="{$add_card_link}" class="btn btn-primary">{l s='Add Card' mod='btipay'}</a>
+    <a href="{$add_card_link}" class="btn btn-primary">{l s='Add Card' mod='btipay' d='Modules.Btipay.Account'}</a>
   </div>
 {/block}

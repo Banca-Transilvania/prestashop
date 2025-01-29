@@ -56,19 +56,19 @@ class AdminBTiPayCaptureController extends ModuleAdminController
         $this->modals[] = [
             'modal_id' => 'btipayCaptureModal',
             'modal_class' => 'modal-lg',
-            'modal_title' => $this->module->l('Capture Payment for BT iPay'),
+            'modal_title' => $this->trans('Capture Payment for BT iPay', [], 'Modules.Btipay.Btipay'),
             'modal_content' => $modalContent,
-            'modal_cancel_label' => $this->trans('Cancel', [], 'Admin.Actions'),
+            'modal_cancel_label' => $this->trans('Cancel', [], 'Modules.Btipay.Btipay'),
             'modal_actions' => [
                 [
                     'type' => 'button',
-                    'label' => $this->module->l('Confirm Capture'),
+                    'label' => $this->trans('Confirm Capture', [], 'Modules.Btipay.Btipay'),
                     'class' => 'btn-primary',
                     'value' => 'capture',
                 ],
                 [
                     'type' => 'link',
-                    'label' => $this->module->l('View Details'),
+                    'label' => $this->trans('View Details', [], 'Modules.Btipay.Btipay'),
                     'class' => 'btn-link',
                     'href' => $this->context->link->getAdminLink('AdminOrders') . '&viewOrder&id_order=' . Tools::getValue('id_order'),
                 ],

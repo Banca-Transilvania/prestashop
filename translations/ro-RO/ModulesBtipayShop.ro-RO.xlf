@@ -2,9 +2,9 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="admin114aq3j4rbjktyggjkl" source-language="ro-RO" target-language="ro-RO" datatype="plaintext">
     <body>
-      <trans-unit id="92d4773a9f32fc3333cb8238471cf763">
-        <source>You have to enable the cURL extension on your server to install this module</source>
-        <target>Trebuie să activați extensia cURL pe serverul dumneavoastră pentru a instala acest modul</target>
+      <trans-unit id="f56caa74ae9f984769e6127ef963fca9">
+        <source>Save card for later use</source>
+        <target>Salvează cardul pentru utilizări ulterioare</target>
         <note>Line: </note>
       </trans-unit>
     </body>

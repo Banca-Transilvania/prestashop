@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="ro-RO" target-language="ro-RO" datatype="plaintext">
+    <body>
+      <trans-unit id="d56196e47b5b7f45cec5f1689f6f7d1e">
+        <source>My Saved Cards</source>
+        <target>Cardurile mele salvate</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="19067b1c605a0acf55c0c165784895d1">
+        <source>Cardholder Name</source>
+        <target>Nume Deținător Card</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="931d3a3ad177dd96a28c9642fec11b01">
+        <source>Card Number</source>
+        <target>Număr card</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4d29676394d688341ec389a3de8ff14f">
+        <source>Expiration Date</source>
+        <target>Dată Expirare</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ec53a8c4f07baed5d8825072c89799be">
+        <source>Status</source>
+        <target>Stare</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="06df33001c1d7187fdd81ea1f5b277aa">
+        <source>Actions</source>
+        <target>Acțiuni</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bcfaccebf745acfd5e75351095a5394a">
+        <source>Disable</source>
+        <target>Dezactivează</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2faec1f9f8cc7f8f40d521c4dd574f49">
+        <source>Enable</source>
+        <target>Activează</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f2a6c498fb90ee345d997f888fce3b18">
+        <source>Delete</source>
+        <target>Șterge</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="0b4c57e2a4db6f0079159067fc9481a7">
+        <source>No cards saved.</source>
+        <target>Niciun card salvat</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1dd1686f4c2439ce3cfcf96ca683f4e1">
+        <source>Add Card</source>
+        <target>Adaugare Card</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

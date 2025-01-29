@@ -20,8 +20,8 @@
 
 {block name='page_content'}
 	<div class="content-container">
-		<h3>{l s='Payment Unsuccessful' mod='btipay'}</h3>
-		<p>{l s='We were unable to process your payment. Please see the details below for more information.' mod='btipay'}</p>
+		<h3>{l s='Payment Unsuccessful' mod='btipay' d='Modules.Btipay.Error'}</h3>
+		<p>{l s='We were unable to process your payment. Please see the details below for more information.' mod='btipay' d='Modules.Btipay.Error'}</p>
 		<div class="alert alert-danger">
 			<ul>
 				{foreach from=$errors item='error'}
@@ -32,11 +32,11 @@
 		{if $order_id and $payment_link}
 			<div class="retry-payment">
 				<a href="{$payment_link|escape:'htmlall':'UTF-8'}" class="btn btn-primary">
-					{l s='Click Here to Retry Payment' mod='btipay'}
+					{l s='Click Here to Retry Payment' mod='btipay' d='Modules.Btipay.Error'}
 				</a>
 			</div>
 		{else}
-			<p>{l s='If you continue to encounter problems, please contact our support team.' mod='btipay'}</p>
+			<p>{l s='If you continue to encounter problems, please contact our support team.' mod='btipay' d='Modules.Btipay.Error'}</p>
 		{/if}
 	</div>
 	<style>

@@ -2,9 +2,24 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
   <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
     <body>
-      <trans-unit id="a25c753ee3e4be15ec0daa5a40deb7b8">
-        <source>An error occurred</source>
-        <target>An error occurred</target>
+      <trans-unit id="e16a2a1f09313a9561453541b92134c9">
+        <source>Payment Unsuccessful</source>
+        <target>Payment Unsuccessful</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="4e6ec94220da8e8a70fb997571f82863">
+        <source>We were unable to process your payment. Please see the details below for more information.</source>
+        <target>We were unable to process your payment. Please see the details below for more information.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e61423f9f3cbb6ce2e4490ae1dd95584">
+        <source>Click Here to Retry Payment</source>
+        <target>Click Here to Retry Payment</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="e648f7c57a2098c921bef7bf61cbe19a">
+        <source>If you continue to encounter problems, please contact our support team.</source>
+        <target>If you continue to encounter problems, please contact our support team.</target>
         <note>Line: </note>
       </trans-unit>
     </body>

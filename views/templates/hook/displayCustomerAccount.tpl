@@ -19,6 +19,6 @@
 <a class="col-lg-4 col-md-6 col-sm-6 col-xs-12" id="btipay-displayCustomerAccount-link" href="{$cardsLink}">
   <span class="link-item">
     <i class="material-icons">credit_card</i>
-    {$moduleDisplayName} - {l s='Cards' mod='btipay'}
+    {$moduleDisplayName} - {l s='Cards' mod='btipay' d='Modules.Btipay.Displaycustomeraccount'}
   </span>
 </a>

@@ -40,9 +40,15 @@ class GeneralSettingsHelper
      */
     protected $context;
 
+    /**
+     * @var \PrestaShopBundle\Translation\TranslatorComponent|null
+     */
+    private $translator;
+
     public function __construct($btIpayModule)
     {
         $this->module = $btIpayModule;
+        $this->translator = $this->module->getTranslator();
         $this->context = \Context::getContext();
     }
 
@@ -120,122 +126,122 @@ class GeneralSettingsHelper
         return [
             'form' => [
                 'legend' => [
-                    'title' => $this->module->l('General Settings'),
+                    'title' => $this->translate('General Settings'),
                     'icon' => 'icon-cogs',
                 ],
                 'input' => [
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Enabled'),
+                        'label' => $this->translate('Enabled'),
                         'name' => BTiPayConfig::ENABLED,
                         'is_bool' => true,
-                        'desc' => $this->module->l('Enable or disable the payment method'),
+                        'desc' => $this->translate('Enable or disable the payment method'),
                         'values' => [
                             [
                                 'id' => 'active_on',
                                 'value' => true,
-                                'label' => $this->module->l('Yes'),
+                                'label' => $this->translate('Yes'),
                             ],
                             [
                                 'id' => 'active_off',
                                 'value' => false,
-                                'label' => $this->module->l('No'),
+                                'label' => $this->translate('No'),
                             ],
                         ],
                         'default' => '0', // Defaults to No
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('Title'),
+                        'label' => $this->translate('Title'),
                         'name' => BTiPayConfig::TITLE,
-                        'desc' => $this->module->l('The title for the BT IPay payment method.'),
+                        'desc' => $this->translate('The title for the BT IPay payment method.'),
                         'default' => 'BT IPay',
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('Description'),
+                        'label' => $this->translate('Description'),
                         'name' => BTiPayConfig::DESCRIPTION,
-                        'desc' => $this->module->l('Description for transaction. You can use the next variables: $orderId, $shopUrl.'),
+                        'desc' => $this->translate('Description for transaction. You can use the next variables: $orderId, $shopUrl.'),
                         'default' => 'Comanda nr. $orderId prin iPay BT la: $shopUrl',
                     ],
                     [
                         'type' => 'switch',
-                        'label' => $this->module->l('Test Mode'),
+                        'label' => $this->translate('Test Mode'),
                         'name' => BTiPayConfig::TEST_MODE,
                         'is_bool' => true,
-                        'desc' => $this->module->l('Enable test mode for transactions'),
+                        'desc' => $this->translate('Enable test mode for transactions'),
                         'values' => [
                             [
                                 'id' => 'test_on',
                                 'value' => true,
-                                'label' => $this->module->l('Yes'),
+                                'label' => $this->translate('Yes'),
                             ],
                             [
                                 'id' => 'test_off',
                                 'value' => false,
-                                'label' => $this->module->l('No'),
+                                'label' => $this->translate('No'),
                             ],
                         ],
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('User name (live)'),
+                        'label' => $this->translate('User name (live)'),
                         'name' => BTiPayConfig::LIVE_USERNAME,
-                        'desc' => $this->module->l('Username for live mode provided by BT'),
+                        'desc' => $this->translate('Username for live mode provided by BT'),
                         'form_group_class' => 'live',
                         'prefix' => '<i class="icon icon-user"></i>',
                     ],
                     [
                         'type' => 'password',
-                        'label' => $this->module->l('Password (live)'),
+                        'label' => $this->translate('Password (live)'),
                         'name' => BTiPayConfig::LIVE_PASSWORD,
-                        'desc' => $this->module->l('Password for live mode. Will be encrypted in the DB.'),
+                        'desc' => $this->translate('Password for live mode. Will be encrypted in the DB.'),
                         'form_group_class' => 'live',
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('Sub Merchant ID (live)'),
+                        'label' => $this->translate('Sub Merchant ID (live)'),
                         'name' => BTiPayConfig::LIVE_SUB_MERCHANT_ID,
                         'form_group_class' => 'live',
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('User name (test)'),
+                        'label' => $this->translate('User name (test)'),
                         'name' => BTiPayConfig::TEST_USERNAME,
-                        'desc' => $this->module->l('Username for test mode provided by BT'),
+                        'desc' => $this->translate('Username for test mode provided by BT'),
                         'form_group_class' => 'test',
                         'prefix' => '<i class="icon icon-user"></i>',
                     ],
                     [
                         'type' => 'password',
-                        'label' => $this->module->l('Password (test)'),
+                        'label' => $this->translate('Password (test)'),
                         'name' => BTiPayConfig::TEST_PASSWORD,
-                        'desc' => $this->module->l('Password for test mode. Will be encrypted in the DB.'),
+                        'desc' => $this->translate('Password for test mode. Will be encrypted in the DB.'),
                         'form_group_class' => 'test',
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('Sub Merchant ID (test)'),
+                        'label' => $this->translate('Sub Merchant ID (test)'),
                         'name' => BTiPayConfig::TEST_SUB_MERCHANT_ID,
                         'form_group_class' => 'test',
                     ],
                     [
                         'type' => 'text',
-                        'label' => $this->module->l('Callback URL'),
+                        'label' => $this->translate('Callback URL'),
                         'name' => BTiPayConfig::CALLBACK_URL,
-                        'desc' => $this->module->l('The url required in order use the callback functionality'),
+                        'desc' => $this->translate('The url required in order use the callback functionality'),
                         'prefix' => '<i class="icon icon-link"></i>',
                         'disabled' => true,
                     ],
                     [
                         'type' => 'password',
-                        'label' => $this->module->l('Callback Key'),
+                        'label' => $this->translate('Callback Key'),
                         'name' => BTiPayConfig::CALLBACK_KEY,
-                        'desc' => $this->module->l('The key required in order to verify the callback response'),
+                        'desc' => $this->translate('The key required in order to verify the callback response'),
                     ],
                 ],
                 'submit' => [
-                    'title' => $this->module->l('Save General Settings'),
+                    'title' => $this->translate('Save General Settings'),
                 ],
             ],
         ];
@@ -279,5 +285,10 @@ class GeneralSettingsHelper
     public function getWebhookUrl()
     {
         return $this->context->link->getModuleLink('btipay', 'webhook', [], true);
+    }
+
+    private function translate($string)
+    {
+        return $this->translator->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }

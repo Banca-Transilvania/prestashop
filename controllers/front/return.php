@@ -114,7 +114,7 @@ class BtipayReturnModuleFrontController extends ModuleFrontController
     private function handleError($errorMessage, $orderId, $secureKey = null)
     {
         if (empty($errorMessage)) {
-            $errorMessage = $this->module->l(
+            $errorMessage = $this->translate(
                 'Your payment was unsuccessful. Please try again or choose another payment method.'
             );
         }
@@ -141,11 +141,16 @@ class BtipayReturnModuleFrontController extends ModuleFrontController
     private function validateOrderOwnership($order, $secureKey)
     {
         if ((int)$order->id_customer !== (int)$this->context->customer->id) {
-            throw new Exception($this->module->l('Order does not belong to the authenticated user.'));
+            throw new Exception($this->translate('Order does not belong to the authenticated user.'));
         }
 
         if ($order->secure_key !== $secureKey) {
-            throw new Exception($this->module->l('Invalid secure key.'));
+            throw new Exception($this->translate('Invalid secure key.'));
         }
+    }
+
+    private function translate($string)
+    {
+        return $this->module->getTranslator()->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }

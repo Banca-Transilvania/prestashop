@@ -18,22 +18,22 @@
  *}
 
 <div>
-	<h3>{l s='Redirect your customer' mod='btipay'}:</h3>
+	<h3>{l s='Redirect your customer' mod='btipay' d='Modules.Btipay.Redirect'}:</h3>
 	<ul class="alert alert-info">
-			<li>{l s='This action should be used to redirect your customer to the website of your payment processor' mod='btipay'}.</li>
+			<li>{l s='This action should be used to redirect your customer to the website of your payment processor' mod='btipay' d='Modules.Btipay.Redirect'}.</li>
 	</ul>
 	
 	<div class="alert alert-warning">
-		{l s='You can redirect your customer with an error message' mod='btipay'}:
-		<a href="{$link->getModuleLink('btipay', 'redirect', ['action' => 'error'], true)|escape:'htmlall':'UTF-8'}" title="{l s='Look at the error' mod='btipay'}">
-			<strong>{l s='Look at the error message' mod='btipay'}</strong>
+		{l s='You can redirect your customer with an error message' mod='btipay' d='Modules.Btipay.Redirect'}:
+		<a href="{$link->getModuleLink('btipay', 'redirect', ['action' => 'error'], true)|escape:'htmlall':'UTF-8'}" title="{l s='Look at the error' mod='btipay' d='Modules.Btipay.Redirect'}">
+			<strong>{l s='Look at the error message' mod='btipay' d='Modules.Btipay.Redirect'}</strong>
 		</a>
 	</div>
 	
 	<div class="alert alert-success">
-		{l s='You can also redirect your customer to the confirmation page' mod='btipay'}:
-		<a href="{$link->getModuleLink('btipay', 'confirmation', ['cart_id' => $cart_id, 'secure_key' => $secure_key], true)|escape:'htmlall':'UTF-8'}" title="{l s='Confirm' mod='btipay'}">
-			<strong>{l s='Go to the confirmation page' mod='btipay'}</strong>
+		{l s='You can also redirect your customer to the confirmation page' mod='btipay' d='Modules.Btipay.Redirect'}:
+		<a href="{$link->getModuleLink('btipay', 'confirmation', ['cart_id' => $cart_id, 'secure_key' => $secure_key], true)|escape:'htmlall':'UTF-8'}" title="{l s='Confirm' mod='btipay' d='Modules.Btipay.Redirect'}">
+			<strong>{l s='Go to the confirmation page' mod='btipay' d='Modules.Btipay.Redirect'}</strong>
 		</a>
 	</div>
 </div>

@@ -18,19 +18,19 @@
  *}
 
 {if (isset($status) == true) && ($status == 'ok')}
-<h3>{l s='Your order on %s is complete.' sprintf=$shop_name mod='btipay'}</h3>
+<h3>{l s='Your order on %s is complete.' sprintf=$shop_name mod='btipay' d='Modules.Btipay.Confirmation'}</h3>
 <p>
-	<br />- {l s='Amount' mod='btipay'} : <span class="price"><strong>{$total|escape:'htmlall':'UTF-8'}</strong></span>
-	<br />- {l s='Reference' mod='btipay'} : <span class="reference"><strong>{$reference|escape:'html':'UTF-8'}</strong></span>
-	<br /><br />{l s='An email has been sent with this information.' mod='btipay'}
-	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='btipay'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='btipay'}</a>
+	<br />- {l s='Amount' mod='btipay' d='Modules.Btipay.Confirmation'} : <span class="price"><strong>{$total|escape:'htmlall':'UTF-8'}</strong></span>
+	<br />- {l s='Reference' mod='btipay' d='Modules.Btipay.Confirmation'} : <span class="reference"><strong>{$reference|escape:'html':'UTF-8'}</strong></span>
+	<br /><br />{l s='An email has been sent with this information.' mod='btipay' d='Modules.Btipay.Confirmation'}
+	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='btipay' d='Modules.Btipay.Confirmation'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='btipay' d='Modules.Btipay.Confirmation'}</a>
 </p>
 {else}
-<h3>{l s='Your order on %s has not been accepted.' sprintf=$shop_name mod='btipay'}</h3>
+<h3>{l s='Your order on %s has not been accepted.' sprintf=$shop_name mod='btipay' d='Modules.Btipay.Confirmation'}</h3>
 <p>
-	<br />- {l s='Reference' mod='btipay'} <span class="reference"> <strong>{$reference|escape:'html':'UTF-8'}</strong></span>
-	<br /><br />{l s='Please, try to order again.' mod='btipay'}
-	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='btipay'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='btipay'}</a>
+	<br />- {l s='Reference' mod='btipay' d='Modules.Btipay.Confirmation'} <span class="reference"> <strong>{$reference|escape:'html':'UTF-8'}</strong></span>
+	<br /><br />{l s='Please, try to order again.' mod='btipay' d='Modules.Btipay.Confirmation'}
+	<br /><br />{l s='If you have questions, comments or concerns, please contact our' mod='btipay' d='Modules.Btipay.Confirmation'} <a href="{$link->getPageLink('contact', true)|escape:'html':'UTF-8'}">{l s='expert customer support team.' mod='btipay' d='Modules.Btipay.Confirmation'}</a>
 </p>
 {/if}
 <hr />

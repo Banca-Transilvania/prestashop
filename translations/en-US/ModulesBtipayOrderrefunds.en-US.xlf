@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="en-US" target-language="en-US" datatype="plaintext">
+    <body>
+      <trans-unit id="a0976ed79701b97a6de1cb12116a6aa1">
+        <source>BT iPay Refunds</source>
+        <target>BT iPay Refunds</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="834aa4f122586f0b75b1e369983aed0a">
+        <source>Return ID</source>
+        <target>Return ID</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8910d3efe91e7d5c5ca931fdbc6919f8">
+        <source>IPay ID</source>
+        <target>IPay ID</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b2f40690858b404ed10e62bdf422c704">
+        <source>Amount</source>
+        <target>Amount</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ec53a8c4f07baed5d8825072c89799be">
+        <source>Status</source>
+        <target>Status</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a1fa27779242b4902f7ae3bdd5c6d508">
+        <source>Type</source>
+        <target>Type</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="2eab8cfb51a601246d31a23d182308b6">
+        <source>Loy</source>
+        <target>Loy</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="44749712dbec183e983dcd78a7736c41">
+        <source>Date</source>
+        <target>Date</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="562f669aa94ecfd3b84aa695ace38daf">
+        <source>No BT iPay refunds found for this order.</source>
+        <target>No BT iPay refunds found for this order.</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

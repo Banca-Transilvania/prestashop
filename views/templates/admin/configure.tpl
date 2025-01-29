@@ -22,19 +22,19 @@
 			<a class="nav-link {if $selectedTab=='generalSettings'}active{/if}" id="general-settings-tab" data-toggle="tab"
 			   href="#generalSettings" role="tab"
 			   aria-controls="generalSettings"
-			   aria-selected="false"><i class="icon-cogs"></i> {l s='General Settings' mod='btipay'}</a>
+			   aria-selected="false"><i class="icon-cogs"></i> {l s='General Settings' mod='btipay' d='Modules.Btipay.Configure'}</a>
 		</li>
 
 		<li class="nav-item {if $selectedTab=='paymentMethod'}active{/if}">
 			<a class="nav-link {if $selectedTab=='paymentMethod'}active{/if}" id="payment-settings-tab" data-toggle="tab"
 			   href="#paymentMethod" role="tab"
 			   aria-controls="generalSettings"
-			   aria-selected="false"><i class="icon-cogs"></i> {l s='Payment Method Settings' mod='btipay'}</a>
+			   aria-selected="false"><i class="icon-cogs"></i> {l s='Payment Method Settings' mod='btipay' d='Modules.Btipay.Configure'}</a>
 		</li>
 	</ul>
 	<div class="tab-content">
 		<div class="panel tab-pane fade {if $selectedTab == 'generalSettings'}active in{/if}" id="generalSettings" role="tabpanel" aria-labelledby="general-settings-tab">
-			{include file='./general_info.tpl'}
+			{include file='./generalInfo.tpl'}
 			{$generalForm}
 		</div>
 		<div class="panel tab-pane fade {if $selectedTab == 'paymentMethod'}active in{/if}" id="paymentMethod" role="tabpanel" aria-labelledby="payment-settings-tab">

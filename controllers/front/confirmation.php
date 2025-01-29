@@ -65,7 +65,8 @@ class BtipayConfirmationModuleFrontController extends ModuleFrontController
             /*
              * An error occured and is shown on a new page.
              */
-            $this->errors[] = $this->module->l('An error occured. Please contact the merchant to have more informations');
+
+            $this->errors[] = $this->module->getTranslator()->trans('An error occured. Please contact the merchant to have more informations', [], 'Modules.Btipay.Btipay');
 
             return $this->setTemplate('error.tpl');
         }

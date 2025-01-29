@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="admin114aq3j4rbjktyggjkl" source-language="ro-RO" target-language="ro-RO" datatype="plaintext">
+    <body>
+      <trans-unit id="6d9ed293387a7d0055b245a91efee3c7">
+        <source>BT iPay Payments</source>
+        <target>Plăți BT iPay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="1e63d1811556fc2dad106dcbd4217a69">
+        <source>Payment ID</source>
+        <target>ID Plată</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="8910d3efe91e7d5c5ca931fdbc6919f8">
+        <source>IPay ID</source>
+        <target>ID IPay</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b2f40690858b404ed10e62bdf422c704">
+        <source>Amount</source>
+        <target>Suma</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="f0b7cad3b2f0f29dcb4f2cad27cba2f8">
+        <source>Capture Amount</source>
+        <target>Suma Capturată</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="b782d4ff61550d7e8cdee4cf70a03788">
+        <source>Refund Amount</source>
+        <target>Suma Rambursată</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="42242164b35519776bba47762aaac5a8">
+        <source>Cancel Amount</source>
+        <target>Suma Anulată</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="ec53a8c4f07baed5d8825072c89799be">
+        <source>Status</source>
+        <target>Status</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="a1fa27779242b4902f7ae3bdd5c6d508">
+        <source>Type</source>
+        <target>Tip</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="6759b907f024adc9050b29ec21be12ea">
+        <source>Updated Date</source>
+        <target>Data Actualizării</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="76ec2a6b407bd69568dc3aab4e6230c1">
+        <source>No BT iPay payments found for this order.</source>
+        <target>Nu au fost găsite plăți BT iPay pentru această comandă.</target>
+        <note>Line: </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

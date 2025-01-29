@@ -4,7 +4,22 @@
     <body>
       <trans-unit id="29f7a0beb72af66420125b9bc651b190">
         <source>You will be redirected to Banca Transilvania page to complete the payment.</source>
-        <target>You will be redirected to Banca Transilvania page to complete the payment.</target>
+        <target>Veți fi redirecționat către pagina Banca Transilvania pentru a finaliza plata.</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="d4b088efcc79790be779b5723335a77e">
+        <source>I want to pay with a new card</source>
+        <target>Doresc să plătesc cu un card nou</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="bb7bc702fea407f4321a7fa5803e5d5e">
+        <source>Select saved card</source>
+        <target>Selectează un card salvat</target>
+        <note>Line: </note>
+      </trans-unit>
+      <trans-unit id="3483b84601424ea4a5d0d28d45d78f0d">
+        <source>Save my card for future uses</source>
+        <target>Salvează cardul meu pentru utilizări viitoare</target>
         <note>Line: </note>
       </trans-unit>
     </body>

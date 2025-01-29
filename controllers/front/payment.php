@@ -93,14 +93,14 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
             $secureKey = Tools::getValue('secureKey');
 
             if (empty($secureKey)) {
-                $this->displayError([$this->module->l('Missing secure key.')]);
+                $this->displayError([$this->translate('Missing secure key.')]);
 
                 return false;
             }
             $order = new Order($orderId);
 
             if (!Validate::isLoadedObject($order)) {
-                $errorMessage = $this->module->l('Order not found.');
+                $errorMessage = $this->translate('Order not found.');
                 $this->get('btipay.logger')->error($errorMessage);
                 $this->displayError([$errorMessage]);
 
@@ -108,7 +108,7 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
             }
 
             if ($order->secure_key !== $secureKey) {
-                $errorMessage = $this->module->l('Invalid secure key.');
+                $errorMessage = $this->translate('Invalid secure key.');
                 $this->get('btipay.logger')->error($errorMessage);
                 $this->displayError([$errorMessage], $orderId);
 
@@ -141,7 +141,7 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
             ]);
 
             if ($response->isError()) {
-                $errors[] = $response->getErrorCode() . ': ' . $this->module->l($response->getErrorMessage());
+                $errors[] = $response->getErrorCode() . ': ' . $this->translate($response->getErrorMessage());
                 $btLogger->error($response->getErrorCode() . ': ' . $response->getErrorMessage());
             }
 
@@ -149,13 +149,13 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
                 Tools::redirect($response->getRedirectUrl());
             }
         } catch (BTiPay\Exception\CommandException $exception) {
-            $errors[] = $this->module->l($exception->getMessage());
+            $errors[] = $this->translate($exception->getMessage());
             $btLogger->error($exception->getMessage());
         } catch (BTransilvania\Api\Exception\ApiException $exception) {
-            $errors[] = $this->module->l($exception->getPlainMessage());
+            $errors[] = $this->translate($exception->getPlainMessage());
             $btLogger->error($exception->getMessage());
         } catch (Exception $exception) {
-            $errors[] = $this->module->l('An error occurred. Please contact us for more details.');
+            $errors[] = $this->translate('An error occurred. Please contact us for more details.');
             $btLogger->error($exception->getMessage());
         }
 
@@ -211,7 +211,7 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
     protected function displayError($errors = [], $invoicenumber = null, $secureKey = null)
     {
         if (empty($errors)) {
-            $errorMessage = $this->module->l(
+            $errorMessage = $this->translate(
                 'Your payment was unsuccessful. Please try again or choose another payment method.'
             );
         } else {
@@ -233,5 +233,10 @@ class BtipayPaymentModuleFrontController extends ModuleFrontController
         );
 
         $this->setTemplate('module:btipay/views/templates/front/error.tpl');
+    }
+
+    private function translate($string)
+    {
+        return $this->module->getTranslator()->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }

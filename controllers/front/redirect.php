@@ -49,8 +49,8 @@ class BtipayRedirectModuleFrontController extends ModuleFrontController
          * Create the breadcrumb for your ModuleFrontController.
          */
         $this->context->smarty->assign('path', '
-			<a href="' . $this->context->link->getPageLink('order', null, null, 'step=3') . '">' . $this->module->l('Payment') . '</a>
-			<span class="navigation-pipe">&gt;</span>' . $this->module->l('Error'));
+			<a href="' . $this->context->link->getPageLink('order', null, null, 'step=3') . '">' . $this->translate('Payment') . '</a>
+			<span class="navigation-pipe">&gt;</span>' . $this->translate('Error'));
 
         /*
          * Set error message and description for the template.
@@ -58,5 +58,10 @@ class BtipayRedirectModuleFrontController extends ModuleFrontController
         array_push($this->errors, $this->module->l($message), $description);
 
         return $this->setTemplate('error.tpl');
+    }
+
+    private function translate($string)
+    {
+        return $this->module->getTranslator()->trans($string, [], 'Modules.Btipay.Btipay');
     }
 }
