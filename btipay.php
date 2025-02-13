@@ -104,7 +104,7 @@ class Btipay extends PaymentModule
             return false;
         }
 
-        $registerHooks = $this->registerHook('header') // add css & js in front
+        $registerHooks = $this->registerHook('displayHeader') // add css & js in front
             && $this->registerHook('displayBackOfficeHeader') // add css & js in admin
             && $this->registerHook('paymentOptions') // Create payment option on checkout
             && $this->registerHook('moduleRoutes') // Register Webhook custom route
@@ -200,7 +200,7 @@ class Btipay extends PaymentModule
     /**
      * Add the CSS & JavaScript files you want to be added on the FO.
      */
-    public function hookHeader()
+    public function hookDisplayHeader()
     {
         $this->context->controller->addJS($this->_path . 'views/js/front.js');
         $this->context->controller->addCSS($this->_path . 'views/css/front.css');
