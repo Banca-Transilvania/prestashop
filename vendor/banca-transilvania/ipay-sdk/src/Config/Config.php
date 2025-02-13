@@ -169,7 +169,7 @@ class Config
 
         $validLanguages = [self::ROMANIAN_LANGUAGE, self::ENGLISH_LANGUAGE];
         if (!in_array($value, $validLanguages, true)) {
-            throw new \InvalidArgumentException("Invalid language value: '$value'.");
+            $value = self::ENGLISH_LANGUAGE;
         }
 
         $this->language = $value;
