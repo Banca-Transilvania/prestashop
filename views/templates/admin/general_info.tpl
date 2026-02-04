@@ -78,7 +78,7 @@
 					<dt>{l s='Supported PHP Versions' mod='btipay'}</dt>
 					<dd>{l s='7.4, 8.0+' mod='btipay'}</dd>
 					<dt>{l s='Compatible with PrestaShop' mod='btipay'}</dt>
-					<dd>{l s='1.7.x and 8.1' mod='btipay'}</dd>
+					<dd>{l s='1.7.x and 8.2.4' mod='btipay'}</dd>
 				</dl>
 			</div>
 		</div>

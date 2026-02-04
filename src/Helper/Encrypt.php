@@ -71,7 +71,7 @@ class Encrypt
             if (file_exists($keyFile)) {
                 $key = trim(\Tools::file_get_contents($keyFile));
                 if ($key) {
-                    self::$key = substr(hash('sha256', self::STATIC_SALT, true), 0, 32);
+                    self::$key = substr(hash('sha256', self::STATIC_SALT . $key, true), 0, 32);
                 }
             } else {
                 $newKey = bin2hex(openssl_random_pseudo_bytes(32));
