@@ -37,7 +37,7 @@ class ValidatorPool implements ValidatorInterface
         $this->validators = $validators;
     }
 
-    public function validate($params, $config = null): bool
+    public function validate(array $params, ?BTiPayConfig $config = null): bool
     {
         $isValid = true;
 

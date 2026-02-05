@@ -20,11 +20,13 @@
 
 namespace BTiPay\Validator;
 
+use BTiPay\Config\BTiPayConfig;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
 interface ValidatorInterface
 {
-    public function validate($params, $config = null): bool;
+    public function validate(array $params, ?BTiPayConfig $config = null): bool;
 }

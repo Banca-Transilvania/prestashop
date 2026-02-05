@@ -151,7 +151,7 @@ class RefundService
     /**
      * @throws BTRefundException
      */
-    public function refund(\Order $order, $payments, $amount = null): void
+    public function refund(\Order $order, array $payments, ?float $amount = null): void
     {
         if (!$this->btConfig->isEnabled()) {
             $this->logger->info('Refund process or BT iPay is disabled.');

@@ -184,6 +184,7 @@ class BTPayJwt
      */
     public static function urlsafeB64Decode($input)
     {
+        $input = $input ?? '';
         $remainder = strlen($input) % 4;
         if ($remainder) {
             $padlen = 4 - $remainder;

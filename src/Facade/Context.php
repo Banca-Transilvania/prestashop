@@ -117,7 +117,7 @@ class Context
      *
      * @throws InvalidArgumentException If the locale contains invalid characters
      */
-    public function trans($id, array $parameters = [], $domain = null, $locale = null)
+    public function trans($id, array $parameters = [], ?string $domain = null, ?string $locale = null): string
     {
         return $this->context->getTranslator()->trans($id, $parameters, $domain, $locale);
     }
@@ -156,7 +156,7 @@ class Context
         return (string) $this->context->link->getProductLink($product);
     }
 
-    public function getImageLink($name, $ids, $type = null): string
+    public function getImageLink($name, $ids, ?string $type = null): string
     {
         return (string) $this->context->link->getImageLink($name, $ids, $type);
     }

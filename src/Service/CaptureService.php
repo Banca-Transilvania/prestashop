@@ -66,7 +66,7 @@ class CaptureService
      * @throws BTRefundException
      * @throws \Exception
      */
-    public function execute($data, $type, $amount = null): void
+    public function execute(array $data, string $type, ?float $amount = null): void
     {
         if (!$this->btConfig->isEnabled()) {
             $this->logger->info('Capture process or BT iPay is disabled.');

@@ -20,6 +20,7 @@
 
 namespace BTiPay\Validator\Response;
 
+use BTiPay\Config\BTiPayConfig;
 use BTiPay\Helper\SubjectReader;
 use BTiPay\Validator\ValidatorInterface;
 
@@ -29,7 +30,7 @@ if (!defined('_PS_VERSION_')) {
 
 class StatusValidator implements ValidatorInterface
 {
-    public function validate($params, $config = null): bool
+    public function validate(array $params, ?BTiPayConfig $config = null): bool
     {
         $response = SubjectReader::readResponse($params);
 
