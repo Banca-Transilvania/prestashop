@@ -61,7 +61,7 @@ class Btipay extends PaymentModule
         parent::__construct();
 
         $this->displayName = $this->l('BT iPay');
-        $this->description = $this->l('BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.6 - 8.2.4');
+        $this->description = $this->l('BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.6 - 9.0.x');
 
         $this->confirmUninstall = $this->l('Are you sure you want to unistall the payment module BT iPay?');
         $this->limited_currencies = ['RON', 'EUR', 'USD'];

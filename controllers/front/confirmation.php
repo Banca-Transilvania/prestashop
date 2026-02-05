@@ -53,7 +53,13 @@ class BtipayConfirmationModuleFrontController extends ModuleFrontController
         /**
          * If the order has been validated we try to retrieve it
          */
-        $order_id = Order::getOrderByCartId((int) $cart->id);
+        if (method_exists(Order::class, 'getOrderByCartId')) {
+            $order_id = Order::getOrderByCartId((int) $cart->id);
+        } else {
+            $order_id = $this->module->currentOrder;
+        }
+
+
 
         if ($order_id && ($secure_key == $customer->secure_key)) {
             /**

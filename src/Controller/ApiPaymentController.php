@@ -24,15 +24,40 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+use BTiPay\Service\CancelService;
 use BTiPay\Service\CaptureService;
 use BTiPay\Service\RefundService;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiPaymentController extends FrameworkBundleAdminController
+class ApiPaymentController extends AbstractAdminController
 {
+    /**
+     * @var CaptureService
+     */
+    private $captureService;
+
+    /**
+     * @var RefundService
+     */
+    private $refundService;
+
+    /**
+     * @var CancelService
+     */
+    private $cancelService;
+
+    public function __construct(
+        CaptureService $captureService,
+        RefundService $refundService,
+        CancelService $cancelService
+    ) {
+        $this->captureService = $captureService;
+        $this->refundService = $refundService;
+        $this->cancelService = $cancelService;
+    }
+
     public function handleRequest(Request $request, $action, $orderId)
     {
         $amount = $request->request->get('amount') ?? null;
@@ -60,9 +85,7 @@ class ApiPaymentController extends FrameworkBundleAdminController
     private function handleCapture($data, $type, $amount)
     {
         try {
-            /** @var CaptureService $captureService */
-            $captureService = $this->get('btipay.capture.service');
-            $captureService->execute($data, $type, $amount);
+            $this->captureService->execute($data, $type, $amount);
 
             return new JsonResponse(['success' => true]);
         } catch (\Exception $e) {
@@ -73,9 +96,7 @@ class ApiPaymentController extends FrameworkBundleAdminController
     private function handleRefund($data, $type, $amount)
     {
         try {
-            /** @var RefundService $refundService */
-            $refundService = $this->get('btipay.refund.service');
-            $result = $refundService->customRefund($data, $type, $amount);
+            $result = $this->refundService->customRefund($data, $type, $amount);
 
             return new JsonResponse(['success' => true, 'message' => $result]);
         } catch (\Exception $e) {
@@ -86,8 +107,7 @@ class ApiPaymentController extends FrameworkBundleAdminController
     private function handleCancel($data, $type, $amount)
     {
         try {
-            $cancelService = $this->get('btipay.cancel.service');
-            $result = $cancelService->execute($data, $type, $amount);
+            $result = $this->cancelService->execute($data, $type, $amount);
 
             return new JsonResponse(['success' => true, 'message' => $result]);
         } catch (\Exception $e) {
