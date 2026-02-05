@@ -14,7 +14,7 @@
 
 ### About
 
-BT iPay PrestaShop Payment Module is developed to integrate Banca Transilvania's BT iPay with PrestaShop, allowing merchants to easily accept payments. This module is designed with a focus on ease of use, security, and providing a seamless payment experience for both the merchant and their customers. Compatible with PrestaShop 8.2, this module supports various payment methods and is tailored for merchants looking to offer a robust online payment solution.
+BT iPay PrestaShop Payment Module is developed to integrate Banca Transilvania's BT iPay with PrestaShop, allowing merchants to easily accept payments. This module is designed with a focus on ease of use, security, and providing a seamless payment experience for both the merchant and their customers. Compatible with PrestaShop 9.0, this module supports various payment methods and is tailored for merchants looking to offer a robust online payment solution.
 
 ### Requirements
 
