@@ -49,7 +49,7 @@ class Btipay extends PaymentModule
     {
         $this->name = 'btipay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.1';
+        $this->version = '1.1.0';
         $this->author = 'Banca Transilvania';
         $this->need_instance = 1;
 

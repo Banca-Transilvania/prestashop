@@ -2,7 +2,7 @@
 <module>
     <name>btipay</name>
     <displayName><![CDATA[BT iPay]]></displayName>
-    <version><![CDATA[1.0.1]]></version>
+    <version><![CDATA[1.1.0]]></version>
     <author><![CDATA[Banca Transilvania]]></author>
     <tab><![CDATA[payments_gateways]]></tab>
 	<confirmUninstall><![CDATA[Are you sure you want to unistall the payment module BT iPay?]]></confirmUninstall>
