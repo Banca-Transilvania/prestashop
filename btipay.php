@@ -49,7 +49,7 @@ class Btipay extends PaymentModule
     {
         $this->name = 'btipay';
         $this->tab = 'payments_gateways';
-        $this->version = '1.0.1';
+        $this->version = '1.1.0';
         $this->author = 'Banca Transilvania';
         $this->need_instance = 1;
 
@@ -61,7 +61,7 @@ class Btipay extends PaymentModule
         parent::__construct();
 
         $this->displayName = $this->l('BT iPay');
-        $this->description = $this->l('BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.6 - 8.1.5');
+        $this->description = $this->l('BT iPay Prestashop Payment Module. Compatible with Prestashop version 1.7.6 - 9.0.x');
 
         $this->confirmUninstall = $this->l('Are you sure you want to unistall the payment module BT iPay?');
         $this->limited_currencies = ['RON', 'EUR', 'USD'];

@@ -74,8 +74,8 @@ class OrderBundleRequestBuilder implements BuilderInterface
 
     private function getAddressChunks(\Address $address): array
     {
-        $address1 = $address->address1;
-        $remainder = $address->address2;
+        $address1 = $address->address1 ?? '';
+        $remainder = $address->address2 ?? '';
 
         $data = [];
 

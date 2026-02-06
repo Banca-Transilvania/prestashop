@@ -34,10 +34,7 @@ class Configuration
         $this->context = $context;
     }
 
-    /**
-     * @param string $key
-     */
-    public function get($key, $idShop = null, $idLang = null, $idShopGroup = null): ?string
+    public function get(string $key, ?int $idShop = null, ?int $idLang = null, ?int $idShopGroup = null): ?string
     {
         if (!$idShop) {
             $idShop = $this->context->getShopId();
@@ -53,9 +50,9 @@ class Configuration
     }
 
     /**
-     * @param string $key
+     * @param string|array $value
      */
-    public function updateValue($key, $value, $idShop = null, $html = false, $idShopGroup = null): void
+    public function updateValue(string $key, $value, ?int $idShop = null, bool $html = false, ?int $idShopGroup = null): void
     {
         if (!$idShop) {
             $idShop = $this->context->getShopId();
@@ -68,10 +65,7 @@ class Configuration
         \Configuration::updateValue($key, $value, $html, $idShopGroup, $idShop);
     }
 
-    /**
-     * @param string $key
-     */
-    public function delete($key): void
+    public function delete(string $key): void
     {
         \Configuration::deleteByName($key);
     }

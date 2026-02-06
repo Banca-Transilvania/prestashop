@@ -2,6 +2,16 @@ imports:
   - { resource: ../common.yml }
 
 services:
+  BTiPay\Controller\ApiPaymentController:
+    class: BTiPay\Controller\ApiPaymentController
+    public: true
+    arguments:
+      - '@btipay.capture.service'
+      - '@btipay.refund.service'
+      - '@btipay.cancel.service'
+    calls:
+      - [setContainer, ['@service_container']]
+
   btipay.refund.service:
     class: BTiPay\Service\RefundService
     public: true

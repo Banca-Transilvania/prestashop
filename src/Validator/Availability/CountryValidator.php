@@ -29,7 +29,7 @@ if (!defined('_PS_VERSION_')) {
 
 class CountryValidator implements ValidatorInterface
 {
-    public function validate($params, $config = null): bool
+    public function validate(array $params, ?BTiPayConfig $config = null): bool
     {
         if (!$this->checkConfigCountry($params['cart'], $config)) {
             return false;

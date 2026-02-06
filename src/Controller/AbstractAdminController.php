@@ -18,22 +18,33 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
-namespace BTiPay\Validator\Response;
-
-use BTiPay\Config\BTiPayConfig;
-use BTiPay\Helper\SubjectReader;
-use BTiPay\Validator\ValidatorInterface;
+namespace BTiPay\Controller;
 
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-class StatusValidator implements ValidatorInterface
-{
-    public function validate(array $params, ?BTiPayConfig $config = null): bool
+/**
+ * Abstract admin controller providing compatibility across PrestaShop versions.
+ *
+ * - PrestaShop 9+: Uses PrestaShopAdminController (FrameworkBundleAdminController is deprecated)
+ * - PrestaShop 7.x-8.x: Uses FrameworkBundleAdminController
+ *
+ * This approach ensures the module works without deprecation warnings on PS9
+ * while maintaining full backward compatibility with older versions.
+ */
+if (class_exists(\PrestaShopBundle\Controller\Admin\PrestaShopAdminController::class)) {
+    /**
+     * Base controller for PrestaShop 9+
+     */
+    abstract class AbstractAdminController extends \PrestaShopBundle\Controller\Admin\PrestaShopAdminController
     {
-        $response = SubjectReader::readResponse($params);
-
-        return $response->isSuccess();
+    }
+} else {
+    /**
+     * Base controller for PrestaShop 7.x-8.x
+     */
+    abstract class AbstractAdminController extends \PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController
+    {
     }
 }

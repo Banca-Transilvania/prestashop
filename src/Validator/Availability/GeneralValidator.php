@@ -20,6 +20,7 @@
 
 namespace BTiPay\Validator\Availability;
 
+use BTiPay\Config\BTiPayConfig;
 use BTiPay\Validator\ValidatorInterface;
 
 if (!defined('_PS_VERSION_')) {
@@ -28,7 +29,7 @@ if (!defined('_PS_VERSION_')) {
 
 class GeneralValidator implements ValidatorInterface
 {
-    public function validate($params, $config = null): bool
+    public function validate(array $params, ?BTiPayConfig $config = null): bool
     {
         if (empty($config) || !$config->isEnabled()) {
             return false;
