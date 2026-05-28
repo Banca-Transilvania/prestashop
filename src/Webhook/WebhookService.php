@@ -93,6 +93,14 @@ class WebhookService
             throw new \Exception('Cannot find order');
         }
 
+        if ($paymentStatus === IPayStatuses::STATUS_APPROVED && !$this->hasFailed()) {
+            $this->approve($paymentData);
+        }
+
+        if ($paymentStatus === IPayStatuses::STATUS_DECLINED) {
+            $this->decline($paymentData);
+        }
+
         if ($paymentStatus === IPayStatuses::STATUS_DEPOSITED && !$this->hasFailed()) {
             $this->capture($paymentData);
         }
@@ -109,6 +117,21 @@ class WebhookService
         $this->orderService->updateOrderStatus($orderId);
 
         return true;
+    }
+
+    private function approve(BTIPayPayment $paymentData)
+    {
+        $paymentData->status = IPayStatuses::STATUS_APPROVED;
+        $this->paymentRepository->save($paymentData);
+    }
+
+    private function decline(BTIPayPayment $paymentData)
+    {
+        if (!in_array($paymentData->status, [IPayStatuses::STATUS_PENDING, IPayStatuses::STATUS_CREATED], true)) {
+            return;
+        }
+        $paymentData->status = IPayStatuses::STATUS_DECLINED;
+        $this->paymentRepository->save($paymentData);
     }
 
     private function capture(BTIPayPayment $paymentData)
