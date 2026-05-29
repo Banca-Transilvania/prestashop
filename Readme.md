@@ -50,5 +50,6 @@ For transparency into our release cycle and in striving to maintain backward com
 **Note:** This document is prepared with care and continuously updated. However, it may contain typographical errors or inaccuracies.
 
 ### CHANGELOG
+- [v.1.1.1] - Finalize 2-phase APPROVED/DECLINED webhook callbacks
 - [v.1.1.0] - Added compatbility with version 9.0.x and php 8.4.
 - [v.1.0.1] - Added Romanian translation.
