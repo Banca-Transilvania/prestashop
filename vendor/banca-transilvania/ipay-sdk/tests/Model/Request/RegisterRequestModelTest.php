@@ -67,7 +67,7 @@ class RegisterRequestModelTest extends TestCase
                     'phone'        => '40740123456',
                     'deliveryInfo' => [
                         'deliveryType' => 'comanda',
-                        'country'      => 'Romania',
+                        'country'      => 'RO',
                         'city'         => 'Cluj',
                         'postAddress'  => 'Str.Sperantei',
                         'postalCode'   => '12345'

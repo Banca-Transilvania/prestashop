@@ -80,15 +80,13 @@ class ConfigTest extends TestCase
         $this->assertEquals($validLanguage, $config->language());
     }
 
-    public function testLanguageSetterWithInvalidValueThrowsException()
+    public function testLanguageSetterWithInvalidValueFallsBackToEnglish()
     {
         $config = new Config(['user' => 'user', 'password' => 'pass']);
 
         $invalidLanguage = 'de'; // Assuming 'de' (German) is not a supported language
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage("Invalid language value: 'de'.");
-
         $config->language($invalidLanguage);
+
+        $this->assertEquals(Config::ENGLISH_LANGUAGE, $config->language());
     }
 }

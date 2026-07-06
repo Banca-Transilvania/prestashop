@@ -52,6 +52,11 @@
         <target>Updated Date</target>
         <note>Line: </note>
       </trans-unit>
+      <trans-unit id="13c5c78fcf31c69cdc6560e15e1b66ab">
+        <source>Combined status</source>
+        <target>Combined status</target>
+        <note>Line: </note>
+      </trans-unit>
       <trans-unit id="76ec2a6b407bd69568dc3aab4e6230c1">
         <source>No BT iPay payments found for this order.</source>
         <target>No BT iPay payments found for this order.</target>

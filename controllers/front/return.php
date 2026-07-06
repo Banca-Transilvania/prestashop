@@ -61,7 +61,7 @@ class BtipayReturnModuleFrontController extends ModuleFrontController
 
             /** @var GetOrderStatusResponseModel $response */
             $response = $this->executePaymentDetailsCommand($ipayId, $token, $saveCard);
-            $orderId = explode('-', $response->orderNumber);
+            $orderId = explode('-', (string) $response->orderNumber);
             $orderId = $orderId[0];
 
             if ($orderId !== $order->id) {

@@ -2,7 +2,7 @@
   "name": "banca-transilvania/ipay-sdk",
   "description": "This SDK facilitates communication between payment modules and the iPay API.",
   "license": "Apache-2.0",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "type": "library",
   "require": {
     "php": ">=7.4",

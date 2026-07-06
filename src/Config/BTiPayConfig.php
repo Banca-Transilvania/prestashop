@@ -159,12 +159,12 @@ class BTiPayConfig
 
     public function getSpecificCountries()
     {
-        return explode(',', $this->configuration->get(self::SPECIFIC_COUNTRIES));
+        return explode(',', (string) $this->configuration->get(self::SPECIFIC_COUNTRIES));
     }
 
     public function getAllowedCurrencies()
     {
-        return explode(',', $this->configuration->get(self::ALLOWED_CURRENCIES));
+        return explode(',', (string) $this->configuration->get(self::ALLOWED_CURRENCIES));
     }
 
     public function isInvoiceGenerationEnabled()

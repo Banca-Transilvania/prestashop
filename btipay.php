@@ -436,6 +436,7 @@ class Btipay extends PaymentModule
 
         $this->context->smarty->assign([
             'payments' => $payments,
+            'combinedStatus' => $paymentRepository->getCombinedStatusFromRows($payments),
             'refunds' => $refunds,
             'payment_link' => $this->context->link->getModuleLink(
                 $this->name,

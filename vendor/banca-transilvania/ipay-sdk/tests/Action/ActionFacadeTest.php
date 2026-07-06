@@ -8,6 +8,7 @@ use BTransilvania\Api\Client\ClientInterface;
 use BTransilvania\Api\Exception\ApiException;
 use BTransilvania\Api\Model\Request\RequestModelInterface;
 use BTransilvania\Api\Model\Response\ResponseModelInterface;
+use BTransilvania\Api\Logger\LoggerInterface;
 
 class ActionFacadeTest extends TestCase
 {
@@ -34,7 +35,9 @@ class ActionFacadeTest extends TestCase
             ->method('setResponse')
             ->with($this->equalTo($dummyResponse));
 
-        $actionFacade = new ActionFacade($endpoint, $clientMock, $requestModelMock, $responseModelMock);
+        $loggerMock = $this->createMock(LoggerInterface::class);
+
+        $actionFacade = new ActionFacade($endpoint, $clientMock, $requestModelMock, $responseModelMock, $loggerMock);
 
         $result = $actionFacade->execute($requestData);
 
@@ -53,7 +56,7 @@ class ActionFacadeTest extends TestCase
         $requestModelMock->method('buildRequest')->willReturn($requestData);
         $clientMock->method('sendRequest')->willThrowException(new \Exception($exceptionMessage));
 
-        $actionFacade = new ActionFacade($endpoint, $clientMock, $requestModelMock, $this->createMock(ResponseModelInterface::class));
+        $actionFacade = new ActionFacade($endpoint, $clientMock, $requestModelMock, $this->createMock(ResponseModelInterface::class), $this->createMock(LoggerInterface::class));
 
         $this->expectException(ApiException::class);
         $this->expectExceptionMessage("Failed to execute API call: " . $exceptionMessage);

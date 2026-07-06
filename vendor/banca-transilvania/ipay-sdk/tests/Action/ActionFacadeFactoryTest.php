@@ -5,15 +5,18 @@ namespace BTransilvania\Tests\Action;
 use PHPUnit\Framework\TestCase;
 use BTransilvania\Api\Action\ActionFacadeFactory;
 use BTransilvania\Api\Client\ClientInterface;
+use BTransilvania\Api\Logger\LoggerInterface;
 
 class ActionFacadeFactoryTest extends TestCase
 {
     private $clientMock;
+    private $loggerMock;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->clientMock = $this->createMock(ClientInterface::class);
+        $this->loggerMock = $this->createMock(LoggerInterface::class);
     }
 
     /**
@@ -23,7 +26,7 @@ class ActionFacadeFactoryTest extends TestCase
     {
         $data = []; // Assuming data is an empty array for simplicity
 
-        $actionFacade = ActionFacadeFactory::createActionFacade($action, $this->clientMock, $data);
+        $actionFacade = ActionFacadeFactory::createActionFacade($action, $this->clientMock, $data, $this->loggerMock);
 
         $reflection = new \ReflectionClass($actionFacade);
         $endpointProperty = $reflection->getProperty('endpoint');
@@ -48,7 +51,7 @@ class ActionFacadeFactoryTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
-        ActionFacadeFactory::createActionFacade('invalidAction', $this->clientMock, []);
+        ActionFacadeFactory::createActionFacade('invalidAction', $this->clientMock, [], $this->loggerMock);
     }
 
     public function actionProvider(): array

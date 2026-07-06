@@ -87,6 +87,13 @@
                         <td>{$payment.updated_at|date_format:"%Y-%m-%d %H:%M:%S"}</td>
                     </tr>
                 {/foreach}
+                {if $combinedStatus}
+                    <tr>
+                        <td colspan="6" style="text-align: right;"><strong>{l s='Combined status' mod='btipay' d='Modules.Btipay.Orderpayments'}</strong></td>
+                        <td><span class="status-label status-{$combinedStatus|lower}">{$combinedStatus}</span></td>
+                        <td colspan="2"></td>
+                    </tr>
+                {/if}
                 </tbody>
             </table>
         </div>
