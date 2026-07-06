@@ -15,13 +15,16 @@ class IPayClientTest extends BaseTestClass
         // Case 1: HTTP client not initially set
         $ipayClient1 = new IPayClient($this->config);
         // Simulate an action that triggers ensureHttpClientIsInitialized
-        $ipayClient1->register($this->getRegisterData());
+        try {
+            $ipayClient1->register($this->getRegisterData());
+        } catch (ApiException $e) {
+        }
         // Assert that an HTTP client has been initialized
         $this->assertNotNull($ipayClient1->getHttpClient());
 
         // Case 2: HTTP client already set
         $mockHttpClient = $this->createMock(HttpClientInterface::class);
-        $dummyResponse = new \stdClass;
+        $dummyResponse = new \stdClass();
         $mockHttpClient->method('send')->willReturn($dummyResponse);
         $ipayClient2 = new IPayClient($this->config, $mockHttpClient);
         $ipayClient2->register($this->getRegisterData());
@@ -137,7 +140,7 @@ class IPayClientTest extends BaseTestClass
                     'phone'        => '40740123456',
                     'deliveryInfo' => [
                         'deliveryType' => 'comanda',
-                        'country'      => 'Romania',
+                        'country'      => 'RO',
                         'city'         => 'Cluj',
                         'postAddress'  => 'Str.Sperantei',
                         'postalCode'   => '12345'

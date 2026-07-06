@@ -36,7 +36,7 @@
   },
   "require": {
     "php": ">=7.4",
-    "banca-transilvania/ipay-sdk": "1.1.7"
+    "banca-transilvania/ipay-sdk": "~1.1.8"
   },
   "autoload": {
     "psr-4": {

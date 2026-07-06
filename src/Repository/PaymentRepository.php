@@ -86,6 +86,37 @@ class PaymentRepository
     }
 
     /**
+     * Computes the combined (card + loyalty) status from raw payment rows.
+     *
+     * Returns null when the order has no loyalty (currency='LOY') row, so the
+     * combined status is only surfaced for split card/points payments.
+     *
+     * @param array $rows rows as returned by findPaymentsByOrderIdAsArray()
+     *
+     * @return string|null
+     */
+    public function getCombinedStatusFromRows(array $rows): ?string
+    {
+        $payStatus = null;
+        $loyStatus = null;
+        $hasLoy = false;
+        foreach ($rows as $row) {
+            if (($row['currency'] ?? null) === 'LOY') {
+                $loyStatus = $row['status'] ?? null;
+                $hasLoy = true;
+            } else {
+                $payStatus = $row['status'] ?? null;
+            }
+        }
+
+        if (!$hasLoy) {
+            return null;
+        }
+
+        return IPayStatuses::getCombinedStatus($payStatus, $loyStatus);
+    }
+
+    /**
      * Finds all payments by order ID and returns them as an array of arrays.
      *
      * @param int $orderId the ID of the order
@@ -205,38 +236,6 @@ class PaymentRepository
         $sql->select('*');
         $sql->from(BTIPayPayment::$definition['table']);
         $sql->where('`ipay_id` = "' . $escapedIPayId . '"');
-
-        try {
-            $result = \Db::getInstance()->getRow($sql);
-            if (!$result) {
-                return null;
-            }
-
-            $payment = new BTIPayPayment();
-            $payment->hydrate($result);
-
-            return $payment;
-        } catch (\PrestaShopException $e) {
-            // Log error
-            return null;
-        }
-    }
-
-    /**
-     * Finds a payment by Loy ID.
-     *
-     * @param string $iPayId the ID of the order
-     *
-     * @return BTIPayPayment|null returns the payment object or null if not found
-     */
-    public function findByLoyId(string $iPayId): ?BTIPayPayment
-    {
-        $escapedIPayId = pSQL($iPayId);
-
-        $sql = new \DbQuery();
-        $sql->select('*');
-        $sql->from(BTIPayPayment::$definition['table']);
-        $sql->where('`loy_id` = "' . $escapedIPayId . '"');
 
         try {
             $result = \Db::getInstance()->getRow($sql);

@@ -264,11 +264,6 @@ class WebhookService
         return $this->paymentRepository->findByIPayId($this->getPaymentEngineId());
     }
 
-    private function getPaymentDataByLoy(): ?BTIPayPayment
-    {
-        return $this->paymentRepository->findByLoyId($this->getPaymentEngineId());
-    }
-
     /**
      * Get the total amount refunded for a given order.
      *

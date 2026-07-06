@@ -49,7 +49,7 @@ class UpdateOrderPaymentHandler implements HandlerInterface
     public function handle(array $handlingSubject, ResponseModelInterface $response): void
     {
         $iPayId = SubjectReader::readIPayId($handlingSubject);
-        $orderId = explode('-', $response->orderNumber);
+        $orderId = explode('-', (string) $response->orderNumber);
         $orderId = $orderId[0];
 
         $loyAmount = $response->getLoyAmount();

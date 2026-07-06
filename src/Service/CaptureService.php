@@ -212,7 +212,7 @@ class CaptureService
 
     protected function setPaymentData(BTIPayPayment $transaction, array $data)
     {
-        $paymentData = \json_decode($transaction->data, true) ?? [];
+        $paymentData = \json_decode((string) $transaction->data, true) ?? [];
         $paymentData = array_merge($paymentData, [$this->action => $data]);
         $transaction->data = \json_encode($paymentData, true);
     }

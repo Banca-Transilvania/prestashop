@@ -38,6 +38,7 @@ class PSTMap implements \IteratorAggregate, \Countable, \ArrayAccess
         $this->items = $items;
     }
 
+    #[\ReturnTypeWillChange]
     public function getIterator()
     {
         foreach ($this->items as $key => $value) {
@@ -45,11 +46,13 @@ class PSTMap implements \IteratorAggregate, \Countable, \ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->items);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if ($offset === null) {
@@ -59,16 +62,19 @@ class PSTMap implements \IteratorAggregate, \Countable, \ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->items[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->items[$offset], $this->instances[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!isset($this->instances[$offset])) {
