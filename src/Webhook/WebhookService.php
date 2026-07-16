@@ -121,6 +121,14 @@ class WebhookService
 
     private function approve(BTIPayPayment $paymentData)
     {
+        $paymentDetails = $this->paymentDetailsService->get($paymentData->ipay_id);
+
+        $amount = $paymentDetails->getAmount();
+        if ($amount > 0) {
+            $paymentData->amount = $amount;
+            $paymentData->currency = $paymentDetails->getCurrencyCode();
+        }
+
         $paymentData->status = IPayStatuses::STATUS_APPROVED;
         $this->paymentRepository->save($paymentData);
     }
