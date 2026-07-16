@@ -131,6 +131,29 @@ class WebhookService
 
         $paymentData->status = IPayStatuses::STATUS_APPROVED;
         $this->paymentRepository->save($paymentData);
+
+        $this->approveLoyalty($paymentData, $paymentDetails);
+    }
+
+    private function approveLoyalty(BTIPayPayment $paymentData, $paymentDetails)
+    {
+        $loyId = $paymentDetails->getLoyId();
+        if (!$loyId) {
+            return;
+        }
+
+        $loyDetails = $this->paymentDetailsService->get($loyId);
+
+        $loyTransaction = $this->paymentRepository->findByIPayId($loyId);
+        if (!$loyTransaction) {
+            $loyTransaction = new BTIPayPayment();
+            $loyTransaction->order_id = $paymentData->order_id;
+            $loyTransaction->payment_tries = 0;
+        }
+
+        $this->paymentRepository->updatePaymentFromResponse($loyTransaction, $loyDetails, $loyId, $paymentData->ipay_id);
+
+        $this->paymentRepository->save($loyTransaction);
     }
 
     private function decline(BTIPayPayment $paymentData)
