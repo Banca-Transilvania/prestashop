@@ -123,6 +123,45 @@ class WebhookService
     {
         $paymentData->status = IPayStatuses::STATUS_APPROVED;
         $this->paymentRepository->save($paymentData);
+
+        try {
+            $paymentDetails = $this->paymentDetailsService->get($paymentData->ipay_id);
+
+            $amount = $paymentDetails->getAmount();
+            if ($amount > 0) {
+                $paymentData->amount = $amount;
+                $paymentData->currency = $paymentDetails->getCurrencyCode();
+                $this->paymentRepository->save($paymentData);
+            }
+
+            $this->approveLoyalty($paymentData, $paymentDetails);
+        } catch (\Throwable $e) {
+            $this->logger->error('Failed to enrich approved payment', [
+                'ipay_id' => $paymentData->ipay_id,
+                'Exception message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    private function approveLoyalty(BTIPayPayment $paymentData, $paymentDetails)
+    {
+        $loyId = $paymentDetails->getLoyId();
+        if (!$loyId) {
+            return;
+        }
+
+        $loyDetails = $this->paymentDetailsService->get($loyId);
+
+        $loyTransaction = $this->paymentRepository->findByIPayId($loyId);
+        if (!$loyTransaction) {
+            $loyTransaction = new BTIPayPayment();
+            $loyTransaction->order_id = $paymentData->order_id;
+            $loyTransaction->payment_tries = 0;
+        }
+
+        $this->paymentRepository->updatePaymentFromResponse($loyTransaction, $loyDetails, $loyId, $paymentData->ipay_id);
+
+        $this->paymentRepository->save($loyTransaction);
     }
 
     private function decline(BTIPayPayment $paymentData)
