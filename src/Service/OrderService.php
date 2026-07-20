@@ -137,6 +137,7 @@ class OrderService
                 $orderPayment->order_reference = $order->reference;
                 $orderPayment->id_currency = $order->id_currency;
                 $orderPayment->payment_method = $order->payment;
+                $orderPayment->transaction_id = $this->paymentRepository->getPayTransaction()->ipay_id ?? null;
                 $orderPayment->date_add = date('Y-m-d H:i:s');
             }
 
