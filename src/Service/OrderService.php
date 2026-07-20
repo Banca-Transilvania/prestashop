@@ -131,7 +131,13 @@ class OrderService
             if (count($orderPayments) > 0) {
                 $orderPayment = array_shift($orderPayments);
             } else {
-                throw new \Exception('Payment details not found.');
+                // No OrderPayment yet (customer never returned; webhook is the
+                // sole finalizer). Create it instead of failing.
+                $orderPayment = new \OrderPayment();
+                $orderPayment->order_reference = $order->reference;
+                $orderPayment->id_currency = $order->id_currency;
+                $orderPayment->payment_method = $order->payment;
+                $orderPayment->date_add = date('Y-m-d H:i:s');
             }
 
             $orderPayment->amount = $totalAmountCaptured;
