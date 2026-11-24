@@ -72,13 +72,13 @@
 				<h5>{l s='Module Specifications' mod='btipay' d='Modules.Btipay.Generalinfo'}</h5>
 				<dl class="list-unstyled">
 					<dt>{l s='Release Date' mod='btipay' d='Modules.Btipay.Generalinfo'}</dt>
-					<dd>{l s='January 2025' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
+					<dd>{l s='December 2026' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
 					<dt>{l s='Version' mod='btipay' d='Modules.Btipay.Generalinfo'}</dt>
-					<dd>{l s='1.0.1' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
+					<dd>{l s='1.1.4' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
 					<dt>{l s='Supported PHP Versions' mod='btipay' d='Modules.Btipay.Generalinfo'}</dt>
-					<dd>{l s='7.4, 8.0+' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
+					<dd>{l s='7.4 - 8.5' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
 					<dt>{l s='Compatible with PrestaShop' mod='btipay' d='Modules.Btipay.Generalinfo'}</dt>
-					<dd>{l s='1.7.x and 9.0.x' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
+					<dd>{l s='1.7.6 - 9.2.x' mod='btipay' d='Modules.Btipay.Generalinfo'}</dd>
 				</dl>
 			</div>
 		</div>

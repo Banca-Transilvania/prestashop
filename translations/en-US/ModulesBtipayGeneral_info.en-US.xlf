@@ -118,8 +118,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="8d9a63332fb430c7f604af4715f54b31">
-        <source>7.4, 8.0+</source>
-        <target>7.4, 8.0+</target>
+        <source>7.4 - 8.5</source>
+        <target>7.4 - 8.5</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="a6dadc4dfbc1366943388f836248950f">
@@ -128,8 +128,8 @@
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="18c78d87c9d5615375a86987f1a990b7">
-        <source>1.7.x and 9.0.x</source>
-        <target>1.7.x and 9.0.x</target>
+        <source>1.7.6 - 9.2.x</source>
+        <target>1.7.6 - 9.2.x</target>
         <note>Line: </note>
       </trans-unit>
       <trans-unit id="359f9e79e746fa9f684e5cda9e60ca2e">
