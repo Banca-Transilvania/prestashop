@@ -27,26 +27,30 @@
 */
 
 // Creditcards on Checkout
-document.addEventListener("DOMContentLoaded", function() {
-    const newCardCheckbox = document.getElementById('bt_ipay_use_new_card');
-    const cardList = document.querySelector('.bt-ipay-card-list');
-    const saveCardCheckbox = document.getElementById('bt_ipay_save_cards');
-    const saveCardRadio = document.querySelector('.bt-save-card-radio');
+document.addEventListener('change', function(event) {
+    const target = event.target;
 
-    newCardCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            cardList.style.display = 'none';
-            saveCardRadio.style.display = 'block';
-            document.getElementById('bt_ipay_use_new_card_hidden').value = 'yes';
-        } else {
-            cardList.style.display = 'block';
-            saveCardRadio.style.display = 'none';
-            document.getElementById('bt_ipay_use_new_card_hidden').value = 'no';
+    if (target.id === 'bt_ipay_use_new_card') {
+        const cardList = document.querySelector('.bt-ipay-card-list');
+        const saveCardRadio = document.querySelector('.bt-save-card-radio');
+        const hidden = document.getElementById('bt_ipay_use_new_card_hidden');
+
+        if (cardList) {
+            cardList.style.display = target.checked ? 'none' : 'block';
         }
-    });
+        if (saveCardRadio) {
+            saveCardRadio.style.display = target.checked ? 'block' : 'none';
+        }
+        if (hidden) {
+            hidden.value = target.checked ? 'yes' : 'no';
+        }
+    }
 
-    saveCardCheckbox.addEventListener('change', function() {
-        document.getElementById('bt_ipay_save_cards_hidden').value = this.checked ? 'save' : 'no';
-    });
+    if (target.id === 'bt_ipay_save_cards') {
+        const hidden = document.getElementById('bt_ipay_save_cards_hidden');
+        if (hidden) {
+            hidden.value = target.checked ? 'save' : 'no';
+        }
+    }
 });
 

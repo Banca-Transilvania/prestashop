@@ -14,14 +14,14 @@
 
 ### About
 
-BT iPay PrestaShop Payment Module is developed to integrate Banca Transilvania's BT iPay with PrestaShop, allowing merchants to easily accept payments. This module is designed with a focus on ease of use, security, and providing a seamless payment experience for both the merchant and their customers. Compatible with PrestaShop 9.0, this module supports various payment methods and is tailored for merchants looking to offer a robust online payment solution.
+BT iPay PrestaShop Payment Module is developed to integrate Banca Transilvania's BT iPay with PrestaShop, allowing merchants to easily accept payments. This module is designed with a focus on ease of use, security, and providing a seamless payment experience for both the merchant and their customers. Compatible with PrestaShop 1.7.6 – 9.2.x, this module supports various payment methods and is tailored for merchants looking to offer a robust online payment solution.
 
 ### Requirements
 
 To ensure a smooth operation of the BT iPay payment module, the following requirements should be met:
 - A valid Banca Transilvania account with BT iPay service activated.
-- PrestaShop 8.2.x.
-- PHP 7.3 or higher.
+- PrestaShop 1.7.6 – 9.2.x.
+- PHP 7.4 – 8.5.
 
 ### Installation
 
@@ -50,6 +50,7 @@ For transparency into our release cycle and in striving to maintain backward com
 **Note:** This document is prepared with care and continuously updated. However, it may contain typographical errors or inaccuracies.
 
 ### CHANGELOG
+- [v.1.1.4] - Compatibility with PrestaShop 9.2.1 and 8.2.9, PHP 8.5. Fix the checkout card-on-file script (JavaScript error on every page, and toggles lost after the one-page checkout reloads the payment step).
 - [v.1.1.2] - Fix PHP 8.x compatibility. Add combined status for split (card + loyalty) payments.
 - [v.1.1.1] - Finalize 2-phase APPROVED/DECLINED webhook callbacks
 - [v.1.1.0] - Added compatbility with version 9.0.x and php 8.4.
